@@ -4,10 +4,10 @@ const Footer = () => {
       <div className="bg-lightgrey flex justify-center">
         <div className="flex justify-between items-center w-3/5 py-10">
           <div className="flex flex-col items-start">
-            <p className="flex text-black text-2xl font-bold leading-8 tracking-tighter">
+            <p className="text-black text-start text-2xl font-bold leading-8 tracking-tighter">
               Consulting Agency For Your Business
             </p>
-            <p className="text-secondtext text-sm">
+            <p className="text-secondtext text-start text-sm">
               the quick fox jumps over the lazy dog
             </p>
           </div>

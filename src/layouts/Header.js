@@ -1,14 +1,14 @@
 const Header = () => {
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex justify-center items-center h-14 bg-secondary text-white pt-2.5 pb-1">
+    <div className="w-full flex flex-col gap-4">
+      <div className="flex justify-center items-center min-h-14 bg-secondary text-white pt-2.5 pb-1">
         <div className="flex justify-between font-bold w-full px-6">
           <div className="flex items-center p-2.5 gap-[0.3rem]">
-            <div className="flex p-2.5 gap-1">
+            <div className="flex p-2.5 gap-1 items-center">
               <i className="fa-solid fa-phone"></i>
               <p>(225) 555-0118</p>
             </div>
-            <div className="flex p-2.5 gap-1">
+            <div className="flex p-2.5 gap-1 items-center">
               <i className="fa-solid fa-envelope"></i>
               <p>michelle.rivera@example.com</p>
             </div>
@@ -25,12 +25,12 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-start items-center w-full h-14 pr-4 pl-10 gap-24">
+      <div className="flex justify-start items-center w-full min-h-14 pr-4 pl-10 gap-24 mb-4">
         <h3 className="flex pl-4 text-2xl font-bold leading-8 tracking-tighter">
           BrandName
         </h3>
         <div className="flex justify-between grow items-center p-0.5">
-          <nav>
+          <nav className="flex">
             <ul className="flex items-center text-secondtext font-bold text-base leading-6 tracking-wide gap-4">
               <li>
                 <a href="/home">Home</a>
