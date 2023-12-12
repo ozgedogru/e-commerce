@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Montserrat", sans-serif;
+  }
+}
+
+.btn-primary {
+  @apply flex px-5 py-4 justify-center items-center rounded bg-primary text-white text-base font-bold leading-6 tracking-wide;
+}
+.btn-light {
+  @apply flex px-5 py-4 rounded-lg bg-white text-primary border border-solid text-base font-bold leading-6 tracking-wide;
+}
