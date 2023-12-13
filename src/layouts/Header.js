@@ -33,7 +33,7 @@ const Header = () => {
           <nav className="flex">
             <ul className="flex items-center text-secondtext font-bold text-base leading-6 tracking-wide gap-4">
               <li>
-                <a href="/home">Home</a>
+                <a href="/">Home</a>
               </li>
               <li>
                 <a href="/product-list">Shop</a>

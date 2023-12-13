@@ -5,7 +5,6 @@ import girl from "../../assets/home-pics/girl.png";
 const Hero = () => {
   return (
     <>
-      <Header />
       <div className="flex justify-center">
         <div className="w-[80.75rem] pl-48 flex justify-center items-center rounded-md bg-gradient-to-r from-blue to-green">
           <div className="flex flex-col items-start gap-8 font-bold">
