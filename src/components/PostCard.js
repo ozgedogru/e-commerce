@@ -10,14 +10,14 @@ import arrow from "../assets/posts/arrow.png";
 
 const PostCard = ({ posts, index }) => {
   return (
-    <div className="flex">
+    <div className="flex w-[40rem]">
       <div>
         <img src={posts} alt={`post${index}`}></img>
       </div>
       <div className="flex flex-col justify-start p-4 gap-4 w-[20rem]">
         <div className="flex justify-between">
           <h4 className="text-primary font-bold text-sm">English Department</h4>
-          <div className="flex bg-secondary rounded-2xl gap-1 p-2">
+          <div className="flex bg-black rounded-2xl gap-1 p-2">
             <i className="fa-solid fa-star text-yellow"></i>
             <p className="text-white text-xs leading-4">4.9</p>
           </div>
