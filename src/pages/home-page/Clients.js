@@ -10,7 +10,7 @@ const Clients = () => {
 
   return (
     <div className="flex w-full justify-center items-center">
-      <div className="flex w-3/4 px-40 justify-center py-16 gap-8">
+      <div className="flex w-3/4 px-40 justify-center py-20 gap-8">
         {brands.map((logo, i) => (
           <div key={i} className="flex items-center object-cover h-16 w-28">
             <img src={logo} alt="brand1"></img>

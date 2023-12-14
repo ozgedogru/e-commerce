@@ -13,7 +13,7 @@ const Blog = () => {
           <h6 className="text-primary font-bold font-sm">Practice Advice</h6>
           <h3 className="text-black font-bold text-5xl">Featured Posts</h3>
         </div>
-        <div className="flex justify-center flex-wrap">
+        <div className="flex justify-center flex-wrap gap-4">
           {posts.map((post, index) => (
             <PostCard posts={post} index={index} />
           ))}
