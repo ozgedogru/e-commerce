@@ -1,16 +1,18 @@
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import girl from "../../assets/home-pics/girl.png";
+import hero2 from "../../assets/home-pics/hero2.png";
 
-const Hero = () => {
+const HeroCopy = () => {
   const history = useHistory();
 
   const handleButtonClick = () => {
     history.push("/shop");
   };
+
   return (
     <div>
       <div className="flex justify-center w-full">
-        <div className="w-[72rem] h-[32rem] pl-36 flex justify-start items-center rounded-md bg-gradient-to-r from-blue to-green relative">
+        <div className="w-[72rem] h-[32rem] pl-36 flex justify-start items-center rounded-md bg-gradient-to-r from-green to-herocopy relative">
           <div className="flex flex-col w-[30rem] p-10 items-start gap-8 font-bold">
             <p className="text-darkblue text-base leading-6 tracking-wide">
               SUMMER 2024
@@ -27,11 +29,15 @@ const Hero = () => {
             </button>
           </div>
           <div className="flex h-full w-[36rem] absolute right-0">
-            <img className="flex object-cover" src={girl} alt="girl"></img>
+            <img
+              className="flex object-cover rounded-md"
+              src={hero2}
+              alt="girl"
+            ></img>
           </div>
         </div>
       </div>
     </div>
   );
 };
-export default Hero;
+export default HeroCopy;

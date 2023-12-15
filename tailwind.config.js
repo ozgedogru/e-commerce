@@ -17,6 +17,7 @@ module.exports = {
       yellow: "#FFCE31",
       slim: "#E8E8E8",
       red: "#E74040",
+      herocopy: "#01ADD5",
     },
     extend: {},
   },
