@@ -10,7 +10,7 @@ const Hero = () => {
   return (
     <div>
       <div className="flex justify-center w-full">
-        <div className="w-[72rem] h-[32rem] pl-36 flex justify-start items-center rounded-md bg-gradient-to-r from-blue to-green relative">
+        <div className="w-[70rem] h-[32rem] pl-36 flex justify-start items-center rounded-xl bg-gradient-to-r from-blue to-green relative">
           <div className="flex flex-col w-[30rem] p-10 items-start gap-8 font-bold">
             <p className="text-darkblue text-base leading-6 tracking-wide">
               SUMMER 2024
@@ -26,7 +26,7 @@ const Hero = () => {
               SHOP NOW
             </button>
           </div>
-          <div className="flex h-full w-[36rem] absolute right-0">
+          <div className="flex h-full w-[36rem] absolute left-[38rem]">
             <img className="flex object-cover" src={girl} alt="girl"></img>
           </div>
         </div>

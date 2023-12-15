@@ -1,4 +1,3 @@
-import Hero from "./home-page/Hero";
 import Clients from "./home-page/Clients";
 import ShopCard from "./home-page/ShopCard";
 import ProductCards from "./home-page/ProductCards";

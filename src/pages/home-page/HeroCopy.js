@@ -1,5 +1,4 @@
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import girl from "../../assets/home-pics/girl.png";
 import hero2 from "../../assets/home-pics/hero2.png";
 
 const HeroCopy = () => {
@@ -12,7 +11,7 @@ const HeroCopy = () => {
   return (
     <div>
       <div className="flex justify-center w-full">
-        <div className="w-[72rem] h-[32rem] pl-36 flex justify-start items-center rounded-md bg-gradient-to-r from-green to-herocopy relative">
+        <div className="w-[70rem] h-[32rem] flex justify-start items-center rounded-xl bg-gradient-to-r from-green to-herocopy relative">
           <div className="flex flex-col w-[30rem] p-10 items-start gap-8 font-bold">
             <p className="text-darkblue text-base leading-6 tracking-wide">
               SUMMER 2024

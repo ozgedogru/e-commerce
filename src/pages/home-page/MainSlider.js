@@ -12,9 +12,10 @@ const MainSlider = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    arrows: true,
   };
   return (
-    <div className="mx-aouto justify-center w-full">
+    <div className="mx-auto p-8">
       <Slider {...settings}>
         <div>
           <Hero />

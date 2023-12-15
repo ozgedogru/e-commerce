@@ -124,11 +124,11 @@ const ProductListPage = () => {
           </div>
         </div>
       </div>
+      <div className="flex justify-center py-16">
+        <PageButton />
+      </div>
       <div className="bg-lightgrey">
         <Clients />
-      </div>
-      <div className="flex justify-center py-20">
-        <PageButton />
       </div>
     </div>
   );

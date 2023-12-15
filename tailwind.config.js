@@ -18,6 +18,7 @@ module.exports = {
       slim: "#E8E8E8",
       red: "#E74040",
       herocopy: "#01ADD5",
+      hero3: "#9c9c9a",
     },
     extend: {},
   },
