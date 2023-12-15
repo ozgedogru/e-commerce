@@ -16,6 +16,7 @@ module.exports = {
       pricegreen: "#23856D",
       yellow: "#FFCE31",
       slim: "#E8E8E8",
+      red: "#E74040",
     },
     extend: {},
   },

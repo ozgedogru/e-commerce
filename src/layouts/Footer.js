@@ -65,7 +65,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="bg-lightgrey flex justify-center items-center h-16">
-          <div className="flex justify-between items-center w-3/5 py-10">
+          <div className="flex justify-between items-center w-3/5">
             <p className="text-secondtext font-bold leading-6 tracking-wide">
               Made With Love By Figmaland All Right Reserved
             </p>
