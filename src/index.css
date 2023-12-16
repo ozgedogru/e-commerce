@@ -9,10 +9,10 @@
 }
 
 .btn-primary {
-  @apply flex px-5 py-3 justify-center items-center rounded bg-primary text-white text-base font-bold leading-6 tracking-wide;
+  @apply flex px-5 py-3 justify-center items-center rounded bg-primary hover:bg-shineblue text-white text-base font-bold leading-6 tracking-wide;
 }
 .btn-light {
-  @apply flex px-5 py-4 rounded-lg bg-white text-primary border border-solid text-base font-bold leading-6 tracking-wide;
+  @apply flex px-5 py-4 rounded-lg bg-white hover:bg-shineblue hover:text-white text-primary border border-solid text-base font-bold leading-6 tracking-wide;
 }
 
 .blue-button {

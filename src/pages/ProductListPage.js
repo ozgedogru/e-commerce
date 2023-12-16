@@ -21,10 +21,7 @@ import pro9 from "../assets/shop/pro9.png";
 import pro10 from "../assets/shop/pro10.png";
 import pro11 from "../assets/shop/pro11.png";
 import pro12 from "../assets/shop/pro12.png";
-import ellipse1 from "../assets/posts/ellipse1.png";
-import ellipse2 from "../assets/posts/ellipse2.png";
-import ellipse3 from "../assets/posts/ellipse3.png";
-import ellipse4 from "../assets/posts/ellipse4.png";
+
 import Clients from "./home-page/Clients";
 import PageButton from "../components/PageButton";
 
@@ -62,7 +59,10 @@ const ProductListPage = () => {
           <div className="flex justify-center items-center py-4">
             <div className="flex justify-center gap-4">
               {shops.map((card, index) => (
-                <div key={index}>
+                <div
+                  key={index}
+                  className="hover:opacity-75 transition duration-200 cursor-pointer"
+                >
                   <div className="relative text-center">
                     <img src={card} alt="shop"></img>
                     <div className="absolute inset-0 flex flex-col items-center justify-center text-white font-bold text-base leading-6">
@@ -99,6 +99,8 @@ const ProductListPage = () => {
               <div className="flex px-5 py-[0.9rem] bg-lightgrey2 rounded-md border-solid border-color-lightgrey2">
                 <select className="text-secondtext bg-lightgrey2 text-sm leading-7">
                   <option>Popularity </option>
+                  <option>Price Low to High</option>
+                  <option>Price High to Low</option>
                   <img
                     src={arrowdown}
                     className="absolute right-0 top-0 bottom-0 m-auto w-4 h-4 pointer-events-none"
@@ -109,16 +111,10 @@ const ProductListPage = () => {
               <button className="btn-primary">Filter</button>
             </div>
           </div>
-          <div className="flex flex-wrap justify-center py-8 gap-4">
+          <div className="flex flex-wrap justify-center py-16 gap-8">
             {products.map((image, index) => (
               <div className="flex flex-col py-4 gap-4">
                 <ProductCard index={index} product={image} />
-                <div className="flex justify-center gap-1">
-                  <img src={ellipse1} alt="color1"></img>
-                  <img src={ellipse2} alt="color2"></img>
-                  <img src={ellipse3} alt="color3"></img>
-                  <img src={ellipse4} alt="color4"></img>
-                </div>
               </div>
             ))}
           </div>

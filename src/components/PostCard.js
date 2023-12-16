@@ -6,12 +6,16 @@ import ellipse4 from "../assets/posts/ellipse4.png";
 import icon1 from "../assets/posts/icon1.png";
 import icon2 from "../assets/posts/icon2.png";
 import icon3 from "../assets/posts/icon3.png";
-import icon4 from "../assets/posts/icon4.png";
-import icon5 from "../assets/posts/icon5.png";
-import icon6 from "../assets/posts/icon6.png";
 import arrow from "../assets/posts/arrow.png";
+import { useState } from "react";
 
 const PostCard = ({ posts, index }) => {
+  const [fav, setFav] = useState(false);
+
+  const addFav = () => {
+    setFav(!fav);
+  };
+
   return (
     <div className="flex w-[40rem]">
       <div className="relative">
@@ -20,21 +24,19 @@ const PostCard = ({ posts, index }) => {
           <p className="text-white font-bold leading-6">Sale</p>
         </div>
         <div className="flex justify-evenly w-full absolute bottom-8 ">
-          <img
-            className="p-3 rounded-3xl bg-white"
-            src={icon4}
-            alt="icon4"
-          ></img>
-          <img
-            className="p-3 rounded-3xl bg-white"
-            src={icon5}
-            alt="icon4"
-          ></img>
-          <img
-            className="p-3 rounded-3xl bg-white"
-            src={icon6}
-            alt="icon4"
-          ></img>
+          <button onClick={() => addFav()}>
+            <i
+              className={`${
+                fav ? "fa solid fa-heart text-red" : "fa-regular fa-heart "
+              }  p-3 rounded-3xl hover:scale-110 transition-transform bg-white`}
+            ></i>
+          </button>
+          <button>
+            <i className="fa-solid fa-cart-shopping p-3 rounded-3xl hover:scale-110 transition-transform bg-white"></i>
+          </button>
+          <button>
+            <i className="fa-solid fa-eye p-3 rounded-3xl hover:scale-110 transition-transform bg-white"></i>
+          </button>
         </div>
       </div>
       <div className="flex flex-col justify-start p-4 gap-4 w-[20rem]">
