@@ -1,4 +1,6 @@
 import ProductCard from "../components/ProductCard";
+import Clients from "../components/Clients";
+import PageButton from "../components/PageButton";
 
 import shop1 from "../assets/shop/shop1.png";
 import shop2 from "../assets/shop/shop2.png";
@@ -21,9 +23,6 @@ import pro9 from "../assets/shop/pro9.png";
 import pro10 from "../assets/shop/pro10.png";
 import pro11 from "../assets/shop/pro11.png";
 import pro12 from "../assets/shop/pro12.png";
-
-import Clients from "./home-page/Clients";
-import PageButton from "../components/PageButton";
 
 const ProductListPage = () => {
   const shops = [shop1, shop2, shop3, shop4, shop5];
@@ -95,8 +94,8 @@ const ProductListPage = () => {
                 <img src={iconlist} alt="icon"></img>
               </button>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="flex px-5 py-[0.9rem] bg-lightgrey2 rounded-md border-solid border-color-lightgrey2">
+            <div className="flex items-center">
+              <div className="flex px-5 py-[0.9rem] bg-lightgrey2 rounded-s-lg">
                 <select className="text-secondtext bg-lightgrey2 text-sm leading-7">
                   <option>Popularity </option>
                   <option>Price Low to High</option>
@@ -108,7 +107,9 @@ const ProductListPage = () => {
                   />
                 </select>
               </div>
-              <button className="btn-primary">Filter</button>
+              <button className="flex px-5 py-3 justify-center items-center bg-primary hover:bg-shineblue text-white text-base font-bold leading-6 tracking-wider rounded-e-lg">
+                Filter
+              </button>
             </div>
           </div>
           <div className="flex flex-wrap justify-center py-16 gap-8">

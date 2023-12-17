@@ -1,8 +1,8 @@
 const Header = () => {
   return (
     <div className="w-full flex flex-col mb-4">
-      <div className="flex justify-center items-center min-h-14 bg-black text-white">
-        <div className="flex justify-between items-center font-bold w-full px-6">
+      <div className="hidden sm:flex justify-center items-center min-h-14 bg-black text-white">
+        <div className="flex flex-wrap justify-between items-center font-bold w-full px-24">
           <div className="flex items-center p-2.5 gap-[0.3rem]">
             <div className="flex p-2.5 gap-1 items-center">
               <i className="fa-solid fa-phone"></i>
@@ -26,12 +26,12 @@ const Header = () => {
         </div>
       </div>
       <div className="flex justify-center items-center min-h-14">
-        <div className="flex justify-between items-center font-bold w-full px-6 gap-10">
+        <div className="flex flex-wrap justify-between items-center font-bold w-full px-24">
           <div className="flex p-4 text-2xl font-bold leading-8 tracking-tighter">
             <h3>BrandName</h3>
           </div>
-          <div className="flex justify-between grow items-center p-0.5">
-            <nav className="flex">
+          <div className="flex flex-wrap-reverse justify-between grow items-center p-0.5">
+            <nav className="flex flex-wrap">
               <ul className="flex items-center text-secondtext font-bold text-base leading-6 tracking-wide gap-4">
                 <li>
                   <a href="/">Home</a>
@@ -54,7 +54,7 @@ const Header = () => {
               </ul>
             </nav>
             <div className="flex items-center text-primary font-bold">
-              <div className="flex items-center p-4 gap-1">
+              <div className="flex flex-wrap items-center p-4 gap-1">
                 <i className="fa-regular fa-user"></i>
                 <button>Login / Register</button>
               </div>

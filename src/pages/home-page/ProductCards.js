@@ -1,5 +1,4 @@
 import ProductCard from "../../components/ProductCard";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 import pc1 from "../../assets/productcard/pc1.png";
 import pc2 from "../../assets/productcard/pc2.png";
@@ -13,12 +12,6 @@ import pc8 from "../../assets/productcard/pc8.png";
 const ProductCards = () => {
   const pcards = [pc1, pc2, pc3, pc4, pc5, pc1, pc6, pc7, pc8, pc3];
 
-  const history = useHistory();
-
-  const getProductDetail = () => {
-    history.push(`/product`);
-  };
-
   return (
     <div className="flex justify-center w-full">
       <div className="flex justify-center w-4/5 items-center flex-col gap-16 p-16">
@@ -31,10 +24,7 @@ const ProductCards = () => {
             Problems trying to resolve the conflict between{" "}
           </p>
         </div>
-        <div
-          className="flex justify-center flex-wrap gap-8"
-          onClick={() => getProductDetail()}
-        >
+        <div className="flex justify-center flex-wrap gap-8">
           {pcards.map((image, index) => (
             <ProductCard index={index} product={image} />
           ))}

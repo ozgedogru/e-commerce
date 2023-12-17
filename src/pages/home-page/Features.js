@@ -15,15 +15,15 @@ const Features = () => {
             Problems trying to resolve the conflict between{" "}
           </p>
         </div>
-        <div className="flex flex-row items-center justify-evenly w-3/4 gap-24">
-          <div className="flex flex-col items-center w-[18rem] gap-6">
+        <div className="flex flex-row flex-wrap items-baseline justify-evenly w-6/7 gap-8">
+          <div className="flex flex-col items-center w-[18rem] px-8 gap-4">
             <img className="w-16 h-16" src={book} alt="book"></img>
             <h3 className="font-bold text-2xl">Easy Wins</h3>
             <p className="text-secondtext font-normal leading-5 tracking-widest">
               Get your best looking smile now!
             </p>
           </div>
-          <div className="flex flex-col items-center w-[18rem] gap-6">
+          <div className="flex flex-col items-center w-[18rem] px-8 gap-4">
             <img className="w-16 h-16" src={notebook} alt="notebook"></img>
             <h3 className="font-bold text-2xl">Concrete</h3>
             <p className="text-secondtext font-normal leading-5 tracking-widest">
@@ -31,7 +31,7 @@ const Features = () => {
               beautiful smile
             </p>
           </div>
-          <div className="flex flex-col items-center w-[18rem] gap-6">
+          <div className="flex flex-col items-center w-[18rem] px-8 gap-4">
             <img className="w-16 h-16" src={graph} alt="graph"></img>
             <h3 className="font-bold text-2xl">Hack Growth</h3>
             <p className="text-secondtext font-normal leading-5 tracking-widest">

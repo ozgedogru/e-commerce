@@ -1,9 +1,9 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Hero from "./Hero";
-import HeroCopy from "./HeroCopy";
-import HeroCopy2 from "./HeroCopy2";
+import Hero from "../pages/home-page/Hero";
+import HeroCopy from "../pages/home-page/HeroCopy";
+import HeroCopy2 from "../pages/home-page/HeroCopy2";
 
 const MainSlider = () => {
   const settings = {

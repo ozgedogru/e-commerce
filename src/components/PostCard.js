@@ -17,13 +17,17 @@ const PostCard = ({ posts, index }) => {
   };
 
   return (
-    <div className="flex w-[40rem]">
-      <div className="relative">
-        <img src={posts} alt={`post${index}`}></img>
-        <div className="bg-red absolute top-4 left-4 px-3 py-1 rounded-md">
+    <div className="flex flex-wrap justify-center items-center border border-lightgrey shadow-md p-4">
+      <div className="flex justify-center h-[15rem] sm:h-auto relative">
+        <img
+          src={posts}
+          alt={`post${index}`}
+          className="w-[15rem] h-auto object-cover object-bottom "
+        ></img>
+        <div className="bg-red absolute top-4 left-4 px-3 py-1 rounded-md shadow-black shadow-md ">
           <p className="text-white font-bold leading-6">Sale</p>
         </div>
-        <div className="flex justify-evenly w-full absolute bottom-8 ">
+        <div className="sm:flex justify-evenly w-[full] absolute bottom-8 gap-2 hidden">
           <button onClick={() => addFav()}>
             <i
               className={`${
@@ -39,10 +43,12 @@ const PostCard = ({ posts, index }) => {
           </button>
         </div>
       </div>
-      <div className="flex flex-col justify-start p-4 gap-4 w-[20rem]">
-        <div className="flex justify-between">
-          <h4 className="text-primary font-bold text-sm">English Department</h4>
-          <div className="flex bg-black rounded-2xl gap-1 p-2">
+      <div className="flex flex-col justify-start max-w-[20rem] w-[15rem] p-4 gap-4">
+        <div className="flex justify-between gap-2">
+          <h4 className="text-primary font-bold text-sm text-start">
+            English Department
+          </h4>
+          <div className="flex bg-black rounded-2xl items-center h-8 gap-1 p-2">
             <i className="fa-solid fa-star text-yellow"></i>
             <p className="text-white text-xs leading-4">4.9</p>
           </div>
@@ -54,7 +60,7 @@ const PostCard = ({ posts, index }) => {
           We focus on ergonomics and meeting you where you work. It's only a
           keystroke away.
         </p>
-        <div className="flex gap-2">
+        <div className="hidden sm:flex gap-2">
           <img src={frame} alt="frame"></img>
           <p className="text-secondtext font-bold text-sm leading-5">
             15 Sales
@@ -64,13 +70,13 @@ const PostCard = ({ posts, index }) => {
           <h5 className="text-pricegrey font-bold text-base ">$16.48</h5>
           <h5 className="text-pricegreen font-bold text-base">$6.48</h5>
         </div>
-        <div className="flex gap-2">
+        <div className="hidden sm:flex gap-2">
           <img src={ellipse1} alt="color1"></img>
           <img src={ellipse2} alt="color2"></img>
           <img src={ellipse3} alt="color3"></img>
           <img src={ellipse4} alt="color4"></img>
         </div>
-        <div className="flex gap-2 text-secondtext text-xs leading-4 tracking-widest ">
+        <div className="hidden sm:flex flex-wrap gap-2 text-secondtext text-xs leading-4 tracking-widest ">
           <div className="flex items-center gap-2">
             <img className="w-4 h-4" src={icon1} alt="icon1"></img>
             <p>22h..</p>
@@ -84,7 +90,7 @@ const PostCard = ({ posts, index }) => {
             <p>Progress</p>
           </div>
         </div>
-        <button className="flex justify-center items-center gap-1 bg-white text-primary font-bold border border-solid rounded-3xl p-2 w-36">
+        <button className="flex sm:justify-center items-center gap-1 bg-white text-primary font-bold sm:border border-solid rounded-3xl sm:p-2 w-36">
           Learn More
           <img src={arrow} alt="arrow"></img>
         </button>
