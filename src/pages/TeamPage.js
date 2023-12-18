@@ -33,7 +33,9 @@ const TeamPage = () => {
           Innovation tailored for you
         </h2>
         <div className="flex gap-2 justify-end items-center">
-          <p className="text-black font-bold leading-6">Home</p>
+          <a href="/" className="text-black font-bold leading-6">
+            Home
+          </a>
           <img className="w-2 h-4" src={arrowright} alt="arrow"></img>
           <p className="text-pricegrey font-bold leading-6">Team</p>
         </div>
@@ -61,7 +63,7 @@ const TeamPage = () => {
             of Classical physics: Newtonian mechanics
           </p>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center max-w-screen-lg">
           <TeamCard team={team} />
         </div>
       </div>

@@ -6,7 +6,7 @@ const TeamCard = ({ team }) => {
           <div className="flex w-76 h-56">
             <img className="w-full h-full" src={member.img} alt="team1"></img>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 mb-4">
             <h5 className="text-md font-bold leading-6 ">Username</h5>
             <h6 className="text-secondtext font-bold text-sm leading-5">
               Profession
