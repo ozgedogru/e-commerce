@@ -3,6 +3,7 @@ import HomePage from "../pages/HomePage";
 import ProductListPage from "../pages/ProductListPage";
 import ProductDetailPage from "../pages/ProductDetailPage";
 import AboutPage from "../pages/AboutPage";
+import TeamPage from "../pages/TeamPage";
 
 const PageContent = () => {
   return (
@@ -19,6 +20,9 @@ const PageContent = () => {
         </Route>
         <Route path="/about" exact>
           <AboutPage />
+        </Route>
+        <Route path="/team" exact>
+          <TeamPage />
         </Route>
       </Switch>
     </div>
