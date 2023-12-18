@@ -50,7 +50,9 @@ const ProductListPage = () => {
               Shop
             </h2>
             <div className="flex gap-2 justify-end items-center">
-              <p className="text-black font-bold leading-6">Home</p>
+              <a href="/" className="text-black font-bold leading-6">
+                Home
+              </a>
               <img className="w-2 h-4" src={arrowright} alt="arrow"></img>
               <p className="text-pricegrey font-bold leading-6">Shop</p>
             </div>
@@ -96,7 +98,7 @@ const ProductListPage = () => {
             </div>
             <div className="flex items-center">
               <div className="flex px-5 py-[0.9rem] bg-lightgrey2 rounded-s-lg">
-                <select className="text-secondtext bg-lightgrey2 text-sm leading-7">
+                <select className="text-secondtext bg-lightgrey2 text-sm leading-7 cursor-pointer">
                   <option>Popularity </option>
                   <option>Price Low to High</option>
                   <option>Price High to Low</option>
@@ -112,7 +114,7 @@ const ProductListPage = () => {
               </button>
             </div>
           </div>
-          <div className="flex flex-wrap justify-center py-16 gap-8">
+          <div className="flex flex-wrap justify-center py-12 gap-8">
             {products.map((image, index) => (
               <div className="flex flex-col py-4 gap-4">
                 <ProductCard index={index} product={image} />
@@ -121,10 +123,10 @@ const ProductListPage = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center py-16">
+      <div className="flex justify-center mb-36">
         <PageButton />
       </div>
-      <div className="bg-lightgrey">
+      <div className="bg-lightgrey mb-4">
         <Clients />
       </div>
     </div>

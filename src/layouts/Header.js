@@ -1,6 +1,6 @@
 const Header = () => {
   return (
-    <div className="w-full flex flex-col mb-4">
+    <div className="flex flex-col justify-center w-full">
       <div className="hidden sm:flex justify-center items-center min-h-14 bg-black text-white">
         <div className="flex flex-wrap justify-between items-center font-bold w-full px-24">
           <div className="flex items-center p-2.5 gap-[0.3rem]">

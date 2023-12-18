@@ -16,9 +16,9 @@ const AboutPage = () => {
   ];
   return (
     <div className="flex flex-col justify-center items-center w-full">
-      <div className="flex justify-center items-center px-24  rounded-xl bg-white">
-        <div className="flex flex-col w-1/2 max-w-[24rem] p-10 items-start gap-8 font-bold">
-          <p className=" text-base leading-6 tracking-wide">ABOUT COMPONY</p>
+      <div className="flex justify-center items-center px-24 px-24 rounded-xl bg-white">
+        <div className="flex flex-col w-1/2 max-w-[36rem] p-10 items-start gap-8 font-bold">
+          <p className=" text-base leading-6 tracking-wide">ABOUT COMPANY</p>
           <h1 className="text-4xl text-start">ABOUT US</h1>
           <p className="text-secondtext font-normal text-lg text-start">
             We know how large objects will act, but things on a small scale.
@@ -30,15 +30,15 @@ const AboutPage = () => {
         </div>
       </div>
       <div className="flex justify-center items-center gap-10 px-24 py-10">
-        <div className="flex flex-col max-w-lg">
-          <p className="text-sm text-red leading-5 text-start">
+        <div className="flex flex-col max-w-md">
+          <p className="text-sm font-bold text-red leading-5 text-start">
             Problems trying
           </p>
           <h2 className="font-bold text-2xl leading-8 text-start">
             Met minim Mollie non desert Alamo est sit cliquey dolor do met sent.
           </h2>
         </div>
-        <div className="flexs max-w-lg">
+        <div className="flexs max-w-md">
           <p className="text-secondtext font-normal text-sm leading-5 text-start">
             Problems trying to resolve the conflict between the two major realms
             of Classical physics: Newtonian mechanics
