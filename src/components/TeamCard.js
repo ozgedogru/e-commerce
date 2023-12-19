@@ -2,7 +2,10 @@ const TeamCard = ({ team }) => {
   return (
     <div className="flex flex-wrap justify-center gap-10">
       {team.map((member, index) => (
-        <div className="flex flex-col justify-center gap-8 shadow-md">
+        <div
+          key={index}
+          className="flex flex-col justify-center gap-8 shadow-md"
+        >
           <div className="flex w-76 h-56">
             <img className="w-full h-full" src={member.img} alt="team1"></img>
           </div>
