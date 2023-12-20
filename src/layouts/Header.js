@@ -1,10 +1,10 @@
 const Header = () => {
   return (
     <div className="flex flex-col justify-center w-full">
-      <div className="hidden sm:flex justify-center items-center min-h-14 bg-black text-white">
-        <div className="flex flex-wrap justify-between items-center font-bold w-full px-24">
-          <div className="flex items-center p-2.5 gap-[0.3rem]">
-            <div className="flex p-2.5 gap-1 items-center">
+      <div className="hidden sm:flex justify-between items-center min-h-14 bg-black text-white">
+        <div className="flex flex-wrap justify-between items-center font-bold w-full px-48">
+          <div className="flex items-center py-2.5 gap-[0.3rem]">
+            <div className="flex pr-2.5 gap-1 items-center">
               <i className="fa-solid fa-phone"></i>
               <p>(225) 555-0118</p>
             </div>
@@ -26,8 +26,8 @@ const Header = () => {
         </div>
       </div>
       <div className="hidden sm:flex justify-center items-center min-h-14">
-        <div className="flex flex-wrap justify-between items-center font-bold w-full px-24">
-          <div className="flex p-4 text-2xl font-bold leading-8 tracking-tighter">
+        <div className="flex flex-wrap justify-between items-center font-bold w-full px-48">
+          <div className="flex pr-4 text-2xl font-bold leading-8">
             <h3>BrandName</h3>
           </div>
           <div className="flex flex-wrap-reverse justify-between grow items-center p-0.5">
@@ -53,20 +53,20 @@ const Header = () => {
                 </li>
               </ul>
             </nav>
-            <div className="flex items-center text-primary font-bold">
-              <div className="flex flex-wrap items-center p-4 gap-1">
+            <div className="flex items-center text-primary py-4 font-bold">
+              <div className="flex flex-wrap items-center px-2 gap-1">
                 <i className="fa-regular fa-user"></i>
                 <button>Login / Register</button>
               </div>
-              <div className="flex items-center p-4 gap-1">
+              <div className="flex items-center px-2 gap-1">
                 <i className="fa-solid fa-search"></i>
                 <p></p>
               </div>
-              <div className="flex items-center p-4 gap-1">
+              <div className="flex items-center px-2 gap-1">
                 <i className="fa-solid fa-cart-shopping"></i>
                 <p></p>
               </div>
-              <div className="flex items-center p-4 gap-1">
+              <div className="flex items-center px-2 gap-1">
                 <i className="fa-regular fa-heart"></i>
                 <p></p>
               </div>

@@ -5,7 +5,7 @@ import graph from "../../assets/icons/graph.png";
 const Features = () => {
   return (
     <div className="flex justify-center w-full">
-      <div className="flex flex-col items-center w-3/4 justify-center py-24 px-20">
+      <div className="flex flex-col items-center px-24 justify-center sm:py-24">
         <div className="flex flex-col w-3/4 items-center font-bold py-24 gap-4">
           <h2 className="text-secondtext font-bold text-xl leading-6 tracking-wider">
             Featured Products

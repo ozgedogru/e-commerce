@@ -14,7 +14,7 @@ const ProductCards = () => {
 
   return (
     <div className="flex justify-center w-full">
-      <div className="flex justify-center w-4/5 items-center flex-col gap-16 p-16">
+      <div className="flex justify-center sm:px-24 items-center flex-col gap-16 sm:p-16 py-8 px-4">
         <div className="flex flex-col w-160 items-center font-bold gap-4">
           <h2 className="text-secondtext font-bold text-xl leading-6 tracking-wider">
             Featured Products
@@ -29,7 +29,7 @@ const ProductCards = () => {
             <ProductCard index={index} product={image} />
           ))}
         </div>
-        <div className="py-16">
+        <div className="pb-16 sm:py-16">
           <button className="btn-light">LOAD MORE PRODUCTS</button>
         </div>
       </div>

@@ -10,7 +10,7 @@ function ShopCard() {
           <img
             src={img1}
             alt="img1"
-            className="object-cover w-full min-h-[34rem] "
+            className="object-cover w-full h-full min-h-[34rem]"
           />
           <div className="absolute bottom-0 left-0 text-white bg-transblue bg-opacity-70 max-w-full max-h-full flex flex-col justify-center gap-4 p-12 hover:bg-opacity-100">
             <h4 className="text-2xl tracking-wider">Top Product Of the Week</h4>
@@ -24,7 +24,7 @@ function ShopCard() {
             <img
               src={img2}
               alt="img2"
-              className="object-cover w-full min-h-[24rem]"
+              className="object-cover w-full max-w-lg min-h-[24rem]"
             />
             <div className="absolute bottom-0 left-0 text-white bg-transblue bg-opacity-70 max-w-full max-h-full flex flex-col justify-center gap-4 p-8 hover:bg-opacity-100">
               <h4 className="text-2xl tracking-wider">
@@ -36,7 +36,11 @@ function ShopCard() {
             </div>
           </div>
           <div className="relative">
-            <img src={img3} alt="img3" className="object-cover min-h-[24rem]" />
+            <img
+              src={img3}
+              alt="img3"
+              className="object-cover w-full max-w-lg min-h-[24rem]"
+            />
             <div className="absolute bottom-0 left-0 text-white bg-transblue bg-opacity-70 max-w-full max-h-full flex flex-col justify-center gap-4 p-8 hover:bg-opacity-100">
               <h4 className="text-2xl tracking-wider">
                 Top Product Of the Week
