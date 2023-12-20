@@ -26,20 +26,24 @@ const ProductDetailPage = () => {
   ];
 
   return (
-    <div>
-      <div className="flex justify-center w-full bg-lightgrey">
-        <div className="flex flex-col gap-8 px-8 py-10">
+    <div className="flex flex-col w-full">
+      <div className="flex justify-center w-full sm:px-48 px-8 bg-lightgrey">
+        <div className="flex flex-col w-full gap-8 py-10">
           <div className="flex gap-2 justify-start items-center">
-            <p className="text-black font-bold leading-6">Home</p>
+            <p className="text-black font-bold leading-6">
+              <a href="/" className="text-black font-bold leading-6">
+                Home
+              </a>
+            </p>
             <img className="w-2 h-4" src={arrowright} alt="arrow"></img>
             <p className="text-pricegrey font-bold leading-6">Shop</p>
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-start">
             <ProductDetailCard />
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-center w-full px-24 py-8 gap-8">
+      <div className="flex flex-col justify-center w-full sm:px-48 px-8 py-8 gap-8">
         <div className="flex justify-center gap-8">
           <p className="text-secondtext font-bold text-sm leading-5">
             Description
@@ -52,11 +56,11 @@ const ProductDetailPage = () => {
           </p>
         </div>
         <hr className="text-lightgrey2" />
-        <div className="flex flex-wrap justify-center items-start">
-          <div className="flex justify-center w-1/3 min-w-[20rem] p-4">
-            <img src={productCard2} alt="productCard2"></img>
+        <div className="flex flex-wrap w-full justify-center sm:items-start items-center">
+          <div className="flex justify-center w-1/3 min-w-[20rem] p-4 pl-0">
+            <img className="w-full" src={productCard2} alt="productCard2"></img>
           </div>
-          <div className="flex flex-col justify-center w-1/3 min-w-[20rem] p-4">
+          <div className="flex flex-col w-1/3 min-w-[20rem] p-4">
             <h5 className="flex justify-start text-black font-bold text-2xl mb-2">
               the quick fox jumps over
             </h5>
@@ -78,7 +82,7 @@ const ProductDetailPage = () => {
               </p>
             </div>
           </div>
-          <div className="flex justify-center w-1/3 min-w-[20rem] p-4 flex-col gap-8">
+          <div className="flex w-1/3 min-w-[20rem] p-4 flex-col gap-8">
             <div className="flex flex-col gap-2">
               <h5 className="flex justify-start text-black font-bold text-2xl">
                 the quick fox jumps over
@@ -134,13 +138,13 @@ const ProductDetailPage = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center w-full">
-        <div className="flex justify-center w-4/5 flex-col gap-4">
+      <div className="flex justify-center w-full sm:px-48 px-8">
+        <div className="flex justify-center w-full flex-col gap-4">
           <div className="flex flex-col items-start font-bold gap-4 mt-8">
             <h3 className="text-2xl leading-8">BESTSELLER PRODUCTS</h3>
           </div>
           <hr className="text-lightgrey2" />
-          <div className="flex justify-center flex-wrap gap-8 py-8">
+          <div className="flex justify-between flex-wrap gap-8 py-8 w-full">
             {pcards.map((image, index) => (
               <ProductCard index={index} product={image} />
             ))}

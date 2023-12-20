@@ -24,12 +24,12 @@ const TeamPage = () => {
   ];
 
   return (
-    <div className="flex flex-col justify-center items-center w-full gap-10 py-10">
+    <div className="flex flex-col justify-center items-center w-full gap-10 sm:px-0 px-8 py-10">
       <div className="flex flex-col justify-center items-center gap-6">
         <h5 className="text-secondtext text-md font-bold leading-6 ">
           WHAT WE DO
         </h5>
-        <h2 className="font-bold text-6xl leading-[5rem] ">
+        <h2 className="font-bold sm:text-6xl text-4xl sm:leading-[5rem] leading-10 ">
           Innovation tailored for you
         </h2>
         <div className="flex gap-2 justify-end items-center">
@@ -40,7 +40,7 @@ const TeamPage = () => {
           <p className="text-pricegrey font-bold leading-6">Team</p>
         </div>
       </div>
-      <div className="flex gap-4">
+      <div className="flex flex-wrap w-full justify-center gap-4">
         <div className="flex">
           <img src={teamheader1} alt="teamheader"></img>
         </div>
@@ -53,7 +53,7 @@ const TeamPage = () => {
           <img src={teamheader5} alt="teamheader"></img>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center py-10 gap-20">
+      <div className="flex flex-col justify-center items-center py-10 sm:gap-20 gap-10">
         <div className="flex flex-col justify-center py-10 gap-4">
           <h2 className="font-bold text-[2.5rem] leading-[3rem]">
             Meet Our Team
@@ -68,7 +68,7 @@ const TeamPage = () => {
         </div>
       </div>
       <div className="flex flex-col items-center gap-10 py-10">
-        <h3 className="font-bold text-[2.5rem] leading-8">
+        <h3 className="font-bold sm:text-[2.5rem] text-3xl leading-8">
           Start your 14 days free trial
         </h3>
         <p className="text-secondtext font-bold leading-4 tracking-wide max-w-[36rem]">

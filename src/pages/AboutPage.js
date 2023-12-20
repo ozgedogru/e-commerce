@@ -16,7 +16,7 @@ const AboutPage = () => {
   ];
   return (
     <div className="flex flex-col justify-center items-center w-full">
-      <div className="flex flex-col sm:flex-row justify-center items-center w-full gap-10 sm:px-48 px-8 py-10 rounded-xl bg-white">
+      <div className="flex flex-col flex-wrap sm:flex-row justify-center items-center w-full gap-10 sm:px-48 px-8 py-10 rounded-xl bg-white">
         <div className="flex flex-col sm:w-1/2 w-full max-w-md sm:items-start items-center gap-8 py-10 font-bold">
           <p className="text-base leading-6 tracking-wide">ABOUT COMPANY</p>
           <h1 className="sm:text-4xl text-3xl text-start">ABOUT US</h1>
@@ -83,7 +83,7 @@ const AboutPage = () => {
           <i className="fa-solid fa-play text-2xl"></i>
         </button>
       </div>
-      <div className="flex flex-col justify-center items-center px-10 py-10 gap-20">
+      <div className="flex flex-col justify-center items-center px-10 py-10 sm:gap-20 gap-10">
         <div className="flex flex-col justify-center py-10 gap-4">
           <a href="/team">
             <h2 className="font-bold text-[2.5rem] leading-[3rem] hover:text-shineblack">

@@ -2,8 +2,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Hero from "../pages/home-page/Hero";
-import HeroCopy from "../pages/home-page/HeroCopy";
-import HeroCopy2 from "../pages/home-page/HeroCopy2";
 
 const MainSlider = () => {
   const settings = {
@@ -15,16 +13,13 @@ const MainSlider = () => {
     arrows: true,
   };
   return (
-    <div className="mx-auto p-8">
+    <div className="mx-auto sm:p-8 p-4 w-full sm:px-48 px-8">
       <Slider {...settings}>
         <div>
           <Hero />
         </div>
         <div>
-          <HeroCopy />
-        </div>
-        <div>
-          <HeroCopy2 />
+          <Hero />
         </div>
       </Slider>
     </div>

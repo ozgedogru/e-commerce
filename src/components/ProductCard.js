@@ -13,7 +13,7 @@ const ProductCard = ({ product, index }) => {
   return (
     <div
       onClick={() => getProductDetail()}
-      className="flex flex-col sm:w-[14rem] w-72 gap-4 pb-8 shadow-md hover:scale-105 transition duration-300 cursor-pointer"
+      className="flex flex-col sm:w-[16rem] w-72 gap-4 pb-8 shadow-md hover:scale-105 transition duration-300 cursor-pointer"
     >
       <img src={product} alt={`card {${index}}`}></img>
       <h5 className="text-black text-base font-bold">Graphic Design</h5>

@@ -16,7 +16,7 @@ const Header = () => {
           <div className="flex items-center">
             <p>Follow Us and get a chance to win 80% off</p>
           </div>
-          <div className="flex items-center p-2.5 gap-2.5">
+          <div className="flex items-center p-2.5 pl-0 gap-2.5">
             <p>Follow Us :</p>
             <i className="fa-brands fa-instagram p-1"></i>
             <i className="fa-brands fa-youtube p-1"></i>

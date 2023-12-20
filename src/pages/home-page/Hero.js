@@ -8,28 +8,27 @@ const Hero = () => {
     history.push("/shop");
   };
   return (
-    <div>
-      <div className="flex justify-center w-full">
-        <div className="w-[70rem] h-[32rem] pl-36 flex justify-start items-center rounded-xl bg-gradient-to-r from-blue to-green relative">
-          <div className="flex flex-col w-[30rem] p-10 items-start gap-8 font-bold">
-            <p className="text-darkblue text-base leading-6 tracking-wide">
-              SUMMER 2024
-            </p>
-            <h1 className="text-4xl text-start">NEW COLLECTION</h1>
-            <p className="text-secondtext font-normal text-xl text-start">
-              We know how large objects will act, but things on a small scale.
-            </p>
-            <button
-              className="btn-primary w-48 h-16"
-              onClick={handleButtonClick}
-            >
-              SHOP NOW
-            </button>
-          </div>
-          <div className="flex h-full w-[36rem] absolute left-[38rem]">
-            <img className="flex object-cover" src={girl} alt="girl"></img>
-          </div>
-        </div>
+    <div className="flex flex-col sm:flex-row bg-gradient-to-r from-blue to-green rounded-3xl">
+      <div className="flex flex-col sm:items-start items-center justify-center sm:p-16 p-8 gap-8 max-w-xl">
+        <p className="text-darkblue font-bold text-base leading-6 tracking-wide">
+          SUMMER 2024
+        </p>
+        <h1 className="sm:text-4xl text-3xl font-bold text-center sm:text-start">
+          NEW COLLECTION
+        </h1>
+        <p className="text-secondtext font-normal text-xl sm:text-start text-center">
+          We know how large objects will act, but things on a small scale.
+        </p>
+        <button className="btn-primary w-48 h-16" onClick={handleButtonClick}>
+          SHOP NOW
+        </button>
+      </div>
+      <div>
+        <img
+          className="flex object-cover h-full pt-8 sm:p-0"
+          src={girl}
+          alt="girl"
+        ></img>
       </div>
     </div>
   );

@@ -12,11 +12,11 @@ const ProductDetailCard = () => {
     setFav(!fav);
   };
   return (
-    <div className="flex flex-wrap justify-center shadow-lg">
-      <div className="flex">
+    <div className="flex flex-col sm:flex-row gap-8 justify-start shadow-lg">
+      <div className="flex min-w-sm">
         <ProductSlider />
       </div>
-      <div className="flex flex-col justify-between w-[32rem] max-w-max gap-4 p-8">
+      <div className="flex flex-col justify-between max-w-max gap-4 sm:p-8 p-4">
         <h5 className="flex justify-start text-black text-xl leading-7">
           Floating Phone
         </h5>
@@ -53,7 +53,9 @@ const ProductDetailCard = () => {
           <img src={ellipse4} alt="color4"></img>
         </div>
         <div className="flex gap-4">
-          <button className="btn-primary">Select Options</button>
+          <button className="flex sm:px-5 px-2 sm:py-3 py-2 justify-center items-center sm:rounded-3xl rounded-xl bg-primary hover:bg-shineblue text-white sm:text-base text-xs font-bold leading-6 tracking-wide">
+            Select Options
+          </button>
           <div className="flex gap-2">
             <button onClick={() => addFav()}>
               <i
