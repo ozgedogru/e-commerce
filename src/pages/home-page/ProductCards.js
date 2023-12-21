@@ -26,7 +26,7 @@ const ProductCards = () => {
         </div>
         <div className="flex justify-center flex-wrap gap-8">
           {pcards.map((image, index) => (
-            <ProductCard index={index} product={image} />
+            <ProductCard index={index} key={index} product={image} />
           ))}
         </div>
         <div className="pb-16 sm:py-16">

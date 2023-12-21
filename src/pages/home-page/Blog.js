@@ -15,7 +15,7 @@ const Blog = () => {
         </div>
         <div className="flex justify-center flex-wrap gap-4 sm:w-full w-5/6">
           {posts.map((post, index) => (
-            <PostCard posts={post} index={index} />
+            <PostCard posts={post} key={index} index={index} />
           ))}
         </div>
       </div>
