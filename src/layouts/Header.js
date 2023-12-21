@@ -56,7 +56,9 @@ const Header = () => {
             <div className="flex items-center text-primary py-4 font-bold">
               <div className="flex flex-wrap items-center px-2 gap-1">
                 <i className="fa-regular fa-user"></i>
-                <button>Login / Register</button>
+                <button>
+                  <a href="/signup">Login / Register</a>
+                </button>
               </div>
               <div className="flex items-center px-2 gap-1">
                 <i className="fa-solid fa-search"></i>
