@@ -18,3 +18,13 @@
 .blue-button {
   @apply bg-primary text-white;
 }
+
+.label {
+  @apply flex flex-col items-start w-full gap-1;
+}
+.input {
+  @apply w-full rounded-md p-3 border border-shineblack;
+}
+.error {
+  @apply flex font-normal text-xs text-red;
+}
