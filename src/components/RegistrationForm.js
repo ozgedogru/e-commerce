@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AxiosInstance } from "../api/axiosInstance";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const RegistrationForm = () => {
   const {
@@ -10,10 +12,12 @@ const RegistrationForm = () => {
     watch,
   } = useForm();
 
+  const history = useHistory();
   const password = watch("password", "");
 
   const [roles, setRoles] = useState([]);
   const [selectedRoleID, setSelectedRoleID] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     AxiosInstance.get("/roles")
@@ -53,16 +57,24 @@ const RegistrationForm = () => {
       };
     }
 
-    console.log("data", data);
-    console.log("Form data", formData);
+    setLoading(true);
+    //console.log("Form data", formData);
 
-    AxiosInstance.post("/signup", formData)
-      .then((response) => {
-        console.log("submit succeeded:", response);
-      })
-      .catch((error) => {
-        console.log("Error:", error);
-      });
+    setTimeout(() => {
+      AxiosInstance.post("/signup", formData)
+        .then((response) => {
+          console.log("submit succeeded:", response);
+          toast.info(`${response.data.message}`);
+          history.push("/");
+        })
+        .catch((error) => {
+          console.log("Error:", error);
+          toast.error(`${error.message}`);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }, 2000);
   };
 
   return (
@@ -183,7 +195,7 @@ const RegistrationForm = () => {
             </div>
             <div className="flex flex-col w-full gap-1">
               <label className="label">
-                Store Phone
+                Store storeP
                 <input
                   className="input"
                   type="tel"
@@ -210,8 +222,7 @@ const RegistrationForm = () => {
                     required: "Store Tax ID is required.",
                     pattern: {
                       value: /^T\d{4}V\d{6}$/,
-                      message:
-                        "Invalid Store Tax ID. It should match the pattern 'TXXXXVXXXXXX'.",
+                      message: "Invalid Store Tax ID.",
                     },
                   })}
                 />
@@ -229,8 +240,7 @@ const RegistrationForm = () => {
                     required: "Store Bank Account is required.",
                     pattern: {
                       value: /^TR\d{2}\d{4}\d{4}\d{4}\d{4}\d{4}\d{2}$/,
-                      message:
-                        "Invalid IBAN. It should match the pattern 'TRXXXXXXXXXXXXXXXXXXXXXXXX'.",
+                      message: "Invalid IBAN.",
                     },
                   })}
                 />
@@ -240,7 +250,14 @@ const RegistrationForm = () => {
           </>
         )}
         <button className="flex justify-center self-center bg-shineblack text-white w-min px-4 py-2 rounded active:scale-95">
-          Submit
+          {loading ? (
+            <>
+              Submitting
+              <svg className="animate-spin h-5 w-5 ml-3 border-t-2 border-white rounded-full"></svg>{" "}
+            </>
+          ) : (
+            "Submit"
+          )}
         </button>
       </form>
     </div>
