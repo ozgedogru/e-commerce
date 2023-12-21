@@ -109,6 +109,9 @@ const Header = () => {
               <li>
                 <a href="/contact">Contact</a>
               </li>
+              <li>
+                <a href="/signup">Register</a>
+              </li>
             </ul>
           </nav>
         </div>
