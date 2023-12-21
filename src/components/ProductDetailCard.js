@@ -2,6 +2,8 @@ import ellipse1 from "../assets/posts/ellipse1.png";
 import ellipse2 from "../assets/posts/ellipse2.png";
 import ellipse3 from "../assets/posts/ellipse3.png";
 import ellipse4 from "../assets/posts/ellipse4.png";
+import thumb1 from "../assets/productcard/thumb1.jpg";
+import thumb2 from "../assets/productcard/thumb2.jpg";
 import { useState } from "react";
 import ProductSlider from "../sliders/ProductSlider";
 
@@ -13,8 +15,12 @@ const ProductDetailCard = () => {
   };
   return (
     <div className="flex flex-col sm:flex-row gap-8 justify-start shadow-lg">
-      <div className="flex min-w-sm">
+      <div className="flex flex-col min-w-sm gap-1">
         <ProductSlider />
+        <div className="flex gap-1">
+          <img className="opacity-50" src={thumb1} alt="thumb1"></img>
+          <img src={thumb2} alt="thumb2"></img>
+        </div>
       </div>
       <div className="flex flex-col justify-between max-w-max gap-4 sm:p-8 p-4">
         <h5 className="flex justify-start text-black text-xl leading-7">
