@@ -16,7 +16,7 @@ const RegistrationForm = () => {
   const password = watch("password", "");
 
   const [roles, setRoles] = useState([]);
-  const [selectedRoleID, setSelectedRoleID] = useState("");
+  const [selectedRoleID, setSelectedRoleID] = useState("3");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -64,12 +64,16 @@ const RegistrationForm = () => {
       AxiosInstance.post("/signup", formData)
         .then((response) => {
           console.log("submit succeeded:", response);
-          toast.info(`${response.data.message}`);
+          toast.success(`${response.data.message}`);
           history.push("/");
         })
         .catch((error) => {
           console.log("Error:", error);
-          toast.error(`${error.message}`);
+          if (error.response.data.err.errno === 19) {
+            toast.error("This email address is already registered.");
+          } else {
+            toast.error(`${error.message}`);
+          }
         })
         .finally(() => {
           setLoading(false);
@@ -163,6 +167,7 @@ const RegistrationForm = () => {
               className="input"
               name="role_id"
               onChange={handleRoleChange}
+              value={selectedRoleID}
             >
               {roles.map((role) => (
                 <option key={role.id} value={role.id}>
@@ -195,7 +200,7 @@ const RegistrationForm = () => {
             </div>
             <div className="flex flex-col w-full gap-1">
               <label className="label">
-                Store storeP
+                Store Phone
                 <input
                   className="input"
                   type="tel"
