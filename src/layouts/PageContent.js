@@ -6,6 +6,7 @@ import AboutPage from "../pages/AboutPage";
 import TeamPage from "../pages/TeamPage";
 import ContactPage from "../pages/ContactPage";
 import SignUpPage from "../pages/SignUpPage";
+import LoginPage from "../pages/LoginPage";
 
 const PageContent = () => {
   return (
@@ -31,6 +32,9 @@ const PageContent = () => {
         </Route>
         <Route path="/signup" exact>
           <SignUpPage />
+        </Route>
+        <Route path="/login" exact>
+          <LoginPage />
         </Route>
       </Switch>
     </div>
