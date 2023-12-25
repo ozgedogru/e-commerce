@@ -14,10 +14,10 @@ const LoginPage = () => {
 
   return (
     <div className="flex justify-center items-center sm:px-48 flex-wrap-reverse bg-lightgrey">
-      <div className="flex sm:w-1/2 h-auto">
+      <div className="flex w-[36rem] h-auto">
         <img className="w-full h-full" src={pinkshop} alt="pinkshop"></img>
       </div>
-      <div className="flex flex-col sm:w-1/3 h-min p-8 rounded-xl">
+      <div className="flex flex-col w-[24rem] h-min p-8 rounded-xl">
         <form
           className="flex flex-col w-full items-start gap-4 text-secondtext font-bold"
           onSubmit={handleSubmit(formLogin)}
