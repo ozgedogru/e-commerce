@@ -1,8 +1,10 @@
-export const ADD_TO_CART = "ADD_TO_CART";
-export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
-export const CLEAR_CART = "CLEAR_CART";
-export const SET_PAYMENT = "SET_PAYMENT";
-export const SET_ADDRESS = "SET_ADDRESS";
+import {
+  ADD_TO_CART,
+  REMOVE_FROM_CART,
+  CLEAR_CART,
+  SET_PAYMENT,
+  SET_ADDRESS,
+} from "../actions/shoppingCartActions";
 
 export const shoppingCartReducer = (
   state = { cart: [], payment: {}, address: {} },
