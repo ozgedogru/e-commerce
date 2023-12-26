@@ -1,5 +1,10 @@
 import { useForm } from "react-hook-form";
 import pinkshop from "../assets/form/pinkshop.png";
+import { useDispatch } from "react-redux";
+import { AxiosInstance } from "../api/axiosInstance";
+import { setUser } from "../store/actions/userActions";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const LoginPage = () => {
   const {
@@ -8,8 +13,40 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm();
 
-  const formLogin = (data) => {
-    console.log(data);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  // const formLogin = async (formData) => {
+  //   try {
+  //     const response = await AxiosInstance.post("/login", formData);
+  //     console.log(response.data);
+
+  //     dispatch(setUser(response.data));
+  //     localStorage.setItem("token", response.data.token);
+  //     history.push("/");
+  //     toast.success("welcome back!");
+  //   } catch (error) {
+  //     toast.error("Error occurred: " + error.response.data.message);
+  //   }
+  // };
+
+  const formLogin = (formData) => {
+    dispatch(userLogin(formData));
+  };
+
+  const userLogin = (formData) => async (dispatch) => {
+    try {
+      const response = await AxiosInstance.post("/login", formData);
+      console.log(response.data);
+
+      dispatch(setUser(response.data));
+      localStorage.setItem("token", response.data.token);
+      history.push("/");
+      toast.success("Welcome back!");
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("Error occurred: " + error.response.data.message);
+    }
   };
 
   return (
@@ -17,7 +54,16 @@ const LoginPage = () => {
       <div className="flex w-[36rem] h-auto">
         <img className="w-full h-full" src={pinkshop} alt="pinkshop"></img>
       </div>
-      <div className="flex flex-col w-[24rem] h-min p-8 rounded-xl">
+      <div className="flex flex-col w-[24rem] h-min p-8 gap-8 rounded-xl">
+        <div className="flex flex-col items-start w-full gap-2">
+          <h3 className="text-xl font-bold ">Welcome back!</h3>
+          <p className="text-base text-secondtext">
+            I don't have an account?{" "}
+            <a href="/signup" className="text-shineblue">
+              Sign up.
+            </a>
+          </p>
+        </div>
         <form
           className="flex flex-col w-full items-start gap-4 text-secondtext font-bold"
           onSubmit={handleSubmit(formLogin)}
