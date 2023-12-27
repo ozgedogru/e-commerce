@@ -1,3 +1,21 @@
+import { toast } from "react-toastify";
+import { AxiosInstance } from "../../api/axiosInstance";
+
 export const SET_USER = "SET_USER";
 
 export const setUser = (user) => ({ type: SET_USER, payload: user });
+
+export const userLogin = (formData, history) => async (dispatch) => {
+  try {
+    const response = await AxiosInstance.post("/login", formData);
+    console.log(response.data);
+
+    dispatch(setUser(response.data));
+    localStorage.setItem("token", response.data.token);
+    toast.success("Welcome back!");
+    history.push("/");
+  } catch (error) {
+    console.error("Error:", error);
+    toast.error("Error occurred: " + error.response.data.message);
+  }
+};

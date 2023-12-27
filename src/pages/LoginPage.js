@@ -1,10 +1,8 @@
 import { useForm } from "react-hook-form";
 import pinkshop from "../assets/form/pinkshop.png";
 import { useDispatch } from "react-redux";
-import { AxiosInstance } from "../api/axiosInstance";
-import { setUser } from "../store/actions/userActions";
-import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { userLogin } from "../store/actions/userActions";
 
 const LoginPage = () => {
   const {
@@ -16,37 +14,8 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  // const formLogin = async (formData) => {
-  //   try {
-  //     const response = await AxiosInstance.post("/login", formData);
-  //     console.log(response.data);
-
-  //     dispatch(setUser(response.data));
-  //     localStorage.setItem("token", response.data.token);
-  //     history.push("/");
-  //     toast.success("welcome back!");
-  //   } catch (error) {
-  //     toast.error("Error occurred: " + error.response.data.message);
-  //   }
-  // };
-
   const formLogin = (formData) => {
-    dispatch(userLogin(formData));
-  };
-
-  const userLogin = (formData) => async (dispatch) => {
-    try {
-      const response = await AxiosInstance.post("/login", formData);
-      console.log(response.data);
-
-      dispatch(setUser(response.data));
-      localStorage.setItem("token", response.data.token);
-      history.push("/");
-      toast.success("Welcome back!");
-    } catch (error) {
-      console.error("Error:", error);
-      toast.error("Error occurred: " + error.response.data.message);
-    }
+    dispatch(userLogin(formData, history));
   };
 
   return (
