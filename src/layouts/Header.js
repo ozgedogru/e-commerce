@@ -1,9 +1,19 @@
 import Gravatar from "react-gravatar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { userLogout } from "../store/actions/userActions";
+import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Header = () => {
-  const user = useSelector((state) => state.userReducer.user);
+  const { user, isLoggedIn } = useSelector((state) => state.userReducer);
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleLogout = () => {
+    dispatch(userLogout());
+    history.push("/");
+  };
 
   return (
     <div className="flex flex-col justify-center w-full">
@@ -64,7 +74,7 @@ const Header = () => {
               </ul>
             </nav>
             <div className="flex items-center text-primary py-4 font-bold">
-              {user.name ? (
+              {isLoggedIn ? (
                 <div className="flex flex-wrap items-center px-2 gap-1">
                   <Gravatar
                     email={user.email}
@@ -75,9 +85,9 @@ const Header = () => {
               ) : (
                 <div className="flex flex-wrap items-center px-2 gap-1">
                   <i className="fa-regular fa-user"></i>
-                  <p>
-                    <a href="/signup">Login / Register</a>
-                  </p>
+                  <button>
+                    <Link to="/login">Login / Register</Link>
+                  </button>
                 </div>
               )}
               <div className="flex items-center px-2 gap-1">
@@ -91,6 +101,16 @@ const Header = () => {
               <div className="flex items-center px-2 gap-1">
                 <i className="fa-regular fa-heart"></i>
                 <p></p>
+              </div>
+              <div>
+                {user.name ? (
+                  <div className="flex items-center px-2 gap-1">
+                    <p>
+                      <button onClick={() => handleLogout()}>Logout</button>
+                    </p>
+                    <i className="fa-solid fa-right-from-bracket"></i>
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>
