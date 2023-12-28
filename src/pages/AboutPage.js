@@ -7,6 +7,7 @@ import contact from "../assets/about/contact.png";
 
 import TeamCard from "../components/TeamCard";
 import Clients from "../components/Clients";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const AboutPage = () => {
   const teamAbout = [
@@ -85,11 +86,11 @@ const AboutPage = () => {
       </div>
       <div className="flex flex-col justify-center items-center px-10 py-10 sm:gap-20 gap-10">
         <div className="flex flex-col justify-center py-10 gap-4">
-          <a href="/team">
-            <h2 className="font-bold text-[2.5rem] leading-[3rem] hover:text-shineblack">
+          <Link to="/team">
+            <h2 className="font-bold text-[2.5rem] text-center leading-[3rem] hover:text-shineblack">
               Meet Our Team
             </h2>
-          </a>
+          </Link>
           <p className="text-secondtext font-bold text-sm leading-5 max-w-[28rem]">
             Problems trying to resolve the conflict between the two major realms
             of Classical physics: Newtonian mechanics
