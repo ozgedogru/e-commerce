@@ -1,7 +1,7 @@
 import { SET_USER } from "../actions/userActions";
 
 const initialState = {
-  user: null,
+  user: {},
 };
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
