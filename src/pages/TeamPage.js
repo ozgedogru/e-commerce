@@ -54,8 +54,8 @@ const TeamPage = () => {
         </div>
       </div>
       <div className="flex flex-col justify-center items-center py-10 sm:gap-20 gap-10">
-        <div className="flex flex-col justify-center py-10 gap-4">
-          <h2 className="font-bold text-[2.5rem] leading-[3rem]">
+        <div className="flex flex-col justify-center items-center py-10 gap-4">
+          <h2 className="font-bold text-2xl sm:text-[2.5rem] text-center leading-[3rem]">
             Meet Our Team
           </h2>
           <p className="text-secondtext font-bold text-sm leading-5 max-w-[28rem]">
@@ -71,7 +71,7 @@ const TeamPage = () => {
         <h3 className="font-bold sm:text-[2.5rem] text-3xl leading-8">
           Start your 14 days free trial
         </h3>
-        <p className="text-secondtext font-bold leading-4 tracking-wide max-w-[36rem]">
+        <p className="text-secondtext text-center font-bold leading-4 tracking-wide max-w-[36rem]">
           Met minim Mollie non desert Alamo est sit cliquey dolor do met sent.
           RELIT official consequent.
         </p>

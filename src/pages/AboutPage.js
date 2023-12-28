@@ -87,7 +87,7 @@ const AboutPage = () => {
       <div className="flex flex-col justify-center items-center px-10 py-10 sm:gap-20 gap-10">
         <div className="flex flex-col justify-center py-10 gap-4">
           <Link to="/team">
-            <h2 className="font-bold text-[2.5rem] text-center leading-[3rem] hover:text-shineblack">
+            <h2 className="font-bold text-2xl sm:text-[2.5rem] text-center leading-[3rem] hover:text-shineblack">
               Meet Our Team
             </h2>
           </Link>

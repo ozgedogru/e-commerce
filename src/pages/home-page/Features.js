@@ -11,7 +11,7 @@ const Features = () => {
             Featured Products
           </h2>
           <h3 className="text-2xl leading-8">THE BEST SERVICES</h3>
-          <p className="text-secondtext font-normal leading-5 tracking-widest">
+          <p className="text-secondtext text-center font-normal leading-5 tracking-widest">
             Problems trying to resolve the conflict between{" "}
           </p>
         </div>
@@ -19,14 +19,14 @@ const Features = () => {
           <div className="flex flex-col items-center w-[18rem] px-8 gap-4">
             <img className="w-16 h-16" src={book} alt="book"></img>
             <h3 className="font-bold text-2xl">Easy Wins</h3>
-            <p className="text-secondtext font-normal leading-5 tracking-widest">
+            <p className="text-secondtext text-center font-normal leading-5 tracking-widest">
               Get your best looking smile now!
             </p>
           </div>
           <div className="flex flex-col items-center w-[18rem] px-8 gap-4">
             <img className="w-16 h-16" src={notebook} alt="notebook"></img>
             <h3 className="font-bold text-2xl">Concrete</h3>
-            <p className="text-secondtext font-normal leading-5 tracking-widest">
+            <p className="text-secondtext text-center font-normal leading-5 tracking-widest">
               Defalcate is most focused in helping you discover your most
               beautiful smile
             </p>
@@ -34,7 +34,7 @@ const Features = () => {
           <div className="flex flex-col items-center w-[18rem] px-8 gap-4">
             <img className="w-16 h-16" src={graph} alt="graph"></img>
             <h3 className="font-bold text-2xl">Hack Growth</h3>
-            <p className="text-secondtext font-normal leading-5 tracking-widest">
+            <p className="text-secondtext text-center font-normal leading-5 tracking-widest">
               Overcame any hurdle or any other problem.
             </p>
           </div>

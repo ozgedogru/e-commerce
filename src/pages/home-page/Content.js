@@ -14,7 +14,7 @@ const Content = () => {
           </div>
         </div>
         <div className="flex flex-col justify-center items-start max-w-full px-8 gap-4">
-          <h5 className="text-primary font-bold text-base leading-6 tracking-wider">
+          <h5 className="text-primary text-center font-bold text-base leading-6 tracking-wider">
             Featured Products
           </h5>
           <h2 className="text-black text-start text-4xl font-bold">
