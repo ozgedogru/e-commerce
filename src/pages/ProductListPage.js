@@ -10,7 +10,6 @@ import shop5 from "../assets/shop/shop5.png";
 import arrowright from "../assets/shop/arrowright.png";
 import icongraph from "../assets/shop/icongraph.png";
 import iconlist from "../assets/shop/iconlist.png";
-import arrowdown from "../assets/shop/arrowdown.png";
 import pro1 from "../assets/shop/pro1.png";
 import pro2 from "../assets/shop/pro2.png";
 import pro3 from "../assets/shop/pro3.png";
@@ -98,11 +97,6 @@ const ProductListPage = () => {
                   <option>Popularity </option>
                   <option>Price Low to High</option>
                   <option>Price High to Low</option>
-                  <img
-                    src={arrowdown}
-                    className="absolute right-0 top-0 bottom-0 m-auto w-4 h-4 pointer-events-none"
-                    alt="dropdown-arrow"
-                  />
                 </select>
               </div>
               <button className="flex px-5 py-3 justify-center items-center bg-primary hover:bg-shineblue text-white text-base font-bold leading-6 tracking-wider rounded-e-lg">
