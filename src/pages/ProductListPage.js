@@ -106,7 +106,7 @@ const ProductListPage = () => {
           </div>
           <div className="flex flex-wrap sm:flex-row gap-8 justify-center sm:justify-between items-center sm:px-48 px-8 py-4">
             {products.map((image, index) => (
-              <div className="flex flex-col py-4 gap-4">
+              <div key={index} className="flex flex-col py-4 gap-4">
                 <ProductCard index={index} product={image} />
               </div>
             ))}
