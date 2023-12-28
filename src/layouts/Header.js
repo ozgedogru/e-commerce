@@ -1,5 +1,6 @@
 import Gravatar from "react-gravatar";
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   const user = useSelector((state) => state.userReducer.user);
@@ -39,22 +40,26 @@ const Header = () => {
             <nav className="flex flex-wrap">
               <ul className="flex items-center text-secondtext font-bold text-base leading-6 tracking-wide gap-4">
                 <li>
-                  <a href="/">Home</a>
+                  <NavLink to="/" exact>
+                    Home
+                  </NavLink>
                 </li>
                 <li>
-                  <a href="/shop">Shop</a>
+                  <NavLink to="/shop" exact>
+                    Shop
+                  </NavLink>
                 </li>
                 <li>
-                  <a href="/about">About</a>
+                  <NavLink to="/about">About</NavLink>
                 </li>
                 <li>
-                  <a href="/blog">Blog</a>
+                  <NavLink to="/blog">Blog</NavLink>
                 </li>
                 <li>
-                  <a href="/contact">Contact</a>
+                  <NavLink to="/contact">Contact</NavLink>
                 </li>
                 <li>
-                  <a href="/pages">Pages</a>
+                  <NavLink to="/pages">Pages</NavLink>
                 </li>
               </ul>
             </nav>
@@ -113,19 +118,29 @@ const Header = () => {
           <nav>
             <ul className="flex flex-col items-center text-secondtext text-2xl leading-6 tracking-wide gap-8 py-8">
               <li>
-                <a href="/">Home</a>
+                <NavLink to="/" exact>
+                  Home
+                </NavLink>
               </li>
               <li>
-                <a href="/shop">Shop</a>
+                <NavLink to="/shop" exact>
+                  Shop
+                </NavLink>
               </li>
               <li>
-                <a href="/about">About</a>
+                <NavLink to="/about">About</NavLink>
               </li>
               <li>
-                <a href="/contact">Contact</a>
+                <NavLink to="/blog">Blog</NavLink>
               </li>
               <li>
-                <a href="/signup">Register</a>
+                <NavLink to="/contact">Contact</NavLink>
+              </li>
+              <li>
+                <NavLink to="/pages">Pages</NavLink>
+              </li>
+              <li>
+                <NavLink to="/signup">Register</NavLink>
               </li>
             </ul>
           </nav>
