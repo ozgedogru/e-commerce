@@ -48,25 +48,25 @@ const AboutPage = () => {
         </div>
       </div>
       <div className="flex flex-wrap justify-center items-center gap-10 sm:px-48 px-8 py-10">
-        <div className="flex flex-col justify-center w-60">
+        <div className="flex flex-col justify-center items-center w-60">
           <p className="font-bold text-4xl sm:text-5xl leading-20">15K</p>
           <p className="text-secondtext font-bold text-sm leading-5">
             Happy Customers
           </p>
         </div>
-        <div className="flex flex-col justify-center w-60">
+        <div className="flex flex-col justify-center items-center w-60">
           <p className="font-bold text-4xl sm:text-5xl leading-20">150K</p>
           <p className="text-secondtext font-bold text-sm leading-5">
             Monthly Visitors
           </p>
         </div>
-        <div className="flex flex-col justify-center w-60">
+        <div className="flex flex-col justify-center items-center w-60">
           <p className="font-bold text-4xl sm:text-5xl leading-20">15</p>
           <p className="text-secondtext font-bold text-sm leading-5">
             Countries Worldwide
           </p>
         </div>
-        <div className="flex flex-col justify-center w-60">
+        <div className="flex flex-col justify-center items-center w-60">
           <p className="font-bold text-4xl sm:text-5xl leading-20">100+</p>
           <p className="text-secondtext font-bold text-sm leading-5">
             Top Partners
