@@ -1,4 +1,9 @@
+import Gravatar from "react-gravatar";
+import { useSelector } from "react-redux";
+
 const Header = () => {
+  const user = useSelector((state) => state.userReducer.user);
+
   return (
     <div className="flex flex-col justify-center w-full">
       <div className="hidden sm:flex justify-between items-center min-h-14 bg-black text-white">
@@ -54,12 +59,22 @@ const Header = () => {
               </ul>
             </nav>
             <div className="flex items-center text-primary py-4 font-bold">
-              <div className="flex flex-wrap items-center px-2 gap-1">
-                <i className="fa-regular fa-user"></i>
-                <button>
-                  <a href="/signup">Login / Register</a>
-                </button>
-              </div>
+              {user.name ? (
+                <div className="flex flex-wrap items-center px-2 gap-1">
+                  <Gravatar
+                    email={user.email}
+                    className="w-5 h-5 rounded-full"
+                  />
+                  <p>{user.name}</p>
+                </div>
+              ) : (
+                <div className="flex flex-wrap items-center px-2 gap-1">
+                  <i className="fa-regular fa-user"></i>
+                  <p>
+                    <a href="/signup">Login / Register</a>
+                  </p>
+                </div>
+              )}
               <div className="flex items-center px-2 gap-1">
                 <i className="fa-solid fa-search"></i>
                 <p></p>
