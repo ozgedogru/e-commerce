@@ -4,11 +4,13 @@ import Main from "./layouts/Main";
 
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
+      <Provider store={store}>
         <Main />
         <ToastContainer
           position="top-right"
@@ -16,7 +18,7 @@ function App() {
           autoClose={4000}
           transition={Flip}
         />
-      </div>
+      </Provider>
     </BrowserRouter>
   );
 }
