@@ -132,6 +132,19 @@ const Header = () => {
               <i className="fa-solid fa-bars"></i>
               <p></p>
             </div>
+            {isLoggedIn ? (
+              <div className="flex items-center p-2">
+                <button onClick={() => handleLogout()}>
+                  <i className="fa-solid fa-power-off"></i>
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center p-2">
+                <Link to="/login">
+                  <i className="fa-regular fa-user"></i>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
         <div>
@@ -158,9 +171,6 @@ const Header = () => {
               </li>
               <li>
                 <NavLink to="/pages">Pages</NavLink>
-              </li>
-              <li>
-                <NavLink to="/signup">Register</NavLink>
               </li>
             </ul>
           </nav>
