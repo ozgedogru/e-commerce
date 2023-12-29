@@ -13,9 +13,13 @@ const ProductCard = ({ product, index }) => {
   return (
     <div
       onClick={() => getProductDetail()}
-      className="flex flex-col sm:w-[16rem] w-72 gap-4 pb-8 shadow-md hover:scale-105 transition duration-300 cursor-pointer"
+      className="flex flex-col items-center sm:w-[16rem] w-72 gap-4 pb-8 shadow-md hover:scale-105 transition duration-300 cursor-pointer"
     >
-      <img src={product} alt={`card {${index}}`}></img>
+      <img
+        className="w-full h-full object-cover"
+        src={product}
+        alt={`card {${index}}`}
+      ></img>
       <h5 className="text-black text-base font-bold">Graphic Design</h5>
       <p className="text-secondtext text-sm font-bold">English Department</p>
       <div className="flex justify-center gap-2">
