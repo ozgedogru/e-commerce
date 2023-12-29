@@ -2,11 +2,6 @@ import ProductCard from "../components/ProductCard";
 import Clients from "../components/Clients";
 import PageButton from "../components/PageButton";
 
-import shop1 from "../assets/shop/shop1.png";
-import shop2 from "../assets/shop/shop2.png";
-import shop3 from "../assets/shop/shop3.png";
-import shop4 from "../assets/shop/shop4.png";
-import shop5 from "../assets/shop/shop5.png";
 import arrowright from "../assets/shop/arrowright.png";
 import icongraph from "../assets/shop/icongraph.png";
 import iconlist from "../assets/shop/iconlist.png";
@@ -22,9 +17,10 @@ import pro9 from "../assets/shop/pro9.png";
 import pro10 from "../assets/shop/pro10.png";
 import pro11 from "../assets/shop/pro11.png";
 import pro12 from "../assets/shop/pro12.png";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const ProductListPage = () => {
-  const shops = [shop1, shop2, shop3, shop4, shop5];
   const products = [
     pro1,
     pro2,
@@ -39,6 +35,10 @@ const ProductListPage = () => {
     pro11,
     pro12,
   ];
+  const categories = useSelector((state) => state.globalReducer.categories);
+  const firstFiveCategories = categories
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 5);
 
   return (
     <div>
@@ -55,19 +55,29 @@ const ProductListPage = () => {
             <p className="text-pricegrey font-bold leading-6">Shop</p>
           </div>
         </div>
-        <div className="flex flex-wrap sm:flex-nowrap sm:w-full h-auto justify-center gap-8 ">
-          {shops.map((card, index) => (
+        <div className="flex flex-wrap sm:flex-nowrap sm:w-full h-auto justify-center gap-8">
+          {firstFiveCategories.map((category, index) => (
             <div
               key={index}
               className="w-full hover:opacity-75 transition duration-200 cursor-pointer"
             >
-              <div className="relative text-center w-full">
-                <img className="w-full sm:w-80" src={card} alt="shop"></img>
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-white font-bold text-base leading-6">
-                  <h6>CLOTHS</h6>
-                  <h6>5 Items</h6>
+              <Link
+                to={`/shopping/${category.gender === "k" ? "Kadin" : "Erkek"}/${
+                  category.title
+                }`}
+              >
+                <div className="relative text-center w-full h-full">
+                  <img
+                    className="w-full h-full object-cover sm:w-80"
+                    src={category.img}
+                    alt={category.title}
+                  />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-white font-bold text-base leading-6">
+                    <h6>{category.gender === "k" ? "KADIN" : "ERKEK"}</h6>
+                    <h6>{category.title}</h6>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
           ))}
         </div>
