@@ -51,7 +51,7 @@ const Header = () => {
             <nav className="flex flex-wrap">
               <ul className="flex items-center text-secondtext font-bold text-base leading-6 tracking-wide gap-4">
                 <li>
-                  <NavLink to="/" exact activeClassName="text-primary">
+                  <NavLink to="/" exact>
                     Home
                   </NavLink>
                 </li>
