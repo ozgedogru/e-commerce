@@ -5,36 +5,12 @@ import PageButton from "../components/PageButton";
 import arrowright from "../assets/shop/arrowright.png";
 import icongraph from "../assets/shop/icongraph.png";
 import iconlist from "../assets/shop/iconlist.png";
-import pro1 from "../assets/shop/pro1.png";
-import pro2 from "../assets/shop/pro2.png";
-import pro3 from "../assets/shop/pro3.png";
-import pro4 from "../assets/shop/pro4.png";
-import pro5 from "../assets/shop/pro5.png";
-import pro6 from "../assets/shop/pro6.png";
-import pro7 from "../assets/shop/pro7.png";
-import pro8 from "../assets/shop/pro8.png";
-import pro9 from "../assets/shop/pro9.png";
-import pro10 from "../assets/shop/pro10.png";
-import pro11 from "../assets/shop/pro11.png";
-import pro12 from "../assets/shop/pro12.png";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const ProductListPage = () => {
-  const products = [
-    pro1,
-    pro2,
-    pro3,
-    pro4,
-    pro5,
-    pro6,
-    pro7,
-    pro8,
-    pro9,
-    pro10,
-    pro11,
-    pro12,
-  ];
+  const products = useSelector((state) => state.productReducer.productList);
+
   const categories = useSelector((state) => state.globalReducer.categories);
   const firstFiveCategories = categories
     .sort((a, b) => b.rating - a.rating)
@@ -115,9 +91,9 @@ const ProductListPage = () => {
             </div>
           </div>
           <div className="flex flex-wrap sm:flex-row gap-8 justify-center sm:justify-between items-center sm:px-48 px-8 py-4">
-            {products.map((image, index) => (
+            {products.map((p, index) => (
               <div key={index} className="flex flex-col py-4 gap-4">
-                <ProductCard index={index} product={image} />
+                <ProductCard product={p} />
               </div>
             ))}
           </div>

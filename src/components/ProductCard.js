@@ -4,11 +4,13 @@ import ellipse2 from "../assets/posts/ellipse2.png";
 import ellipse3 from "../assets/posts/ellipse3.png";
 import ellipse4 from "../assets/posts/ellipse4.png";
 
-const ProductCard = ({ product, index }) => {
+const ProductCard = ({ product }) => {
   const history = useHistory();
   const getProductDetail = () => {
     history.push(`/product`);
   };
+
+  const productImg = product.images[0].url;
 
   return (
     <div
@@ -17,8 +19,8 @@ const ProductCard = ({ product, index }) => {
     >
       <img
         className="w-full h-full object-cover"
-        src={product}
-        alt={`card {${index}}`}
+        src={productImg}
+        alt={`card {${product.id}}`}
       ></img>
       <h5 className="text-black text-base font-bold">Graphic Design</h5>
       <p className="text-secondtext text-sm font-bold">English Department</p>
