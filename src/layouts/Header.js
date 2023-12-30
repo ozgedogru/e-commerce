@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { userLogout } from "../store/actions/userActions";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import ShopNavbarDropdown from "./dropdowns/ShopNavbarDropdown";
 
 const Header = () => {
   const { user, isLoggedIn } = useSelector((state) => state.userReducer);
@@ -50,26 +51,32 @@ const Header = () => {
             <nav className="flex flex-wrap">
               <ul className="flex items-center text-secondtext font-bold text-base leading-6 tracking-wide gap-4">
                 <li>
-                  <NavLink to="/" exact>
+                  <NavLink to="/" exact activeClassName="text-primary">
                     Home
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/shop" exact>
-                    Shop
+                  <ShopNavbarDropdown />
+                </li>
+                <li>
+                  <NavLink to="/about" activeClassName="text-primary">
+                    About
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/about">About</NavLink>
+                  <NavLink to="/blog" activeClassName="text-primary">
+                    Blog
+                  </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/blog">Blog</NavLink>
+                  <NavLink to="/contact" activeClassName="text-primary">
+                    Contact
+                  </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/contact">Contact</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/pages">Pages</NavLink>
+                  <NavLink to="/pages" activeClassName="text-primary">
+                    Pages
+                  </NavLink>
                 </li>
               </ul>
             </nav>
