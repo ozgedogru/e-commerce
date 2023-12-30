@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom";
 import hero3 from "../../assets/home-pics/hero3.png";
 
 const HeroCopy2 = () => {

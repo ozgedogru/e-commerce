@@ -5,7 +5,7 @@ import ellipse4 from "../assets/posts/ellipse4.png";
 import thumb1 from "../assets/productcard/thumb1.jpg";
 import thumb2 from "../assets/productcard/thumb2.jpg";
 import { useState } from "react";
-import ProductSlider from "../sliders/ProductSlider";
+import ProductSlider from "../layouts/sliders/ProductSlider";
 
 const ProductDetailCard = () => {
   const [fav, setFav] = useState(false);
