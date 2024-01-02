@@ -4,11 +4,13 @@ import { useSelector } from "react-redux";
 const ProductCards = () => {
   const products = useSelector((state) => state.productReducer.productList);
 
-  const topTen = products.sort((a, b) => b.rating - a.rating).slice(0, 8);
+  const topProducts = [...products];
+  topProducts.sort((a, b) => b.rating - a.rating);
+  const topTen = topProducts.slice(0, 10);
 
   return (
     <div className="flex justify-center w-full">
-      <div className="flex justify-center sm:px-24 items-center flex-col gap-16 sm:p-16 py-8 px-4">
+      <div className="flex justify-center sm:px-48 items-center flex-col gap-16 sm:p-16 py-8 px-4">
         <div className="flex flex-col w-160 items-center font-bold gap-4">
           <h2 className="text-secondtext font-bold text-xl leading-6 tracking-wider">
             Featured Products
