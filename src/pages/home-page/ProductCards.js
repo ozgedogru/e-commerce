@@ -1,16 +1,10 @@
 import ProductCard from "../../components/ProductCard";
-
-import pc1 from "../../assets/productcard/pc1.png";
-import pc2 from "../../assets/productcard/pc2.png";
-import pc3 from "../../assets/productcard/pc3.png";
-import pc4 from "../../assets/productcard/pc4.png";
-import pc5 from "../../assets/productcard/pc5.png";
-import pc6 from "../../assets/productcard/pc6.png";
-import pc7 from "../../assets/productcard/pc7.png";
-import pc8 from "../../assets/productcard/pc8.png";
+import { useSelector } from "react-redux";
 
 const ProductCards = () => {
-  const pcards = [pc1, pc2, pc3, pc4, pc5, pc1, pc6, pc7, pc8, pc3];
+  const products = useSelector((state) => state.productReducer.productList);
+
+  const topTen = products.sort((a, b) => b.rating - a.rating).slice(0, 8);
 
   return (
     <div className="flex justify-center w-full">
@@ -24,9 +18,9 @@ const ProductCards = () => {
             Problems trying to resolve the conflict between{" "}
           </p>
         </div>
-        <div className="flex justify-center flex-wrap gap-8">
-          {pcards.map((image, index) => (
-            <ProductCard index={index} key={index} product={image} />
+        <div className="flex justify-center flex-wrap gap-8 max-w-64">
+          {topTen.map((product) => (
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
         <div className="pb-16 sm:py-16">
