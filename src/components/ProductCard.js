@@ -15,18 +15,28 @@ const ProductCard = ({ product }) => {
   return (
     <div
       onClick={() => getProductDetail()}
-      className="flex flex-col items-center sm:w-[16rem] w-72 gap-4 pb-8 shadow-md hover:scale-105 transition duration-300 cursor-pointer"
+      className="flex flex-col items-center justify-around sm:w-[16rem] sm:min-h-[36rem] w-72 gap-4 pb-8 shadow-md hover:scale-105 transition duration-300 cursor-pointer"
     >
-      <img
-        className="w-full h-full object-cover"
-        src={productImg}
-        alt={`card {${product.id}}`}
-      ></img>
-      <h5 className="text-black text-base font-bold">Graphic Design</h5>
-      <p className="text-secondtext text-sm font-bold">English Department</p>
+      <div className="flex max-h-[20rem]">
+        <img
+          className="w-full object-cover object-center "
+          src={productImg}
+          alt={`card {${product.id}}`}
+        ></img>
+      </div>
+      <h5 className="text-black text-center text-base font-bold">
+        {product.name}
+      </h5>
+      <p className="text-secondtext text-center text-sm font-bold px-1">
+        {product.description}
+      </p>
       <div className="flex justify-center gap-2">
-        <h5 className="text-pricegrey font-bold text-base ">$16.48</h5>
-        <h5 className="text-pricegreen font-bold text-base">$6.48</h5>
+        <h5 className="text-pricegrey font-bold text-base ">
+          ${product.price * 2}
+        </h5>
+        <h5 className="text-pricegreen font-bold text-base">
+          ${product.price}
+        </h5>
       </div>
       <div className="flex justify-center gap-1">
         <img src={ellipse1} alt="color1"></img>
