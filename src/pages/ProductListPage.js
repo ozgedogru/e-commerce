@@ -5,11 +5,27 @@ import PageButton from "../components/PageButton";
 import arrowright from "../assets/shop/arrowright.png";
 import icongraph from "../assets/shop/icongraph.png";
 import iconlist from "../assets/shop/iconlist.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { fetchProducts } from "../store/actions/productActions";
+import { useState } from "react";
 
 const ProductListPage = () => {
   const products = useSelector((state) => state.productReducer.productList);
+  const totalNum = useSelector(
+    (state) => state.productReducer.totalProductCount
+  );
+  const fetchState = useSelector((state) => state.productReducer.fetchState);
+
+  const dispatch = useDispatch();
+
+  const handleFilterButtonClick = () => {
+    dispatch(fetchProducts(category, filter, sort));
+  };
+
+  const [category, setCategory] = useState("");
+  const [filter, setFilter] = useState("");
+  const [sort, setSort] = useState("");
 
   const categories = useSelector((state) => state.globalReducer.categories);
   const firstFiveCategories = categories
@@ -63,7 +79,7 @@ const ProductListPage = () => {
           <div className="flex flex-col sm:flex-row gap-8 justify-between items-center sm:px-48 py-4">
             <div className="flex items-center">
               <label className="text-secondtext text-sm font-bold leading-6">
-                Showing all 12 results
+                Showing all {totalNum} results
               </label>
             </div>
             <div className="flex gap-2 items-center">
@@ -78,24 +94,60 @@ const ProductListPage = () => {
               </button>
             </div>
             <div className="flex items-center">
-              <div className="flex px-5 py-[0.9rem] bg-lightgrey2 rounded-s-lg">
-                <select className="text-secondtext bg-lightgrey2 text-sm leading-7 cursor-pointer">
-                  <option>Popularity </option>
-                  <option>Price Low to High</option>
-                  <option>Price High to Low</option>
+              <input
+                type="text"
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
+                placeholder="Search..."
+                className="mr-2 px-2 py-1 border border-pricegrey rounded focus:outline-none "
+              />
+
+              <div className="flex mr-2 px-2 py-2 bg-lightgrey2 rounded">
+                <select
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  className="text-secondtext bg-lightgrey2 text-sm leading-7 focus:outline-none cursor-pointer"
+                >
+                  <option value="">All Categories</option>
+                  <option value="1">T-Shirt</option>
+                  <option value="2">Shoes</option>
+                  <option value="3">Jacket</option>
+                  <option value="4">Dress</option>
                 </select>
               </div>
-              <button className="flex px-5 py-3 justify-center items-center bg-primary hover:bg-shineblue text-white text-base font-bold leading-6 tracking-wider rounded-e-lg">
+              <div className="flex mr-2 px-2 py-2 bg-lightgrey2 rounded">
+                <select
+                  className="text-secondtext bg-lightgrey2 text-sm leading-7 focus:outline-none cursor-pointer"
+                  value={sort}
+                  onChange={(e) => setSort(e.target.value)}
+                >
+                  <option>Sort by</option>
+                  <option value="price:asc">Price: Low to High</option>
+                  <option value="price:desc">Price: High to Low</option>
+                  <option value="rating:asc">Rating: Low to High</option>
+                  <option value="rating:desc">Rating: High to Low</option>
+                </select>
+              </div>
+              <button
+                className="flex px-2 py-[0.35rem] justify-center items-center bg-primary hover:bg-shineblue text-white text-sm font-bold leading-6 tracking-wider rounded"
+                onClick={handleFilterButtonClick}
+              >
                 Filter
               </button>
             </div>
           </div>
           <div className="flex flex-wrap sm:flex-row gap-8 justify-center sm:justify-between items-center sm:px-48 px-8 py-4">
-            {products.map((p, index) => (
-              <div key={index} className="flex flex-col py-4 gap-4">
-                <ProductCard product={p} />
+            {fetchState === "FETCHING" && (
+              <div className="flex items-center justify-center w-full h-72">
+                <svg className="animate-spin h-12 w-12 border-t-2 border-black rounded-full"></svg>
               </div>
-            ))}
+            )}
+            {fetchState === "FETCHED" &&
+              products.map((p) => (
+                <div key={p.id} className="flex flex-col py-4 gap-4">
+                  <ProductCard product={p} img={p.images[0].url} />
+                </div>
+              ))}
           </div>
           <div className="flex justify-center py-10">
             <PageButton />
