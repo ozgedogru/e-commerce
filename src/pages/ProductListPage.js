@@ -1,31 +1,46 @@
 import ProductCard from "../components/ProductCard";
 import Clients from "../components/Clients";
-import PageButton from "../components/PageButton";
 
 import arrowright from "../assets/shop/arrowright.png";
 import icongraph from "../assets/shop/icongraph.png";
 import iconlist from "../assets/shop/iconlist.png";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchProducts } from "../store/actions/productActions";
+import {
+  clearProductList,
+  fetchProducts,
+  setOffset,
+} from "../store/actions/productActions";
 import { useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import ScrollToTopButton from "../components/ScrollToTopButton";
 
 const ProductListPage = () => {
-  const products = useSelector((state) => state.productReducer.productList);
-  const totalNum = useSelector(
-    (state) => state.productReducer.totalProductCount
-  );
-  const fetchState = useSelector((state) => state.productReducer.fetchState);
-
   const dispatch = useDispatch();
-
-  const handleFilterButtonClick = () => {
-    dispatch(fetchProducts(category, filter, sort));
-  };
-
   const [category, setCategory] = useState("");
   const [filter, setFilter] = useState("");
   const [sort, setSort] = useState("");
+
+  const { productList, totalProductCount, fetchState, offset } = useSelector(
+    (state) => state.productReducer
+  );
+  const limit = 10;
+
+  console.log("ProductList", productList);
+  console.log("Total product count", totalProductCount);
+
+  const handleFilterButtonClick = (e) => {
+    e.preventDefault();
+    dispatch(setOffset(0));
+    dispatch(clearProductList([]));
+    dispatch(fetchProducts(category, filter, sort, limit, 0));
+  };
+
+  const loadMore = () => {
+    const newOffset = offset + limit;
+    dispatch(setOffset(newOffset));
+    dispatch(fetchProducts(category, filter, sort, limit, newOffset));
+  };
 
   const categories = useSelector((state) => state.globalReducer.categories);
   const firstFiveCategories = categories
@@ -79,7 +94,7 @@ const ProductListPage = () => {
           <div className="flex flex-col sm:flex-row gap-8 justify-between items-center sm:px-48 py-4">
             <div className="flex items-center">
               <label className="text-secondtext text-sm font-bold leading-6">
-                Showing all {totalNum} results
+                Showing all {totalProductCount} results
               </label>
             </div>
             <div className="flex gap-2 items-center">
@@ -93,64 +108,70 @@ const ProductListPage = () => {
                 <img src={iconlist} alt="icon"></img>
               </button>
             </div>
-            <div className="flex items-center">
-              <input
-                type="text"
-                value={filter}
-                onChange={(e) => setFilter(e.target.value)}
-                placeholder="Search..."
-                className="mr-2 px-2 py-1 border border-pricegrey rounded focus:outline-none "
-              />
+            <div className="flex items-center text-sm leading-7">
+              <form onSubmit={handleFilterButtonClick} className="flex">
+                <input
+                  type="text"
+                  value={filter}
+                  onChange={(e) => setFilter(e.target.value)}
+                  placeholder="Search..."
+                  className="mr-2 px-2 py-1 border border-pricegrey rounded focus:outline-none "
+                />
 
-              <div className="flex mr-2 px-2 py-2 bg-lightgrey2 rounded">
-                <select
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  className="text-secondtext bg-lightgrey2 text-sm leading-7 focus:outline-none cursor-pointer"
-                >
-                  <option value="">All Categories</option>
-                  <option value="1">T-Shirt</option>
-                  <option value="2">Shoes</option>
-                  <option value="3">Jacket</option>
-                  <option value="4">Dress</option>
-                </select>
-              </div>
-              <div className="flex mr-2 px-2 py-2 bg-lightgrey2 rounded">
-                <select
-                  className="text-secondtext bg-lightgrey2 text-sm leading-7 focus:outline-none cursor-pointer"
-                  value={sort}
-                  onChange={(e) => setSort(e.target.value)}
-                >
-                  <option>Sort by</option>
-                  <option value="price:asc">Price: Low to High</option>
-                  <option value="price:desc">Price: High to Low</option>
-                  <option value="rating:asc">Rating: Low to High</option>
-                  <option value="rating:desc">Rating: High to Low</option>
-                </select>
-              </div>
-              <button
-                className="flex px-2 py-[0.35rem] justify-center items-center bg-primary hover:bg-shineblue text-white text-sm font-bold leading-6 tracking-wider rounded"
-                onClick={handleFilterButtonClick}
-              >
-                Filter
-              </button>
+                <div className="flex mr-2 px-2 py-2 bg-lightgrey2 rounded">
+                  <select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    className="text-secondtext bg-lightgrey2 text-sm leading-7 focus:outline-none cursor-pointer"
+                  >
+                    <option value="">All Categories</option>
+                    <option value="1">T-Shirt</option>
+                    <option value="2">Shoes</option>
+                    <option value="3">Jacket</option>
+                    <option value="4">Dress</option>
+                  </select>
+                </div>
+                <div className="flex mr-2 px-2 py-2 bg-lightgrey2 rounded">
+                  <select
+                    className="text-secondtext bg-lightgrey2 text-sm leading-7 focus:outline-none cursor-pointer"
+                    value={sort}
+                    onChange={(e) => setSort(e.target.value)}
+                  >
+                    <option value="">Sort by</option>
+                    <option value="price:asc">Price: Low to High</option>
+                    <option value="price:desc">Price: High to Low</option>
+                    <option value="rating:asc">Rating: Low to High</option>
+                    <option value="rating:desc">Rating: High to Low</option>
+                  </select>
+                </div>
+                <button className="flex px-2 py-[0.35rem] justify-center items-center bg-primary hover:bg-shineblue text-white text-sm font-bold leading-6 tracking-wider rounded transition transform active:scale-90">
+                  Filter
+                </button>
+              </form>
             </div>
           </div>
-          <div className="flex flex-wrap sm:flex-row gap-8 justify-center sm:justify-between items-center sm:px-48 px-8 py-4">
-            {fetchState === "FETCHING" && (
-              <div className="flex items-center justify-center w-full h-72">
-                <svg className="animate-spin h-12 w-12 border-t-2 border-black rounded-full"></svg>
-              </div>
-            )}
-            {fetchState === "FETCHED" &&
-              products.map((p) => (
-                <div key={p.id} className="flex flex-col py-4 gap-4">
-                  <ProductCard product={p} img={p.images[0].url} />
+          <div className="flex flex-wrap sm:flex-row gap-8 justify-center sm:justify-start items-start sm:px-48 px-8 py-4">
+            <InfiniteScroll
+              className="flex flex-wrap sm:flex-row gap-8 justify-center sm:justify-start items-start"
+              dataLength={productList.length}
+              next={loadMore}
+              hasMore={productList.length < totalProductCount}
+            >
+              {/* {fetchState === "FETCHING" && (
+                <div className="flex items-center justify-center w-full h-72">
+                  <svg className="animate-spin h-12 w-12 border-t-2 border-black rounded-full"></svg>
                 </div>
-              ))}
-          </div>
-          <div className="flex justify-center py-10">
-            <PageButton />
+              )} */}
+              {fetchState === "FETCHED" &&
+                productList.map((p) => (
+                  <div key={p.id} className="flex flex-col py-4 gap-4">
+                    <ProductCard product={p} img={p.images[0].url} />
+                  </div>
+                ))}
+            </InfiniteScroll>
+            <div>
+              <ScrollToTopButton />
+            </div>
           </div>
         </div>
       </div>
