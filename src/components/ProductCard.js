@@ -3,11 +3,21 @@ import ellipse1 from "../assets/posts/ellipse1.png";
 import ellipse2 from "../assets/posts/ellipse2.png";
 import ellipse3 from "../assets/posts/ellipse3.png";
 import ellipse4 from "../assets/posts/ellipse4.png";
+import slugify from "slugify";
 
 const ProductCard = ({ product }) => {
   const history = useHistory();
   const getProductDetail = () => {
-    history.push(`/product`);
+    const categoryMap = {
+      1: "kadinTisort",
+      2: "kadinAyakkabi",
+      3: "kadinCeket",
+      4: "kadinElbise",
+    };
+    const categoryName = categoryMap[product.category_id];
+    const productNameSlug = slugify(product.name, { lower: true });
+    const url = `/${categoryName}/${product.id}/${productNameSlug}`;
+    history.push(url);
   };
 
   const productImg = product.images[0].url;
