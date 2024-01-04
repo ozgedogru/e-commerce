@@ -8,16 +8,21 @@ import { AxiosInstance, renewAxiosInstance } from "./api/axiosInstance";
 import { clearUser, setUser } from "./store/actions/userActions";
 import { useEffect } from "react";
 import { setCategories, setRoles } from "./store/actions/globalActions";
-import { fetchProducts } from "./store/actions/productActions";
+import {
+  fetchBestSellers,
+  fetchProductDetails,
+  fetchProducts,
+} from "./store/actions/productActions";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Registration formun role id'lerini fetch et.
     dispatch(setRoles());
     dispatch(setCategories());
     dispatch(fetchProducts());
+    dispatch(fetchBestSellers(null, "rating:desc"));
+    dispatch(fetchProductDetails("2"));
 
     //localde token bilgisi var mi?
     const checkToken = async () => {
