@@ -2,53 +2,61 @@ import ellipse1 from "../assets/posts/ellipse1.png";
 import ellipse2 from "../assets/posts/ellipse2.png";
 import ellipse3 from "../assets/posts/ellipse3.png";
 import ellipse4 from "../assets/posts/ellipse4.png";
-import thumb1 from "../assets/productcard/thumb1.jpg";
-import thumb2 from "../assets/productcard/thumb2.jpg";
 import { useState } from "react";
 import ProductSlider from "../layouts/sliders/ProductSlider";
+import { useSelector } from "react-redux";
+import StarRating from "./StarRating";
 
 const ProductDetailCard = () => {
+  const selectedProduct = useSelector(
+    (state) => state.productReducer.selectedProduct
+  );
+
   const [fav, setFav] = useState(false);
 
   const addFav = () => {
     setFav(!fav);
   };
+
   return (
-    <div className="flex flex-col sm:flex-row gap-8 justify-start shadow-lg">
+    <div className="flex flex-col sm:flex-row sm:w-full min-w-min gap-8 justify-start shadow-lg">
       <div className="flex flex-col min-w-sm gap-1">
         <ProductSlider />
-        <div className="flex gap-1">
-          <img className="opacity-50" src={thumb1} alt="thumb1"></img>
-          <img src={thumb2} alt="thumb2"></img>
+        <div className="flex gap-1 w-24 h-24">
+          <img
+            className="opacity-50 object-cover w-full h-full"
+            src={selectedProduct.images[0].url}
+            alt="pic1"
+          ></img>
         </div>
       </div>
       <div className="flex flex-col justify-between max-w-max gap-4 sm:p-8 p-4">
         <h5 className="flex justify-start text-black text-xl leading-7">
-          Floating Phone
+          {selectedProduct.name}
         </h5>
         <div className="flex justify-start">
-          <i className="fa-solid fa-star text-yellow"></i>
-          <i className="fa-solid fa-star text-yellow"></i>
-          <i className="fa-solid fa-star text-yellow"></i>
-          <i className="fa-solid fa-star text-yellow"></i>
-          <i className="fa-regular fa-star text-yellow"></i>
+          <StarRating rating={selectedProduct.rating} />
         </div>
         <div className="flex flex-col gap-2">
           <h5 className="flex justify-start text-black font-bold text-2xl ">
-            $1,139.33
+            ${selectedProduct.price}
           </h5>
           <div className="flex gap-1">
             <p className="text-secondtext font-bold text-sm leading-5">
               Availability :
             </p>
-            <p className="text-primary font-bold text-sm leading-5">In Stock</p>
+            <p className="font-bold text-sm leading-5">
+              {selectedProduct.stock !== 0 ? (
+                <p className="text-primary">In Stock</p>
+              ) : (
+                <p className="text-red">Out of Stock</p>
+              )}
+            </p>
           </div>
         </div>
         <div>
           <p className="text-start text-secondtext text-sm leading-5">
-            Met minim Mollie non desert Alamo est sit cliquey dolor do met sent.
-            RELIT official consequent door ENIM RELIT Mollie. Excitation venial
-            consequent sent nostrum met.
+            {selectedProduct.description}
           </p>
         </div>
         <hr className="text-lightgrey2" />
