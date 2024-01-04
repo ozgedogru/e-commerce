@@ -62,11 +62,13 @@ export const fetchProducts = (
   };
 };
 
-export const fetchBestSellers = () => {
+export const fetchBestSellers = (category, sort) => {
   return (dispatch) => {
-    const sort = "rating:desc";
+    const params = {};
+    if (category) params.category = category;
+    if (sort) params.sort = sort;
 
-    AxiosInstance.get("/products", { params: { sort } })
+    AxiosInstance.get("/products", { params: { category, sort } })
       .then((res) => {
         console.log("res.data", res.data);
 

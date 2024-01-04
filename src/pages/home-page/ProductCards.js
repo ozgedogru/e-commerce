@@ -7,7 +7,7 @@ const ProductCards = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchBestSellers());
+    dispatch(fetchBestSellers(null, "rating:desc"));
   }, [dispatch]);
 
   const topProducts = useSelector((state) => state.productReducer.bestSellers);
