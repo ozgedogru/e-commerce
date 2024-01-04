@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const ShopNavbarDropdown = () => {
   const categories = useSelector((state) => state.globalReducer.categories);
-  console.log("categories", categories);
+  //console.log("categories", categories);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -37,7 +37,7 @@ const ShopNavbarDropdown = () => {
               {femaleCategories.map((category) => (
                 <NavLink
                   key={category.id}
-                  to={`/shopping/Kadin/${category.title}`}
+                  to={`/shopping/Kadin${category.title}`}
                   className=" font-normal block px-4 py-2 m-1 text-sm rounded-lg hover:bg-lightgrey2"
                 >
                   {category.title}
