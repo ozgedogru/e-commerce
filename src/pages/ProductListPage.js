@@ -26,9 +26,6 @@ const ProductListPage = () => {
   );
   const limit = 10;
 
-  console.log("ProductList", productList);
-  console.log("Total product count", totalProductCount);
-
   const handleFilterButtonClick = (e) => {
     e.preventDefault();
     dispatch(setOffset(0));
@@ -46,6 +43,11 @@ const ProductListPage = () => {
   const firstFiveCategories = categories
     .sort((a, b) => b.rating - a.rating)
     .slice(0, 5);
+
+  const noProductsFound =
+    fetchState === "FETCHED" &&
+    totalProductCount === 0 &&
+    productList.length === 0;
 
   return (
     <div>
@@ -150,6 +152,11 @@ const ProductListPage = () => {
               </form>
             </div>
           </div>
+          {noProductsFound && (
+            <p className="flex justify-center text-secondtext text-lg py-16">
+              No products found based on the specified criteria.
+            </p>
+          )}
           <div className="flex flex-wrap sm:flex-row gap-8 justify-center sm:justify-start items-start sm:px-48 px-8 py-4">
             <InfiniteScroll
               className="flex flex-wrap sm:flex-row gap-8 justify-center sm:justify-start items-start"
@@ -157,11 +164,11 @@ const ProductListPage = () => {
               next={loadMore}
               hasMore={productList.length < totalProductCount}
             >
-              {/* {fetchState === "FETCHING" && (
+              {fetchState === "FETCHING" && (
                 <div className="flex items-center justify-center w-full h-72">
                   <svg className="animate-spin h-12 w-12 border-t-2 border-black rounded-full"></svg>
                 </div>
-              )} */}
+              )}
               {fetchState === "FETCHED" &&
                 productList.map((p) => (
                   <div key={p.id} className="flex flex-col py-4 gap-4">
