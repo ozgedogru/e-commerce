@@ -4,6 +4,7 @@ export const SET_PRODUCT_LIST = "SET_PRODUCT_LIST";
 export const CLEAR_PRODUCT_LIST = "CLEAR_PRODUCT_LIST";
 export const SET_BEST_SELLERS = "SET_BEST_SELLERS";
 export const SET_TOTAL_PRODUCT_COUNT = "SET_TOTAL_PRODUCT_COUNT";
+export const SET_SELECTED_PRODUCT = "SET_SELECTED_PRODUCT";
 export const SET_OFFSET = "SET_OFFSET";
 export const SET_FETCH_STATE = "SET_FETCH_STATE";
 
@@ -21,6 +22,10 @@ export const setBestSellers = (products) => ({
 export const setTotalProductCount = (count) => ({
   type: SET_TOTAL_PRODUCT_COUNT,
   payload: count,
+});
+export const setSelectedProduct = (id) => ({
+  type: SET_SELECTED_PRODUCT,
+  payload: id,
 });
 export const setOffset = (offset) => ({
   type: SET_OFFSET,
@@ -73,6 +78,19 @@ export const fetchBestSellers = (category, sort) => {
         console.log("res.data", res.data);
 
         dispatch(setBestSellers(res.data.products));
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+};
+
+export const fetchProductDetails = (id) => {
+  return (dispatch) => {
+    AxiosInstance.get(`products/${id}`)
+      .then((res) => {
+        console.log(res.data);
+        dispatch(setSelectedProduct(res.data));
       })
       .catch((error) => {
         console.error("Error:", error);
