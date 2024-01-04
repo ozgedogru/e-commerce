@@ -1,5 +1,6 @@
 import {
   SET_PRODUCT_LIST,
+  SET_BEST_SELLERS,
   SET_TOTAL_PRODUCT_COUNT,
   SET_PAGE_COUNT,
   SET_ACTIVE_PAGE,
@@ -11,6 +12,7 @@ import {
 export const productReducer = (
   state = {
     productList: [],
+    bestSellers: [],
     totalProductCount: 0,
     pageCount: 0,
     activePage: 1,
@@ -20,7 +22,15 @@ export const productReducer = (
 ) => {
   switch (action.type) {
     case SET_PRODUCT_LIST:
-      return { ...state, productList: action.payload };
+      return {
+        ...state,
+        productList: action.payload,
+      };
+    case SET_BEST_SELLERS:
+      return {
+        ...state,
+        bestSellers: action.payload,
+      };
     case SET_TOTAL_PRODUCT_COUNT:
       return { ...state, totalProductCount: action.payload };
     case SET_PAGE_COUNT:

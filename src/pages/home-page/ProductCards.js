@@ -1,12 +1,18 @@
+import { useEffect } from "react";
 import ProductCard from "../../components/ProductCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchBestSellers } from "../../store/actions/productActions";
 
 const ProductCards = () => {
-  const products = useSelector((state) => state.productReducer.productList);
+  const dispatch = useDispatch();
 
-  const topProducts = [...products];
-  topProducts.sort((a, b) => b.rating - a.rating);
+  useEffect(() => {
+    dispatch(fetchBestSellers());
+  }, [dispatch]);
+
+  const topProducts = useSelector((state) => state.productReducer.bestSellers);
   const topTen = topProducts.slice(0, 10);
+  console.log("top Products", topProducts);
 
   return (
     <div className="flex justify-center w-full">
@@ -20,7 +26,7 @@ const ProductCards = () => {
             Problems trying to resolve the conflict between{" "}
           </p>
         </div>
-        <div className="flex justify-center flex-wrap gap-8 max-w-64">
+        <div className="flex justify-start flex-wrap gap-8 max-w-64">
           {topTen.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
