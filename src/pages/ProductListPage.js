@@ -71,7 +71,7 @@ const ProductListPage = () => {
               className="w-full hover:opacity-75 transition duration-200 cursor-pointer"
             >
               <Link
-                to={`/shopping/${category.gender === "k" ? "Kadin" : "Erkek"}/${
+                to={`/shopping/${category.gender === "k" ? "Kadin" : "Erkek"}${
                   category.title
                 }`}
               >
@@ -82,7 +82,7 @@ const ProductListPage = () => {
                     alt={category.title}
                   />
                   <div className="absolute inset-0 flex flex-col items-center justify-center text-white font-bold text-base leading-6">
-                    <h6>{category.gender === "k" ? "KADIN" : "ERKEK"}</h6>
+                    <h6>{category.gender === "k" ? "Kadin" : "Erkek"}</h6>
                     <h6>{category.title}</h6>
                   </div>
                 </div>
