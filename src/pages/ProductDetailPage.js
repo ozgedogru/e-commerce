@@ -52,18 +52,18 @@ const ProductDetailPage = () => {
             <button onClick={() => history.goBack()}>
               <i className="fa-solid fa-backward hover:scale-110 active:scale-75 "></i>
             </button>
-            <p className="text-black font-bold leading-6">
+            <div className="text-black font-bold leading-6">
               <Link
                 to="/"
                 className="text-black font-bold leading-6 hover:text-primary"
               >
                 Home
               </Link>
-            </p>
+            </div>
             <img className="w-2 h-4" src={arrowright} alt="arrow"></img>
-            <p className="text-pricegrey font-bold leading-6 cursor-pointer hover:text-primary">
+            <div className="text-pricegrey font-bold leading-6 cursor-pointer hover:text-primary">
               <Link to="/shop">Shop</Link>
-            </p>
+            </div>
           </div>
           <div className="flex justify-center">
             <ProductDetailCard product={selectedProduct} />
@@ -100,13 +100,15 @@ const ProductDetailPage = () => {
                 Met minim Mollie non desert Alamo est sit cliquey dolor do met
                 sent. RELIT official consequent door ENIM RELIT Mollie.
                 Excitation venial consequent sent nostrum met.
-                <br />
-                <br />
+              </p>
+              <br />
+              <p className="text-start text-secondtext text-sm leading-5">
                 Met minim Mollie non desert Alamo est sit cliquey dolor do met
                 sent. RELIT official consequent door ENIM RELIT Mollie.
                 Excitation venial consequent sent nostrum met.
-                <br />
-                <br />
+              </p>
+              <br />
+              <p className="text-start text-secondtext text-sm leading-5">
                 Met minim Mollie non desert Alamo est sit cliquey dolor do met
                 sent. RELIT official consequent door ENIM RELIT Mollie.
                 Excitation venial consequent sent nostrum met.
@@ -177,7 +179,7 @@ const ProductDetailPage = () => {
           <hr className="text-lightgrey2" />
           <div className="flex justify-start flex-wrap gap-8 py-8 w-full">
             {pcards.map((product) => (
-              <ProductCard product={product} />
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </div>
