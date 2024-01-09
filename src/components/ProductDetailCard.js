@@ -4,16 +4,13 @@ import ellipse3 from "../assets/posts/ellipse3.png";
 import ellipse4 from "../assets/posts/ellipse4.png";
 import { useState } from "react";
 import ProductSlider from "../layouts/sliders/ProductSlider";
-import { useSelector } from "react-redux";
 import StarRating from "./StarRating";
 
-const ProductDetailCard = () => {
-  const selectedProduct = useSelector(
-    (state) => state.productReducer.selectedProduct
-  );
+const ProductDetailCard = ({ productDetails }) => {
+  console.log("productDetails > ", productDetails);
 
+  //heart thing
   const [fav, setFav] = useState(false);
-
   const addFav = () => {
     setFav(!fav);
   };
@@ -21,32 +18,32 @@ const ProductDetailCard = () => {
   return (
     <div className="flex flex-col sm:flex-row sm:w-full min-w-min gap-8 justify-start shadow-lg">
       <div className="flex flex-col min-w-sm gap-1">
-        <ProductSlider />
+        <ProductSlider productDetails={productDetails} />
         <div className="flex gap-1 w-24 h-24">
           <img
             className="opacity-50 object-cover w-full h-full"
-            src={selectedProduct.images[0].url}
+            src={productDetails?.images[0].url}
             alt="pic1"
           ></img>
         </div>
       </div>
       <div className="flex flex-col justify-between max-w-max gap-4 sm:p-8 p-4">
         <h5 className="flex justify-start text-black text-xl leading-7">
-          {selectedProduct.name}
+          {productDetails?.name}
         </h5>
         <div className="flex justify-start">
-          <StarRating rating={selectedProduct.rating} />
+          <StarRating rating={productDetails?.rating} />
         </div>
         <div className="flex flex-col gap-2">
           <h5 className="flex justify-start text-black font-bold text-2xl ">
-            ${selectedProduct.price}
+            ${productDetails?.price}
           </h5>
           <div className="flex gap-1">
             <p className="text-secondtext font-bold text-sm leading-5">
               Availability :
             </p>
             <p className="font-bold text-sm leading-5">
-              {selectedProduct.stock !== 0 ? (
+              {productDetails?.stock !== 0 ? (
                 <p className="text-primary">In Stock</p>
               ) : (
                 <p className="text-red">Out of Stock</p>
@@ -56,7 +53,7 @@ const ProductDetailCard = () => {
         </div>
         <div>
           <p className="text-start text-secondtext text-sm leading-5">
-            {selectedProduct.description}
+            {productDetails?.description}
           </p>
         </div>
         <hr className="text-lightgrey2" />

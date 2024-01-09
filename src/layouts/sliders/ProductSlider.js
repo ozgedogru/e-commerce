@@ -1,12 +1,8 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useSelector } from "react-redux";
 
-const ProductSlider = () => {
-  const selectedProduct = useSelector(
-    (state) => state.productReducer.selectedProduct
-  );
+const ProductSlider = ({ productDetails }) => {
   const settings = {
     dots: false,
     infinite: true,
@@ -21,14 +17,14 @@ const ProductSlider = () => {
         <div className="flex w-72 h-72 sm:w-96 sm:h-96">
           <img
             className="object-cover w-full h-full"
-            src={selectedProduct.images[0].url}
+            src={productDetails?.images[0].url}
             alt="pic1"
           ></img>
         </div>
         <div className="flex w-72 h-72 sm:w-96 sm:h-96">
           <img
             className="object-cover w-full h-full"
-            src={selectedProduct.images[0].url}
+            src={productDetails?.images[0].url}
             alt="pic1"
           ></img>
         </div>

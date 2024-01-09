@@ -3,7 +3,6 @@ import {
   CLEAR_PRODUCT_LIST,
   SET_BEST_SELLERS,
   SET_TOTAL_PRODUCT_COUNT,
-  SET_SELECTED_PRODUCT,
   SET_OFFSET,
   SET_FETCH_STATE,
 } from "../actions/productActions";
@@ -15,7 +14,6 @@ export const productReducer = (
     productList: [],
     bestSellers: [],
     totalProductCount: 0,
-    selectedProduct: {},
     offset: 0,
     fetchState: "NOT_FETCHED",
   },
@@ -39,11 +37,6 @@ export const productReducer = (
       };
     case SET_TOTAL_PRODUCT_COUNT:
       return { ...state, totalProductCount: action.payload };
-    case SET_SELECTED_PRODUCT:
-      return {
-        ...state,
-        selectedProduct: action.payload,
-      };
     case SET_OFFSET:
       return { ...state, offset: action.payload };
     case SET_FETCH_STATE:

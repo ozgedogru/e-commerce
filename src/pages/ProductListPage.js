@@ -5,7 +5,6 @@ import arrowright from "../assets/shop/arrowright.png";
 import icongraph from "../assets/shop/icongraph.png";
 import iconlist from "../assets/shop/iconlist.png";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import {
   clearProductList,
   fetchProducts,
@@ -65,28 +64,22 @@ const ProductListPage = () => {
           </div>
         </div>
         <div className="flex flex-wrap sm:flex-nowrap sm:w-full h-auto justify-center gap-8">
-          {firstFiveCategories.map((category, index) => (
+          {firstFiveCategories.map((category) => (
             <div
-              key={index}
+              key={category.id}
               className="w-full hover:opacity-75 transition duration-200 cursor-pointer"
             >
-              <Link
-                to={`/shopping/${category.gender === "k" ? "Kadin" : "Erkek"}${
-                  category.title
-                }`}
-              >
-                <div className="relative text-center w-full h-full">
-                  <img
-                    className="w-full h-full object-cover sm:w-80"
-                    src={category.img}
-                    alt={category.title}
-                  />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center text-white font-bold text-base leading-6">
-                    <h6>{category.gender === "k" ? "Kadin" : "Erkek"}</h6>
-                    <h6>{category.title}</h6>
-                  </div>
+              <div className="relative text-center w-full h-full">
+                <img
+                  className="w-full h-full object-cover sm:w-80"
+                  src={category.img}
+                  alt={category.title}
+                />
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-white font-bold text-base leading-6">
+                  <h6>{category.gender === "k" ? "Kadin" : "Erkek"}</h6>
+                  <h6>{category.title}</h6>
                 </div>
-              </Link>
+              </div>
             </div>
           ))}
         </div>
@@ -111,7 +104,10 @@ const ProductListPage = () => {
               </button>
             </div>
             <div className="flex items-center text-sm leading-7">
-              <form onSubmit={handleFilterButtonClick} className="flex">
+              <form
+                onSubmit={handleFilterButtonClick}
+                className="flex flex-col flex-wrap sm:flex-row gap-2"
+              >
                 <input
                   type="text"
                   value={filter}
@@ -119,20 +115,6 @@ const ProductListPage = () => {
                   placeholder="Search..."
                   className="mr-2 px-2 py-1 border border-pricegrey rounded focus:outline-none "
                 />
-
-                <div className="flex mr-2 px-2 py-2 bg-lightgrey2 rounded">
-                  <select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                    className="text-secondtext bg-lightgrey2 text-sm leading-7 focus:outline-none cursor-pointer"
-                  >
-                    <option value="">All Categories</option>
-                    <option value="1">T-Shirt</option>
-                    <option value="2">Shoes</option>
-                    <option value="3">Jacket</option>
-                    <option value="4">Dress</option>
-                  </select>
-                </div>
                 <div className="flex mr-2 px-2 py-2 bg-lightgrey2 rounded">
                   <select
                     className="text-secondtext bg-lightgrey2 text-sm leading-7 focus:outline-none cursor-pointer"

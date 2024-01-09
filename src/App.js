@@ -10,7 +10,6 @@ import { useEffect } from "react";
 import { setCategories, setRoles } from "./store/actions/globalActions";
 import {
   fetchBestSellers,
-  fetchProductDetails,
   fetchProducts,
 } from "./store/actions/productActions";
 
@@ -21,8 +20,7 @@ function App() {
     dispatch(setRoles());
     dispatch(setCategories());
     dispatch(fetchProducts());
-    dispatch(fetchBestSellers(null, "rating:desc"));
-    dispatch(fetchProductDetails("2"));
+    dispatch(fetchBestSellers(null));
 
     //localde token bilgisi var mi?
     const checkToken = async () => {
