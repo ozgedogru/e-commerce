@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import { Link, useParams } from "react-router-dom";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom/";
 
 const CategoryPage = () => {
   const dispatch = useDispatch();
@@ -92,23 +92,25 @@ const CategoryPage = () => {
           </div>
         </div>
         <div className="flex flex-wrap sm:flex-nowrap sm:w-full h-auto justify-center gap-8">
-          {firstFiveCategories.map((category) => (
+          {firstFiveCategories.map((cat) => (
             <Link
-              to={`/shop/${category.id}/${
-                category.gender === "k" ? "Kadin" : "Erkek"
-              }/${category.title}`}
-              key={category.id}
-              className="w-full hover:opacity-75 transition duration-200 cursor-pointer"
+              to={`/shop/${cat.id}/${cat.gender === "k" ? "Kadin" : "Erkek"}/${
+                cat.title
+              }`}
+              key={cat.id}
+              className={`w-full transition duration-200 cursor-pointer ${
+                Number(category) === cat.id ? "brightness-90" : "brightness-50"
+              }`}
             >
               <div className="relative text-center w-full h-full">
                 <img
                   className="w-full h-full object-cover sm:w-80"
-                  src={category.img}
-                  alt={category.title}
+                  src={cat.img}
+                  alt={cat.title}
                 />
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-white font-bold text-base leading-6">
-                  <h6>{category.gender === "k" ? "Kadin" : "Erkek"}</h6>
-                  <h6>{category.title}</h6>
+                  <h6>{cat.gender === "k" ? "Kadin" : "Erkek"}</h6>
+                  <h6>{cat.title}</h6>
                 </div>
               </div>
             </Link>

@@ -94,7 +94,7 @@ const ProductListPage = () => {
                 category.gender === "k" ? "Kadin" : "Erkek"
               }/${category.title}`}
               key={category.id}
-              className="w-full hover:opacity-75 transition duration-200 cursor-pointer"
+              className="w-full brightness-90 hover:opacity-90 transition duration-200 cursor-pointer"
             >
               <div className="relative text-center w-full h-full">
                 <img
