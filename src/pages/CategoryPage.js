@@ -1,6 +1,9 @@
 import ProductCard from "../components/ProductCard";
 import Clients from "../components/Clients";
 
+import { Listbox, Transition } from "@headlessui/react";
+import { Fragment } from "react";
+
 import arrowright from "../assets/shop/arrowright.png";
 import icongraph from "../assets/shop/icongraph.png";
 import iconlist from "../assets/shop/iconlist.png";
@@ -149,17 +152,92 @@ const CategoryPage = () => {
                   className="mr-2 px-2 py-1 border border-pricegrey rounded focus:outline-none "
                 />
                 <div className="flex mr-2 px-2 py-2 bg-lightgrey2 rounded">
-                  <select
-                    className="text-secondtext bg-lightgrey2 text-sm leading-7 focus:outline-none cursor-pointer"
-                    value={sort}
-                    onChange={(e) => setSort(e.target.value)}
-                  >
-                    <option value="">Sort by</option>
-                    <option value="price:asc">Price: Low to High</option>
-                    <option value="price:desc">Price: High to Low</option>
-                    <option value="rating:asc">Rating: Low to High</option>
-                    <option value="rating:desc">Rating: High to Low</option>
-                  </select>
+                  <Listbox value={sort} onChange={setSort}>
+                    {({ open }) => (
+                      <>
+                        <Listbox.Button className="flex gap-2 items-center text-secondtext text-start relative min-w-[10rem] bg-lightgrey2 text-sm leading-7 focus:outline-none cursor-pointer">
+                          <span className="flex">
+                            {sort
+                              ? sort === "price:asc"
+                                ? "Price: Low to High"
+                                : sort === "price:desc"
+                                ? "Price: High to Low"
+                                : sort === "rating:asc"
+                                ? "Rating: Low to High"
+                                : sort === "rating:desc"
+                                ? "Rating: High to Low"
+                                : "Sort by"
+                              : "Sort by"}
+                          </span>
+                          <span className="absolute right-2">
+                            <i className="fa-solid fa-caret-down"></i>
+                          </span>
+                          <Transition
+                            show={open}
+                            as={Fragment}
+                            enter="transition ease-out duration-200"
+                            enterFrom="transform opacity-0 scale-95"
+                            enterTo="transform opacity-100 scale-100"
+                            leave="transition ease-in duration-300"
+                            leaveFrom="transform opacity-100 scale-100"
+                            leaveTo="transform opacity-0 scale-95"
+                          >
+                            <Listbox.Options
+                              static
+                              className="absolute flex flex-col items-start top-10 z-10 mt-1 bg-white border border-pricegrey rounded-md shadow-lg max-h-60 "
+                            >
+                              {[
+                                {
+                                  value: "",
+                                  label: "Sort by",
+                                },
+                                {
+                                  value: "price:asc",
+                                  label: "Price: Low to High",
+                                },
+                                {
+                                  value: "price:desc",
+                                  label: "Price: High to Low",
+                                },
+                                {
+                                  value: "rating:asc",
+                                  label: "Rating: Low to High",
+                                },
+                                {
+                                  value: "rating:desc",
+                                  label: "Rating: High to Low",
+                                },
+                              ].map((option) => (
+                                <Listbox.Option
+                                  key={option.value}
+                                  value={option.value}
+                                  className={({ active }) =>
+                                    `${
+                                      active ? "text-black " : "text-secondtext"
+                                    } cursor-pointer relative p-2`
+                                  }
+                                >
+                                  {({ selected }) => (
+                                    <>
+                                      <span
+                                        className={`${
+                                          selected
+                                            ? "font-semibold"
+                                            : "font-normal"
+                                        } block truncate`}
+                                      >
+                                        {option.label}
+                                      </span>
+                                    </>
+                                  )}
+                                </Listbox.Option>
+                              ))}
+                            </Listbox.Options>
+                          </Transition>
+                        </Listbox.Button>
+                      </>
+                    )}
+                  </Listbox>
                 </div>
                 <button className="flex px-2 py-[0.35rem] justify-center items-center bg-primary hover:bg-shineblue text-white text-sm font-bold leading-6 tracking-wider rounded transition transform active:scale-90">
                   Filter
