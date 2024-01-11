@@ -19,7 +19,6 @@ function App() {
   useEffect(() => {
     dispatch(setRoles());
     dispatch(setCategories());
-    dispatch(fetchProducts());
     dispatch(fetchBestSellers(null));
 
     //localde token bilgisi var mi?

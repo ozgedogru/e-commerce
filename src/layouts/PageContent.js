@@ -7,6 +7,7 @@ import ContactPage from "../pages/ContactPage";
 import SignUpPage from "../pages/SignUpPage";
 import LoginPage from "../pages/LoginPage";
 import ProductDetailPage from "../pages/ProductDetailPage";
+import CategoryPage from "../pages/CategoryPage";
 
 const PageContent = () => {
   return (
@@ -20,6 +21,9 @@ const PageContent = () => {
         </Route>
         <Route path="/:category/:productId/:productNameSlug" exact>
           <ProductDetailPage />
+        </Route>
+        <Route path="/shop/:category/:gender/:title" exact>
+          <CategoryPage />
         </Route>
         <Route path="/about" exact>
           <AboutPage />

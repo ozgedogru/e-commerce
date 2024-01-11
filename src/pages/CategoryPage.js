@@ -13,11 +13,12 @@ import {
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ScrollToTopButton from "../components/ScrollToTopButton";
-import { Link } from "react-router-dom/";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-const ProductListPage = () => {
+const CategoryPage = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const { category } = useParams();
   const queryParams = new URLSearchParams(window.location.search);
@@ -36,7 +37,7 @@ const ProductListPage = () => {
     e.preventDefault();
     dispatch(setOffset(0));
     dispatch(clearProductList([]));
-    dispatch(fetchProducts(null, filter, sort, limit, 0));
+    dispatch(fetchProducts(category, filter, sort, limit, 0));
 
     const queryParams = new URLSearchParams();
     if (filter) queryParams.set("filter", filter);
@@ -46,14 +47,17 @@ const ProductListPage = () => {
     const newURL = `${window.location.pathname}${
       queryString ? `?${queryString}` : ""
     }`;
+    window.history.replaceState({}, "", newURL);
 
-    window.history.pushState({}, "", newURL);
+    history.replace({
+      pathname: newURL,
+    });
   };
 
   const loadMore = () => {
     const newOffset = offset + limit;
     dispatch(setOffset(newOffset));
-    dispatch(fetchProducts(null, filter, sort, limit, newOffset));
+    dispatch(fetchProducts(category, filter, sort, limit, newOffset));
   };
 
   useEffect(() => {
@@ -198,4 +202,4 @@ const ProductListPage = () => {
   );
 };
 
-export default ProductListPage;
+export default CategoryPage;

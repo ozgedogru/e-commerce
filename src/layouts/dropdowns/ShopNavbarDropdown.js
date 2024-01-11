@@ -1,10 +1,15 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import {
+  clearProductList,
+  fetchProducts,
+  setOffset,
+} from "../../store/actions/productActions";
 
 const ShopNavbarDropdown = () => {
   const categories = useSelector((state) => state.globalReducer.categories);
-  //console.log("categories", categories);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -15,17 +20,30 @@ const ShopNavbarDropdown = () => {
   const handleMouseLeave = () => {
     setIsDropdownOpen(false);
   };
+
+  const dispatch = useDispatch();
+  const handleShopClick = () => {
+    dispatch(setOffset(0));
+    dispatch(clearProductList([]));
+    dispatch(fetchProducts());
+  };
+
   const femaleCategories = categories.filter((c) => c.gender === "k");
   const maleCategories = categories.filter((c) => c.gender === "e");
 
   return (
     <div
-      className="relative group"
+      className="relative"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <div className={`${isDropdownOpen ? "text-primary" : "text-secondtext"}`}>
-        <NavLink to="/shop" exact activeClassName="text-primary">
+        <NavLink
+          to="/shop"
+          exact
+          onClick={handleShopClick}
+          activeClassName="text-primary"
+        >
           Shop
         </NavLink>
       </div>
@@ -35,25 +53,29 @@ const ShopNavbarDropdown = () => {
             <div className="py-1">
               <div className="font-bold px-4 py-2">Kadın</div>
               {femaleCategories.map((category) => (
-                <NavLink
+                <Link
+                  to={`/shop/${category.id}/${
+                    category.gender === "k" ? "Kadin" : "Erkek"
+                  }/${category.title}`}
                   key={category.id}
-                  to={`/shopping/Kadin${category.title}`}
                   className=" font-normal block px-4 py-2 m-1 text-sm rounded-lg hover:bg-lightgrey2"
                 >
                   {category.title}
-                </NavLink>
+                </Link>
               ))}
             </div>
             <div className="py-1">
               <div className="font-bold px-4 py-2">Erkek</div>
               {maleCategories.map((category) => (
-                <NavLink
+                <Link
+                  to={`/shop/${category.id}/${
+                    category.gender === "k" ? "Kadin" : "Erkek"
+                  }/${category.title}`}
                   key={category.id}
-                  to={`/shopping/Erkek${category.title}`}
                   className=" font-normal block px-4 py-2 m-1 text-sm rounded-lg hover:bg-lightgrey2"
                 >
                   {category.title}
-                </NavLink>
+                </Link>
               ))}
             </div>
           </div>
