@@ -8,10 +8,7 @@ import { AxiosInstance, renewAxiosInstance } from "./api/axiosInstance";
 import { clearUser, setUser } from "./store/actions/userActions";
 import { useEffect } from "react";
 import { setCategories, setRoles } from "./store/actions/globalActions";
-import {
-  fetchBestSellers,
-  fetchProducts,
-} from "./store/actions/productActions";
+import { fetchBestSellers } from "./store/actions/productActions";
 
 function App() {
   const dispatch = useDispatch();
