@@ -5,9 +5,21 @@ import ellipse4 from "../assets/posts/ellipse4.png";
 import { useState } from "react";
 import ProductSlider from "../layouts/sliders/ProductSlider";
 import StarRating from "./StarRating";
+import { addToCart } from "../store/actions/shoppingCartActions";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const ProductDetailCard = ({ productDetails }) => {
-  console.log("productDetails > ", productDetails);
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    console.log("handle add to card function has been trigered");
+    dispatch(addToCart(productDetails, 1));
+    toast.info("Urun sepete eklendi.", {
+      position: "bottom-right",
+      autoClose: 2000,
+    });
+  };
 
   //heart thing
   const [fav, setFav] = useState(false);
@@ -75,8 +87,8 @@ const ProductDetailCard = ({ productDetails }) => {
                 }  p-3 rounded-3xl border border-pricegrey hover:scale-110 transition-transform bg-white`}
               ></i>
             </button>
-            <button>
-              <i className="fa-solid fa-cart-shopping p-3 rounded-3xl border border-pricegrey hover:scale-110 transition-transform bg-white"></i>
+            <button onClick={handleAddToCart}>
+              <i className="fa-solid fa-cart-shopping p-3 rounded-3xl border border-pricegrey hover:scale-110 active:scale-90 transition-transform bg-white"></i>
             </button>
             <button>
               <i className="fa-solid fa-eye p-3 rounded-3xl border border-pricegrey hover:scale-110 transition-transform bg-white"></i>

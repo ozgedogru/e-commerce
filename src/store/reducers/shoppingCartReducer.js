@@ -29,9 +29,12 @@ export const shoppingCartReducer = (
       return { ...state, cart: updatedCart };
 
     case REMOVE_FROM_CART:
-      const filteredCart = state.cart.filter(
-        (item) => item.product.id !== action.payload
+      const newCart = state.cart.map((item) =>
+        item.product.id === action.payload
+          ? { ...item, count: item.count > 1 ? item.count - 1 : 0 }
+          : item
       );
+      const filteredCart = newCart.filter((item) => item.count > 0);
       return { ...state, cart: filteredCart };
 
     case CLEAR_CART:

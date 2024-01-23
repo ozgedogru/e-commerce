@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { userLogout } from "../store/actions/userActions";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import ShopNavbarDropdown from "./dropdowns/ShopNavbarDropdown";
+import CartDropdown from "./dropdowns/CartDropdown";
 
 const Header = () => {
   const { user, isLoggedIn } = useSelector((state) => state.userReducer);
@@ -101,9 +102,8 @@ const Header = () => {
                 <i className="fa-solid fa-search"></i>
                 <p></p>
               </div>
-              <div className="flex items-center px-2 gap-1">
-                <i className="fa-solid fa-cart-shopping"></i>
-                <p></p>
+              <div>
+                <CartDropdown />
               </div>
               <div className="flex items-center px-2 gap-1">
                 <i className="fa-regular fa-heart"></i>

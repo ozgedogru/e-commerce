@@ -71,8 +71,6 @@ export const fetchBestSellers = (category, sort = "rating:desc") => {
 
     AxiosInstance.get("/products", { params: { category, sort } })
       .then((res) => {
-        console.log("res.data", res.data);
-
         dispatch(setBestSellers(res.data.products));
       })
       .catch((error) => {
