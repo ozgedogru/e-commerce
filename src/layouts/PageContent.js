@@ -8,6 +8,7 @@ import SignUpPage from "../pages/SignUpPage";
 import LoginPage from "../pages/LoginPage";
 import ProductDetailPage from "../pages/ProductDetailPage";
 import CategoryPage from "../pages/CategoryPage";
+import ShoppingCartPage from "../pages/ShoppingCartPage";
 
 const PageContent = () => {
   return (
@@ -24,6 +25,9 @@ const PageContent = () => {
         </Route>
         <Route path="/shop/:category/:gender/:title" exact>
           <CategoryPage />
+        </Route>
+        <Route path="/cart" exact>
+          <ShoppingCartPage />
         </Route>
         <Route path="/about" exact>
           <AboutPage />

@@ -6,6 +6,7 @@ import {
   addToCart,
   removeFromCart,
 } from "../../store/actions/shoppingCartActions";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const CartDropdown = () => {
   const dispatch = useDispatch();
@@ -73,17 +74,17 @@ const CartDropdown = () => {
                     </p>
                     <div className="flex justify-evenly">
                       <button
-                        onClick={() => increment(item)}
+                        onClick={() => decrement(item.product.id)}
                         className="bg-lightgrey2 text-black text-sm w-4 rounded-s"
                       >
-                        +
+                        -
                       </button>
                       <p className="px-2">{item.count}</p>
                       <button
-                        onClick={() => decrement(item.product.id)}
+                        onClick={() => increment(item)}
                         className="bg-lightgrey2 text-black text-sm w-4 rounded-e"
                       >
-                        -
+                        +
                       </button>
                     </div>
                   </div>
@@ -92,7 +93,7 @@ const CartDropdown = () => {
             ))}
             <div className="flex justify-evenly">
               <button className="bg-black text-white text-sm rounded p-1 px-2">
-                Sepete Git
+                <Link to="/cart">Sepete Git</Link>
               </button>
               <button className="bg-black text-white text-sm rounded p-1 px-2">
                 Siparisi Tamamla
