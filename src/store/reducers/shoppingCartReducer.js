@@ -7,10 +7,13 @@ import {
   REMOVE_THIS_PRODUCT,
 } from "../actions/shoppingCartActions";
 
-export const shoppingCartReducer = (
-  state = { cart: [], payment: {}, address: {} },
-  action
-) => {
+const initialState = {
+  cart: JSON.parse(localStorage.getItem("cart")) || [],
+  payment: JSON.parse(localStorage.getItem("payment")) || {},
+  address: JSON.parse(localStorage.getItem("address")) || {},
+};
+
+export const shoppingCartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
       const updatedCart = [...state.cart];
@@ -26,7 +29,7 @@ export const shoppingCartReducer = (
           product: action.payload.product,
         });
       }
-
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
       return { ...state, cart: updatedCart };
 
     case REMOVE_FROM_CART:
@@ -36,29 +39,36 @@ export const shoppingCartReducer = (
           : item
       );
       const filteredCart = newCart.filter((item) => item.count > 0);
+      localStorage.setItem("cart", JSON.stringify(filteredCart));
       return { ...state, cart: filteredCart };
 
     case REMOVE_THIS_PRODUCT:
-      const t = state.cart.map((item) => {
+      let t = state.cart.map((item) => {
         if (item.product.id === action.payload) {
-          // Update count to 0 for the removed product
           return { ...item, count: 0 };
         }
         return item;
       });
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(t.filter((item) => item.count > 0))
+      );
 
       return {
         ...state,
-        cart: t.filter((item) => item.count > 0), // Remove items with count 0
+        cart: t.filter((item) => item.count > 0),
       };
 
     case CLEAR_CART:
+      localStorage.removeItem("cart");
+      localStorage.setItem("payment", JSON.stringify(action.payload));
       return { ...state, cart: [] };
 
     case SET_PAYMENT:
       return { ...state, payment: action.payload };
 
     case SET_ADDRESS:
+      localStorage.setItem("address", JSON.stringify(action.payload));
       return { ...state, address: action.payload };
 
     default:

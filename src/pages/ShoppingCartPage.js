@@ -23,8 +23,17 @@ const ShoppingCartPage = () => {
 
   return (
     <div className="mx-auto my-8 py-8 px-48">
-      <h3 className="text-2xl font-semibold mb-4">
-        Sepetim ({totalProductCount} ürün)
+      <h3 className="text-xl text-center font-semibold mb-4">
+        {totalProductCount === 0 ? (
+          <div className="flex flex-col items-center justify-center gap-4">
+            <p>Your cart is currently empty.</p>
+            <button className="flex px-5 py-2 justify-center rounded-3xl bg-white hover:bg-shineblue hover:text-white text-primary border border-solid text-sm">
+              Discover What's New
+            </button>
+          </div>
+        ) : (
+          <p className="text-end">Sepetim ({totalProductCount} ürün)</p>
+        )}
       </h3>
       {cart.map((item) => (
         <div
