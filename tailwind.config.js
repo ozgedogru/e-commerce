@@ -22,6 +22,7 @@ module.exports = {
       shineblue: "#39B4FA",
       transblue: "#2D8BC0",
       shineblack: "#156691",
+      darkbutton: "#475569",
     },
     extend: {},
   },
