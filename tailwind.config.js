@@ -24,6 +24,7 @@ module.exports = {
       shineblack: "#156691",
       darkbutton: "#475569",
       orange: "#fb923c",
+      addtocart: "#0f766e",
     },
     extend: {},
   },
