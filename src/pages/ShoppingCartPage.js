@@ -7,6 +7,7 @@ import {
   selectProduct,
 } from "../store/actions/shoppingCartActions";
 import { useState } from "react";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const ShoppingCartPage = () => {
   const { cart } = useSelector((state) => state.shoppingCartReducer);
@@ -38,11 +39,11 @@ const ShoppingCartPage = () => {
   const discount =
     (totalProductPrice * discountPercentage) / 100 + discountAmount;
 
-  if (totalProductPrice >= 1000) {
+  const grandTotal = totalProductPrice + shippingCost - discount;
+
+  if (totalProductCount > 3) {
     shippingCost = 0;
   }
-
-  const grandTotal = totalProductPrice + shippingCost - discount;
 
   const dispatch = useDispatch();
 
@@ -68,12 +69,15 @@ const ShoppingCartPage = () => {
       <div className="flex w-full">
         <div className="w-2/3">
           <h3 className="flex text-xl text-center font-semibold mb-4">
-            {totalProductCount === 0 ? (
-              <div className="flex flex-col items-center justify-center gap-4 text-2xl">
+            {cart.length === 0 ? (
+              <div className="flex flex-col items-center justify-center gap-4 text-2xl ml-[24rem]">
                 <p>Your cart is currently empty.</p>
-                <button className="flex px-5 py-2 justify-center rounded-3xl bg-white hover:bg-shineblue hover:text-white text-primary border border-solid text-sm">
+                <Link
+                  to="/shop"
+                  className="flex px-5 py-2 justify-center rounded-3xl bg-white hover:bg-shineblue hover:text-white text-primary border border-solid text-sm"
+                >
                   Discover What's New
-                </button>
+                </Link>
               </div>
             ) : (
               <p>Sepetim ({totalProductCount} ürün)</p>
