@@ -6,6 +6,7 @@ import {
   removeThisProduct,
   selectProduct,
 } from "../store/actions/shoppingCartActions";
+import { useState } from "react";
 
 const ShoppingCartPage = () => {
   const { cart } = useSelector((state) => state.shoppingCartReducer);
@@ -24,9 +25,18 @@ const ShoppingCartPage = () => {
   }, 0);
 
   let shippingCost = 10;
+  const [discountCode, setDiscountCode] = useState("");
+  const [discountAmount, setdiscountAmount] = useState(0);
+
+  const applyDiscountCode = () => {
+    if (discountCode.toUpperCase() === "HELLO10") {
+      setdiscountAmount(10);
+    }
+  };
 
   const discountPercentage = totalProductCount >= 3 ? 10 : 0;
-  const discount = (totalProductPrice * discountPercentage) / 100;
+  const discount =
+    (totalProductPrice * discountPercentage) / 100 + discountAmount;
 
   if (totalProductPrice >= 1000) {
     shippingCost = 0;
@@ -59,14 +69,14 @@ const ShoppingCartPage = () => {
         <div className="w-2/3">
           <h3 className="flex text-xl text-center font-semibold mb-4">
             {totalProductCount === 0 ? (
-              <div className="flex flex-col items-center justify-center gap-4">
+              <div className="flex flex-col items-center justify-center gap-4 text-2xl">
                 <p>Your cart is currently empty.</p>
                 <button className="flex px-5 py-2 justify-center rounded-3xl bg-white hover:bg-shineblue hover:text-white text-primary border border-solid text-sm">
                   Discover What's New
                 </button>
               </div>
             ) : (
-              <p className="text-end">Sepetim ({totalProductCount} ürün)</p>
+              <p>Sepetim ({totalProductCount} ürün)</p>
             )}
           </h3>
           {cart.map((item) => (
@@ -149,63 +159,79 @@ const ShoppingCartPage = () => {
             </div>
           ))}
         </div>
-        <div className="w-1/3 ml-8">
-          <div className="bg-lightgrey p-4 border border-lightgrey rounded shadow-md">
-            <h4 className="text-lg font-semibold mb-4">Order Summary</h4>
-            <div className="flex justify-between mb-2">
-              <span>Total Quantity:</span>
-              <span>{totalProductCount}</span>
+        {totalProductCount > 0 ? (
+          <div className="w-1/3 ml-8">
+            <div className="bg-lightgrey p-4 border border-lightgrey rounded shadow-md">
+              <h4 className="text-lg font-semibold mb-4">Order Summary</h4>
+              <div className="flex justify-between mb-3">
+                <span>Total Quantity:</span>
+                <span>{totalProductCount}</span>
+              </div>
+              <div className="flex justify-between mb-3">
+                <span>Total Price:</span>
+                <span>$ {totalProductPrice.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between mb-3">
+                <span className={shippingCost === 0 ? "line-through" : ""}>
+                  Shipping Cost:
+                </span>
+                <span className={shippingCost === 0 ? "text-orange" : ""}>
+                  {shippingCost === 0
+                    ? "Free Shipping"
+                    : `$${shippingCost.toFixed(2)}`}
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span>Discount:</span>
+                <span>$ {discount.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between">
+                {grandTotal > 1000 ? (
+                  <span className="text-primary text-xs">
+                    10% discount on purchases over $1000!
+                  </span>
+                ) : (
+                  ""
+                )}
+              </div>
+              <div>
+                {discountAmount > 0 ? (
+                  <span className="text-primary text-xs">
+                    Additional discount of ${discountAmount} applied with code
+                    HELLO10!
+                  </span>
+                ) : (
+                  ""
+                )}
+              </div>
+              <hr className="my-2" />
+              <div className="flex justify-between font-bold my-4">
+                <span>Grand Total:</span>
+                <span>$ {grandTotal.toFixed(2)}</span>
+              </div>
+              <button className="w-full bg-primary text-white py-2 rounded-md">
+                Checkout
+              </button>
             </div>
-            <div className="flex justify-between mb-2">
-              <span>Total Price:</span>
-              <span>$ {totalProductPrice.toFixed(2)}</span>
+            <div className="flex mt-8 mx-2">
+              <input
+                type="text"
+                placeholder="Enter Discount Code"
+                value={discountCode}
+                onChange={(e) => setDiscountCode(e.target.value)}
+                className="border p-2 rounded-l-md w-3/4 "
+              />
+              <button
+                onClick={() => applyDiscountCode()}
+                className="bg-primary text-white p-2 rounded-r-md w-1/4"
+              >
+                Apply
+              </button>
             </div>
-            <div className="flex justify-between mb-2">
-              <span className={shippingCost === 0 ? "line-through" : ""}>
-                Shipping Cost:
-              </span>
-              <span className={shippingCost === 0 ? "text-orange" : ""}>
-                {shippingCost === 0
-                  ? "Free Shipping"
-                  : `$${shippingCost.toFixed(2)}`}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span>Discount:</span>
-              <span>$ {discount.toFixed(2)}</span>
-            </div>
-            {discount > 0 ? (
-              <span className="text-primary text-sm">
-                10% discount on purchases over $1000!
-              </span>
-            ) : (
-              ""
-            )}
-            <hr className="my-2" />
-            <div className="flex justify-between font-bold mb-2">
-              <span>Grand Total:</span>
-              <span>$ {grandTotal.toFixed(2)}</span>
-            </div>
-            <button className="w-full bg-primary text-white py-2 rounded-md">
-              Checkout
-            </button>
           </div>
-          <div className="flex mt-8 mx-2">
-            <input
-              type="text"
-              placeholder="Enter Discount Code"
-              //value={discountCode}
-              //onChange={(e) => setDiscountCode(e.target.value)}
-              className="border p-2 rounded-l-md w-3/4 "
-            />
-            <button
-              //onClick={() => applyDiscountCode(discountCode)}
-              className="bg-primary text-white p-2 rounded-r-md w-1/4"
-            >
-              Apply
-            </button>
-          </div>
-        </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
