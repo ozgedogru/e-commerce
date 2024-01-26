@@ -9,7 +9,30 @@ import {
 
 const ShoppingCartPage = () => {
   const { cart } = useSelector((state) => state.shoppingCartReducer);
-  const totalProductCount = cart.reduce((total, item) => total + item.count, 0);
+  const totalProductCount = cart.reduce((total, item) => {
+    if (item.checked) {
+      return total + item.count;
+    }
+    return total;
+  }, 0);
+
+  const totalProductPrice = cart.reduce((total, item) => {
+    if (item.checked) {
+      return total + item.count * item.product.price;
+    }
+    return total;
+  }, 0);
+
+  let shippingCost = 10;
+
+  const discountPercentage = totalProductCount >= 3 ? 10 : 0;
+  const discount = (totalProductPrice * discountPercentage) / 100;
+
+  if (totalProductPrice >= 1000) {
+    shippingCost = 0;
+  }
+
+  const grandTotal = totalProductPrice + shippingCost - discount;
 
   const dispatch = useDispatch();
 
@@ -32,97 +55,158 @@ const ShoppingCartPage = () => {
 
   return (
     <div className="mx-auto my-8 py-8 px-48">
-      <h3 className="text-xl text-center font-semibold mb-4">
-        {totalProductCount === 0 ? (
-          <div className="flex flex-col items-center justify-center gap-4">
-            <p>Your cart is currently empty.</p>
-            <button className="flex px-5 py-2 justify-center rounded-3xl bg-white hover:bg-shineblue hover:text-white text-primary border border-solid text-sm">
-              Discover What's New
+      <div className="flex w-full">
+        <div className="w-2/3">
+          <h3 className="flex text-xl text-center font-semibold mb-4">
+            {totalProductCount === 0 ? (
+              <div className="flex flex-col items-center justify-center gap-4">
+                <p>Your cart is currently empty.</p>
+                <button className="flex px-5 py-2 justify-center rounded-3xl bg-white hover:bg-shineblue hover:text-white text-primary border border-solid text-sm">
+                  Discover What's New
+                </button>
+              </div>
+            ) : (
+              <p className="text-end">Sepetim ({totalProductCount} ürün)</p>
+            )}
+          </h3>
+          {cart.map((item) => (
+            <div
+              key={item.product.id}
+              className={`flex items-center mb-4 p-2 pr-12 border border-lightgrey2 rounded shadow-md ${
+                !item.checked ? "opacity-50" : ""
+              }`}
+            >
+              <input
+                type="checkbox"
+                checked={item.checked}
+                onChange={(e) =>
+                  toggleProductSelection(item.product.id, e.target.checked)
+                }
+                className={`h-3 w-3 mx-4 appearance-none cursor-pointer rounded-md border-2 focus:outline-none ${
+                  item.checked
+                    ? "bg-black border-black"
+                    : "bg-pricegrey border-pricegrey"
+                }`}
+              />
+              {item.checked && (
+                <svg
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-4 w-4 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M6 13l4 4 10-10"></path>
+                </svg>
+              )}
+              <img
+                src={item.product.images[0].url}
+                alt={item.product.name}
+                className="w-16 h-20 object-cover rounded"
+              />
+              <div className="flex items-center w-full">
+                <div className="ml-4 w-2/5">
+                  <p className="text-lg font-semibold">{item.product.name}</p>
+                  <p>Adet: {item.count}</p>
+                  <p className="text-xs inline-flex items-center gap-2">
+                    <i className="fa-solid fa-truck-fast"></i>
+                    En geç yarın kargoda!
+                  </p>
+                </div>
+                <div className="flex grow">
+                  <button
+                    onClick={() => decrement(item.product.id)}
+                    disabled={item.count === 1}
+                    className={`bg-darkbutton text-white text-sm w-6 py-1 rounded-s ${
+                      item.count === 1 ? "opacity-40" : ""
+                    }`}
+                  >
+                    -
+                  </button>
+                  <p className="px-2 py-1">{item.count}</p>
+                  <button
+                    onClick={() => increment(item)}
+                    className="bg-darkbutton text-white text-sm w-6 py-1 rounded-e"
+                  >
+                    +
+                  </button>
+                </div>
+                <div className="flex grow">
+                  <p className=" font-semibold">
+                    $ {Number((item.count * item.product.price).toFixed(2))}
+                  </p>
+                </div>
+                <div className="flex">
+                  <button onClick={() => remeoveProduct(item.product.id)}>
+                    <i className="fa-solid fa-trash-can"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="w-1/3 ml-8">
+          <div className="bg-lightgrey p-4 border border-lightgrey rounded shadow-md">
+            <h4 className="text-lg font-semibold mb-4">Order Summary</h4>
+            <div className="flex justify-between mb-2">
+              <span>Total Quantity:</span>
+              <span>{totalProductCount}</span>
+            </div>
+            <div className="flex justify-between mb-2">
+              <span>Total Price:</span>
+              <span>$ {totalProductPrice.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between mb-2">
+              <span className={shippingCost === 0 ? "line-through" : ""}>
+                Shipping Cost:
+              </span>
+              <span className={shippingCost === 0 ? "text-orange" : ""}>
+                {shippingCost === 0
+                  ? "Free Shipping"
+                  : `$${shippingCost.toFixed(2)}`}
+              </span>
+            </div>
+            <div className="flex justify-between">
+              <span>Discount:</span>
+              <span>$ {discount.toFixed(2)}</span>
+            </div>
+            {discount > 0 ? (
+              <span className="text-primary text-sm">
+                10% discount on purchases over $1000!
+              </span>
+            ) : (
+              ""
+            )}
+            <hr className="my-2" />
+            <div className="flex justify-between font-bold mb-2">
+              <span>Grand Total:</span>
+              <span>$ {grandTotal.toFixed(2)}</span>
+            </div>
+            <button className="w-full bg-primary text-white py-2 rounded-md">
+              Checkout
             </button>
           </div>
-        ) : (
-          <p className="text-end">Sepetim ({totalProductCount} ürün)</p>
-        )}
-      </h3>
-      {cart.map((item) => (
-        <div
-          key={item.product.id}
-          className={`flex items-center mb-4 p-2 pr-12 border border-lightgrey2 rounded shadow-md ${
-            !item.checked ? "opacity-50" : ""
-          }`}
-        >
-          <input
-            type="checkbox"
-            checked={item.checked}
-            onChange={(e) =>
-              toggleProductSelection(item.product.id, e.target.checked)
-            }
-            className={`h-3 w-3 mx-4 appearance-none cursor-pointer rounded-md border-2 focus:outline-none ${
-              item.checked
-                ? "bg-black border-black"
-                : "bg-pricegrey border-pricegrey"
-            }`}
-          />
-          {item.checked && (
-            <svg
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-4 w-4 text-white"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+          <div className="flex mt-8 mx-2">
+            <input
+              type="text"
+              placeholder="Enter Discount Code"
+              //value={discountCode}
+              //onChange={(e) => setDiscountCode(e.target.value)}
+              className="border p-2 rounded-l-md w-3/4 "
+            />
+            <button
+              //onClick={() => applyDiscountCode(discountCode)}
+              className="bg-primary text-white p-2 rounded-r-md w-1/4"
             >
-              <circle cx="12" cy="12" r="10"></circle>
-              <path d="M6 13l4 4 10-10"></path>
-            </svg>
-          )}
-          <img
-            src={item.product.images[0].url}
-            alt={item.product.name}
-            className="w-16 h-20 object-cover rounded"
-          />
-          <div className="flex items-center w-full">
-            <div className="ml-4 w-2/5">
-              <p className="text-lg font-semibold">{item.product.name}</p>
-              <p>Adet: {item.count}</p>
-              <p className="text-xs inline-flex items-center gap-2">
-                <i className="fa-solid fa-truck-fast"></i>
-                En geç yarın kargoda!
-              </p>
-            </div>
-            <div className="flex grow">
-              <button
-                onClick={() => decrement(item.product.id)}
-                disabled={item.count === 1}
-                className={`bg-darkbutton text-white text-sm w-6 py-1 rounded-s ${
-                  item.count === 1 ? "opacity-40" : ""
-                }`}
-              >
-                -
-              </button>
-              <p className="px-2 py-1">{item.count}</p>
-              <button
-                onClick={() => increment(item)}
-                className="bg-darkbutton text-white text-sm w-6 py-1 rounded-e"
-              >
-                +
-              </button>
-            </div>
-            <div className="flex grow">
-              <p className=" font-semibold">
-                $ {Number((item.count * item.product.price).toFixed(2))}
-              </p>
-            </div>
-            <div className="flex">
-              <button onClick={() => remeoveProduct(item.product.id)}>
-                <i className="fa-solid fa-trash-can"></i>
-              </button>
-            </div>
+              Apply
+            </button>
           </div>
         </div>
-      ))}
+      </div>
     </div>
   );
 };

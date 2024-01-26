@@ -14,8 +14,12 @@ const CartDropdown = () => {
   const { cart } = useSelector((state) => state.shoppingCartReducer);
   const [isHovered, setIsHovered] = useState(false);
 
-  const totalProductCount = cart.reduce((total, item) => total + item.count, 0);
-
+  const totalProductCount = cart.reduce((total, item) => {
+    if (item.checked) {
+      return total + item.count;
+    }
+    return total;
+  }, 0);
   const increment = (item) => {
     dispatch(addToCart(item.product, 1));
   };
