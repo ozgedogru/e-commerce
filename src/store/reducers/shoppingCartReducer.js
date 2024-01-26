@@ -2,6 +2,8 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   CLEAR_CART,
+  SELECT_PRODUCT,
+  DESELECT_PRODUCT,
   SET_PAYMENT,
   SET_ADDRESS,
   REMOVE_THIS_PRODUCT,
@@ -27,6 +29,7 @@ export const shoppingCartReducer = (state = initialState, action) => {
         updatedCart.push({
           count: action.payload.count,
           product: action.payload.product,
+          checked: true,
         });
       }
       localStorage.setItem("cart", JSON.stringify(updatedCart));
@@ -58,6 +61,20 @@ export const shoppingCartReducer = (state = initialState, action) => {
         ...state,
         cart: t.filter((item) => item.count > 0),
       };
+
+    case SELECT_PRODUCT:
+      const selectedCart = state.cart.map((item) =>
+        item.product.id === action.payload ? { ...item, checked: true } : item
+      );
+      localStorage.setItem("cart", JSON.stringify(selectedCart));
+      return { ...state, cart: selectedCart };
+
+    case DESELECT_PRODUCT:
+      const deselectedCart = state.cart.map((item) =>
+        item.product.id === action.payload ? { ...item, checked: false } : item
+      );
+      localStorage.setItem("cart", JSON.stringify(deselectedCart));
+      return { ...state, cart: deselectedCart };
 
     case CLEAR_CART:
       localStorage.removeItem("cart");

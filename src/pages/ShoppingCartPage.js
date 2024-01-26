@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
+  deselectProduct,
   removeFromCart,
   removeThisProduct,
+  selectProduct,
 } from "../store/actions/shoppingCartActions";
 
 const ShoppingCartPage = () => {
@@ -19,6 +21,13 @@ const ShoppingCartPage = () => {
   };
   const remeoveProduct = (id) => {
     dispatch(removeThisProduct(id));
+  };
+  const toggleProductSelection = (productId, isChecked) => {
+    if (isChecked) {
+      dispatch(selectProduct(productId));
+    } else {
+      dispatch(deselectProduct(productId));
+    }
   };
 
   return (
@@ -38,8 +47,37 @@ const ShoppingCartPage = () => {
       {cart.map((item) => (
         <div
           key={item.product.id}
-          className="flex items-center mb-4 p-2 pr-12 border border-lightgrey2 rounded shadow-md"
+          className={`flex items-center mb-4 p-2 pr-12 border border-lightgrey2 rounded shadow-md ${
+            !item.checked ? "opacity-50" : ""
+          }`}
         >
+          <input
+            type="checkbox"
+            checked={item.checked}
+            onChange={(e) =>
+              toggleProductSelection(item.product.id, e.target.checked)
+            }
+            className={`h-3 w-3 mx-4 appearance-none cursor-pointer rounded-md border-2 focus:outline-none ${
+              item.checked
+                ? "bg-black border-black"
+                : "bg-pricegrey border-pricegrey"
+            }`}
+          />
+          {item.checked && (
+            <svg
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-4 w-4 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M6 13l4 4 10-10"></path>
+            </svg>
+          )}
           <img
             src={item.product.images[0].url}
             alt={item.product.name}
