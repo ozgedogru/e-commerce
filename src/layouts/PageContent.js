@@ -9,6 +9,7 @@ import LoginPage from "../pages/LoginPage";
 import ProductDetailPage from "../pages/ProductDetailPage";
 import CategoryPage from "../pages/CategoryPage";
 import ShoppingCartPage from "../pages/ShoppingCartPage";
+import ProtectedPage from "../pages/ProtectedPage";
 
 const PageContent = () => {
   return (
@@ -27,7 +28,9 @@ const PageContent = () => {
           <CategoryPage />
         </Route>
         <Route path="/cart" exact>
-          <ShoppingCartPage />
+          <ProtectedPage>
+            <ShoppingCartPage />
+          </ProtectedPage>
         </Route>
         <Route path="/about" exact>
           <AboutPage />

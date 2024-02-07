@@ -5,7 +5,7 @@ const initialState = {
     name: null,
     email: null,
     token: null,
-    role_id: "3",
+    role_id: null,
   },
   isLoggedIn: false,
 };
