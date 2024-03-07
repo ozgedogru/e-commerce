@@ -1,35 +1,62 @@
-export const ADD_TO_CART = "ADD_TO_CART";
-export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
-export const REMOVE_THIS_PRODUCT = "REMOVE_THIS_PRODUCT";
-export const CLEAR_CART = "CLEAR_CART";
-export const SELECT_PRODUCT = "SELECT_PRODUCT";
-export const DESELECT_PRODUCT = "DESELECT_PRODUCT";
+export const SET_CART = "SET_CART";
 export const SET_PAYMENT = "SET_PAYMENT";
 export const SET_ADDRESS = "SET_ADDRESS";
 
-export const addToCart = (product, count) => ({
-  type: ADD_TO_CART,
-  payload: { product, count },
-});
-export const removeFromCart = (productId) => ({
-  type: REMOVE_FROM_CART,
-  payload: productId,
-});
-export const removeThisProduct = (productId) => ({
-  type: REMOVE_THIS_PRODUCT,
-  payload: productId,
-});
-export const clearCart = () => ({ type: CLEAR_CART });
+export const addToCart = (product, count) => (dispatch, getState) => {
+  const { cart } = getState().shoppingCartReducer;
+  const updatedCart = [...cart];
+  const existingItemIndex = updatedCart.findIndex(
+    (item) => item.product.id === product.id
+  );
 
-export const selectProduct = (productId) => ({
-  type: SELECT_PRODUCT,
-  payload: productId,
-});
+  if (existingItemIndex !== -1) {
+    updatedCart[existingItemIndex].count += count;
+  } else {
+    updatedCart.push({
+      count: count,
+      product: product,
+      checked: true,
+    });
+  }
+  localStorage.setItem("cart", JSON.stringify(updatedCart));
+  dispatch({ type: SET_CART, payload: updatedCart });
+};
 
-export const deselectProduct = (productId) => ({
-  type: DESELECT_PRODUCT,
-  payload: productId,
-});
+export const removeFromCart = (productId) => (dispatch, getState) => {
+  const { cart } = getState().shoppingCartReducer;
+  const newCart = cart.map((item) =>
+    item.product.id === productId
+      ? { ...item, count: item.count > 1 ? item.count - 1 : 0 }
+      : item
+  );
+  const filteredCart = newCart.filter((item) => item.count > 0);
+  localStorage.setItem("cart", JSON.stringify(filteredCart));
+  dispatch({ type: SET_CART, payload: filteredCart });
+};
+
+export const removeThisProduct = (productId) => (dispatch, getState) => {
+  const { cart } = getState().shoppingCartReducer;
+  const updatedCart = cart.map((item) =>
+    item.product.id === productId ? { ...item, count: 0 } : item
+  );
+  const filteredCart = updatedCart.filter((item) => item.count > 0);
+  localStorage.setItem("cart", JSON.stringify(filteredCart));
+  dispatch({ type: SET_CART, payload: filteredCart });
+};
+
+export const clearCart = () => (dispatch) => {
+  localStorage.removeItem("cart");
+  dispatch({ type: SET_CART, payload: [] });
+};
+
+export const toggleProduct = (productId) => (dispatch, getState) => {
+  const { cart } = getState().shoppingCartReducer;
+  const updatedCart = cart.map((item) =>
+    item.product.id === productId ? { ...item, checked: !item.checked } : item
+  );
+  localStorage.setItem("cart", JSON.stringify(updatedCart));
+  dispatch({ type: SET_CART, payload: updatedCart });
+};
 
 export const setPayment = (payment) => ({
   type: SET_PAYMENT,

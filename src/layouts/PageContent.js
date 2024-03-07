@@ -10,6 +10,7 @@ import ProductDetailPage from "../pages/ProductDetailPage";
 import CategoryPage from "../pages/CategoryPage";
 import ShoppingCartPage from "../pages/ShoppingCartPage";
 import ProtectedPage from "../pages/ProtectedPage";
+import CreateOrderPage from "../pages/CreateOrderPage";
 
 const PageContent = () => {
   return (
@@ -30,6 +31,11 @@ const PageContent = () => {
         <Route path="/cart" exact>
           <ProtectedPage>
             <ShoppingCartPage />
+          </ProtectedPage>
+        </Route>
+        <Route path="/order" exact>
+          <ProtectedPage>
+            <CreateOrderPage />
           </ProtectedPage>
         </Route>
         <Route path="/about" exact>

@@ -1,13 +1,13 @@
 import { SET_LOGGED_IN, SET_LOGGED_OUT } from "../actions/userActions";
 
 const initialState = {
+  isLoggedIn: false,
   user: {
     name: null,
     email: null,
     token: null,
     role_id: null,
   },
-  isLoggedIn: false,
 };
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {

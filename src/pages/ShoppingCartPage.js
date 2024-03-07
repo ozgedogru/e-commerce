@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
-  deselectProduct,
   removeFromCart,
   removeThisProduct,
-  selectProduct,
+  toggleProduct,
 } from "../store/actions/shoppingCartActions";
 import { useState } from "react";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const ShoppingCartPage = () => {
   const { cart } = useSelector((state) => state.shoppingCartReducer);
@@ -57,11 +57,20 @@ const ShoppingCartPage = () => {
     dispatch(removeThisProduct(id));
   };
   const toggleProductSelection = (productId, isChecked) => {
-    if (isChecked) {
-      dispatch(selectProduct(productId));
-    } else {
-      dispatch(deselectProduct(productId));
-    }
+    dispatch(toggleProduct(productId));
+  };
+
+  const history = useHistory();
+
+  const handleOrderDetail = () => {
+    // const orderDetail = {
+    //   totalProductPrice: totalProductPrice,
+    //   discount: discount,
+    //   shippingCost: shippingCost,
+    //   grandTotal: grandTotal,
+    // };
+
+    history.push("/order");
   };
 
   return (
@@ -213,7 +222,10 @@ const ShoppingCartPage = () => {
                 <span>Grand Total:</span>
                 <span>$ {grandTotal.toFixed(2)}</span>
               </div>
-              <button className="w-full bg-primary text-white py-2 rounded-md">
+              <button
+                onClick={handleOrderDetail}
+                className="w-full bg-primary text-white py-2 rounded-md"
+              >
                 Checkout
               </button>
             </div>
