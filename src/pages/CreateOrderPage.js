@@ -9,6 +9,8 @@ const CreateOrderPage = () => {
 
   const [addressList, setAddressList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [addressToEdit, setAddressToEdit] = useState(null);
 
   useEffect(() => {
     fetchAddressList();
@@ -56,9 +58,19 @@ const CreateOrderPage = () => {
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
+    setIsEditing(false);
+    setAddressToEdit(null);
   };
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    setIsEditing(false);
+    setAddressToEdit(null);
+  };
+
+  const handleEditAddress = (address) => {
+    setIsModalOpen(true);
+    setIsEditing(true);
+    setAddressToEdit(address);
   };
 
   //radio button functionss
@@ -146,7 +158,7 @@ const CreateOrderPage = () => {
                       </button>
                       <button
                         className="text-sm text-blue-500"
-                        //onClick={() => handleEditAddress(address)}
+                        onClick={() => handleEditAddress(address)}
                       >
                         Düzenle
                       </button>
@@ -164,6 +176,9 @@ const CreateOrderPage = () => {
                 isOpen={isModalOpen}
                 onClose={handleCloseModal}
                 fetchAddressList={fetchAddressList}
+                isEditing={isEditing}
+                setIsEditing={setIsEditing}
+                addressToEdit={addressToEdit}
               />
             </div>
           )}

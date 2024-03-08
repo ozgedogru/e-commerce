@@ -2,12 +2,37 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import axios from "axios";
 
-const AddAddressModal = ({ isOpen, onClose, fetchAddressList }) => {
+const AddAddressModal = ({
+  isOpen,
+  onClose,
+  fetchAddressList,
+  isEditing,
+  setIsEditing,
+  addressToEdit,
+}) => {
   const [cities, setCities] = useState([]);
+
+  const [addressTitle, setAddressTitle] = useState("");
+  const [nameSurname, setNameSurname] = useState("");
+  const [phone, setPhone] = useState("");
+  const [city, setCity] = useState("");
+  const [district, setDistrict] = useState("");
+  const [neighborhood, setNeighborhood] = useState("");
+  const [address, setAddress] = useState("");
 
   useEffect(() => {
     fetchCities();
-  }, []);
+    if (addressToEdit) {
+      setIsEditing(true);
+      setAddressTitle(addressToEdit.addressTitle);
+      setNameSurname(addressToEdit.nameSurname);
+      setPhone(addressToEdit.phone);
+      setCity(addressToEdit.city);
+      setDistrict(addressToEdit.district);
+      setNeighborhood(addressToEdit.neighborhood);
+      setAddress(addressToEdit.addressDir);
+    }
+  }, [addressToEdit, setIsEditing]);
 
   const fetchCities = async () => {
     try {
@@ -20,14 +45,6 @@ const AddAddressModal = ({ isOpen, onClose, fetchAddressList }) => {
     }
   };
 
-  const [addressTitle, setAddressTitle] = useState("");
-  const [nameSurname, setNameSurname] = useState("");
-  const [phone, setPhone] = useState("");
-  const [city, setCity] = useState("");
-  const [district, setDistrict] = useState("");
-  const [neighborhood, setNeighborhood] = useState("");
-  const [address, setAddress] = useState("");
-
   const addAddress = (newAddress) => {
     axios
       .post("http://localhost:8080/user/1/address", newAddress)
@@ -37,6 +54,22 @@ const AddAddressModal = ({ isOpen, onClose, fetchAddressList }) => {
       })
       .catch((error) => {
         console.error("Error adding address:", error);
+      });
+  };
+
+  const editAddress = (updatedAddress) => {
+    axios
+      .put(
+        `http://localhost:8080/user/address/${addressToEdit.id}`,
+        updatedAddress
+      )
+      .then((response) => {
+        console.log("Address edited successfully:", response.data);
+        fetchAddressList();
+        onClose();
+      })
+      .catch((error) => {
+        console.error("Error editing address:", error);
       });
   };
 
@@ -51,11 +84,13 @@ const AddAddressModal = ({ isOpen, onClose, fetchAddressList }) => {
       neighborhood: neighborhood,
       addressDir: address,
     };
-    console.log("new adres > " + JSON.stringify(newAddress));
-    addAddress(newAddress);
+    if (isEditing) {
+      editAddress({ ...newAddress, id: addressToEdit.id });
+    } else {
+      addAddress(newAddress);
+    }
     onClose();
   };
-
   return (
     <Modal
       isOpen={isOpen}
@@ -155,7 +190,7 @@ const AddAddressModal = ({ isOpen, onClose, fetchAddressList }) => {
               type="submit"
               className="px-5 py-2 rounded-3xl bg-white hover:bg-shineblue hover:text-white text-primary border border-solid text-sm font-bold"
             >
-              Add Address
+              {isEditing ? "Save" : "Add Address"}
             </button>
           </div>
         </form>
