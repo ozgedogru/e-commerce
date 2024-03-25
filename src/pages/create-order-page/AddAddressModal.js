@@ -6,8 +6,6 @@ const AddAddressModal = ({
   isOpen,
   onClose,
   fetchAddressList,
-  isEditing,
-  setIsEditing,
   addressToEdit,
 }) => {
   const [cities, setCities] = useState([]);
@@ -23,7 +21,6 @@ const AddAddressModal = ({
   useEffect(() => {
     fetchCities();
     if (addressToEdit) {
-      setIsEditing(true);
       setAddressTitle(addressToEdit.addressTitle);
       setNameSurname(addressToEdit.nameSurname);
       setPhone(addressToEdit.phone);
@@ -32,7 +29,7 @@ const AddAddressModal = ({
       setNeighborhood(addressToEdit.neighborhood);
       setAddress(addressToEdit.addressDir);
     }
-  }, [addressToEdit, setIsEditing]);
+  }, [addressToEdit]);
 
   const fetchCities = async () => {
     try {
@@ -84,7 +81,7 @@ const AddAddressModal = ({
       neighborhood: neighborhood,
       addressDir: address,
     };
-    if (isEditing) {
+    if (addressToEdit) {
       editAddress({ ...newAddress, id: addressToEdit.id });
     } else {
       addAddress(newAddress);
@@ -190,7 +187,7 @@ const AddAddressModal = ({
               type="submit"
               className="px-5 py-2 rounded-3xl bg-white hover:bg-shineblue hover:text-white text-primary border border-solid text-sm font-bold"
             >
-              {isEditing ? "Save" : "Add Address"}
+              {addressToEdit ? "Save" : "Add Address"}
             </button>
           </div>
         </form>

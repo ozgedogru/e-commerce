@@ -10,7 +10,7 @@ import ProductDetailPage from "../pages/ProductDetailPage";
 import CategoryPage from "../pages/CategoryPage";
 import ShoppingCartPage from "../pages/ShoppingCartPage";
 import ProtectedPage from "../pages/ProtectedPage";
-import CreateOrderPage from "../pages/CreateOrderPage";
+import CreateOrderPage from "../pages/create-order-page/CreateOrderPage";
 
 const PageContent = () => {
   return (
