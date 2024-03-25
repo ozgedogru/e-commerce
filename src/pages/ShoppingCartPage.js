@@ -3,6 +3,7 @@ import {
   addToCart,
   removeFromCart,
   removeThisProduct,
+  setOrderSummary,
   toggleProduct,
 } from "../store/actions/shoppingCartActions";
 import { useState } from "react";
@@ -11,6 +12,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const ShoppingCartPage = () => {
   const { cart } = useSelector((state) => state.shoppingCartReducer);
+
   const totalProductCount = cart.reduce((total, item) => {
     if (item.checked) {
       return total + item.count;
@@ -63,12 +65,14 @@ const ShoppingCartPage = () => {
   const history = useHistory();
 
   const handleOrderDetail = () => {
-    // const orderDetail = {
-    //   totalProductPrice: totalProductPrice,
-    //   discount: discount,
-    //   shippingCost: shippingCost,
-    //   grandTotal: grandTotal,
-    // };
+    const orderSum = {
+      totalProductPrice: totalProductPrice,
+      discount: discount,
+      shippingCost: shippingCost,
+      grandTotal: grandTotal,
+    };
+
+    dispatch(setOrderSummary(orderSum));
 
     history.push("/order");
   };

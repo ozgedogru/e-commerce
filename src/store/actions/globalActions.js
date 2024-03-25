@@ -23,7 +23,7 @@ export const setCategories = () => {
           type: SET_CATEGORIES,
           payload: res.data,
         });
-        console.log("categories ", res.data);
+        //console.log("categories ", res.data);
       })
       .catch((error) => {
         console.error("Error:", error);

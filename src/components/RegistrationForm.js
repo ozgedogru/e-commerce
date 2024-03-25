@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { AxiosInstance } from "../api/axiosInstance";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import axios from "axios";
 
 const RegistrationForm = () => {
   const {
@@ -20,10 +21,11 @@ const RegistrationForm = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    AxiosInstance.get("/roles")
+    axios
+      .get("http://localhost:8080/roles")
       .then((response) => {
         setRoles(response.data);
-        //console.log(response.data);
+        console.log(response.data);
       })
       .catch((error) => console.error("Error:", error));
   }, []);
@@ -34,26 +36,19 @@ const RegistrationForm = () => {
   };
 
   const submitForm = (data) => {
-    let formData;
+    let formData = {
+      fullName: data.fullName,
+      email: data.email,
+      password: data.password,
+      roleId: data.roleId,
+    };
+
     if (selectedRoleID === "2") {
-      formData = {
-        name: data.name,
-        email: data.email,
-        password: data.password,
-        role_id: data.role_id,
-        store: {
-          name: data.storeName,
-          phone: data.storePhone,
-          tax_no: data.tax_no,
-          bank_account: data.bank_account,
-        },
-      };
-    } else {
-      formData = {
-        name: data.name,
-        email: data.email,
-        password: data.password,
-        role_id: data.role_id,
+      formData.store = {
+        name: data.storeName,
+        phone: data.storePhone,
+        tax_no: data.tax_no,
+        bank_account: data.bank_account,
       };
     }
 
@@ -61,7 +56,8 @@ const RegistrationForm = () => {
     //console.log("Form data", formData);
 
     setTimeout(() => {
-      AxiosInstance.post("/signup", formData)
+      axios
+        .post("http://localhost:8080/user/register", formData)
         .then((response) => {
           console.log("submit succeeded:", response);
           toast.success(`${response.data.message}`);
@@ -93,8 +89,8 @@ const RegistrationForm = () => {
             <input
               className="input"
               type="text"
-              name="name"
-              {...register("name", {
+              name="fullName"
+              {...register("fullName", {
                 required: "Name is required.",
                 minLength: {
                   value: 3,
@@ -163,15 +159,15 @@ const RegistrationForm = () => {
           <label className="label">
             Role
             <select
-              {...register("role_id", { required: "Role is required." })}
+              {...register("roleId", { required: "Role is required." })}
               className="input"
-              name="role_id"
+              name="roleId"
               onChange={handleRoleChange}
               value={selectedRoleID}
             >
               {roles.map((role) => (
                 <option key={role.id} value={role.id}>
-                  {role.name}
+                  {role.authority}
                 </option>
               ))}
             </select>
@@ -227,7 +223,8 @@ const RegistrationForm = () => {
                     required: "Store Tax ID is required.",
                     pattern: {
                       value: /^T\d{4}V\d{6}$/,
-                      message: "Invalid Store Tax ID.",
+                      message:
+                        "Please enter a valid Store Tax ID in the format 'TXXXXVYYYYYY'.",
                     },
                   })}
                 />
@@ -245,7 +242,8 @@ const RegistrationForm = () => {
                     required: "Store Bank Account is required.",
                     pattern: {
                       value: /^TR\d{2}\d{4}\d{4}\d{4}\d{4}\d{4}\d{2}$/,
-                      message: "Invalid IBAN.",
+                      message:
+                        "Invalid IBAN. Please enter a valid IBAN starting with 'TR' followed by 22 digits.",
                     },
                   })}
                 />
