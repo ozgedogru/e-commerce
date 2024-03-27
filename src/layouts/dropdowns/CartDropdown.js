@@ -65,7 +65,7 @@ const CartDropdown = () => {
                   src={
                     // item.product.images &&
                     // item.product.images[0] &&
-                    item.product.images[0].url
+                    item.product.image
                   }
                   alt={item.product.name}
                   className="object-cover h-16 rounded-md mr-2"

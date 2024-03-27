@@ -265,7 +265,7 @@ const CategoryPage = () => {
               {fetchState === "FETCHED" &&
                 productList.map((p) => (
                   <div key={p.id} className="flex flex-col py-4 gap-4">
-                    <ProductCard product={p} img={p.images[0].url} />
+                    <ProductCard product={p} img={p.image} />
                   </div>
                 ))}
             </InfiniteScroll>

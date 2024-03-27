@@ -25,7 +25,7 @@ const ProductCard = ({ product }) => {
   const productNameSlug = slugify(product.name, { lower: true });
   const url = `/${categoryName}/${product.id}/${productNameSlug}`;
 
-  const productImg = product.images[0].url;
+  const productImg = product.image;
 
   return (
     <div className="flex flex-col items-center justify-around sm:w-[16rem] sm:min-h-[36rem] w-72 shadow-md hover:scale-105 transition duration-300 ">

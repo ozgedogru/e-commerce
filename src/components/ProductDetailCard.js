@@ -34,7 +34,7 @@ const ProductDetailCard = ({ productDetails }) => {
         <div className="flex gap-1 w-24 h-24">
           <img
             className="opacity-50 object-cover w-full h-full"
-            src={productDetails?.images[0].url}
+            src={productDetails?.image}
             alt="pic1"
           ></img>
         </div>
