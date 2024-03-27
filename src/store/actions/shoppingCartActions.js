@@ -31,7 +31,6 @@ export const removeFromCart = (productId) => (dispatch, getState) => {
       : item
   );
   const filteredCart = newCart.filter((item) => item.count > 0);
-  localStorage.setItem("cart", JSON.stringify(filteredCart));
   dispatch({ type: SET_CART, payload: filteredCart });
 };
 
@@ -41,12 +40,10 @@ export const removeThisProduct = (productId) => (dispatch, getState) => {
     item.product.id === productId ? { ...item, count: 0 } : item
   );
   const filteredCart = updatedCart.filter((item) => item.count > 0);
-  localStorage.setItem("cart", JSON.stringify(filteredCart));
   dispatch({ type: SET_CART, payload: filteredCart });
 };
 
 export const clearCart = () => (dispatch) => {
-  localStorage.removeItem("cart");
   dispatch({ type: SET_CART, payload: [] });
 };
 
@@ -55,7 +52,6 @@ export const toggleProduct = (productId) => (dispatch, getState) => {
   const updatedCart = cart.map((item) =>
     item.product.id === productId ? { ...item, checked: !item.checked } : item
   );
-  localStorage.setItem("cart", JSON.stringify(updatedCart));
   dispatch({ type: SET_CART, payload: updatedCart });
 };
 

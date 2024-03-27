@@ -6,9 +6,9 @@ import {
 } from "../actions/shoppingCartActions";
 
 const initialState = {
-  cart: JSON.parse(localStorage.getItem("cart")) || [],
-  payment: JSON.parse(localStorage.getItem("payment")) || {},
-  address: JSON.parse(localStorage.getItem("address")) || {},
+  cart: [],
+  payment: {},
+  address: {},
   orderSum: {
     totalProductPrice: 0,
     discount: 0,
@@ -20,7 +20,6 @@ const initialState = {
 export const shoppingCartReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_CART:
-      localStorage.setItem("cart", JSON.stringify(action.payload));
       return { ...state, cart: action.payload };
 
     case SET_PAYMENT:
