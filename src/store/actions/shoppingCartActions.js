@@ -2,6 +2,7 @@ export const SET_CART = "SET_CART";
 export const SET_PAYMENT = "SET_PAYMENT";
 export const SET_ADDRESS = "SET_ADDRESS";
 export const SET_ORDER_SUMMARY = "SET_ORDER_SUMMARY";
+export const SET_ORDER_SUCCESS = "SET_ORDER_SUCCESS";
 
 export const addToCart = (product, count) => (dispatch, getState) => {
   const { cart } = getState().shoppingCartReducer;
@@ -68,4 +69,9 @@ export const setAddress = (address) => ({
 export const setOrderSummary = (orderSummary) => ({
   type: SET_ORDER_SUMMARY,
   payload: orderSummary,
+});
+
+export const setOrderSuccess = (orderSuccess) => ({
+  type: SET_ORDER_SUCCESS,
+  payload: orderSuccess,
 });
