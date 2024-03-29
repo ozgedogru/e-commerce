@@ -1,10 +1,10 @@
-import Gravatar from "react-gravatar";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { userLogout } from "../store/actions/userActions";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import ShopNavbarDropdown from "./dropdowns/ShopNavbarDropdown";
 import CartDropdown from "./dropdowns/CartDropdown";
+import UserDropdown from "./dropdowns/UserDropdown";
 
 const Header = () => {
   const { user, isLoggedIn } = useSelector((state) => state.userReducer);
@@ -82,22 +82,9 @@ const Header = () => {
               </ul>
             </nav>
             <div className="flex items-center text-primary py-4 font-bold">
-              {isLoggedIn ? (
-                <div className="flex flex-wrap items-center px-2 gap-1">
-                  <Gravatar
-                    email={user.email}
-                    className="w-5 h-5 rounded-full"
-                  />
-                  <p>{user.name}</p>
-                </div>
-              ) : (
-                <div className="flex flex-wrap items-center px-2 gap-1">
-                  <i className="fa-regular fa-user"></i>
-                  <button>
-                    <Link to="/login">Login / Register</Link>
-                  </button>
-                </div>
-              )}
+              <div>
+                <UserDropdown />
+              </div>
               <div className="flex items-center px-2 gap-1">
                 <i className="fa-solid fa-search"></i>
                 <p></p>
