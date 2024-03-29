@@ -21,29 +21,31 @@ const SuccessOrderPage = () => {
       });
   };
 
-  const fetchProductDetails = (productIds) => {
+  const fetchProductDetails = (products) => {
     Promise.all(
-      productIds.map((productId) =>
-        axios.get(`http://localhost:8080/products/${productId}`)
+      products.map((product) =>
+        axios.get(`http://localhost:8080/products/${product.id}`)
       )
     )
       .then((responses) => {
-        const products = responses.map((response) => response.data);
-        setProductDetails(products);
+        const productDetails = responses.map((response) => response.data);
+        setProductDetails(productDetails);
       })
       .catch((error) => {
         console.error("Error occurred!", error);
       });
   };
 
-  const fetchOrderDetails = () => {
-    fetchAddressDetails(orderSuccess.addressId);
-    fetchProductDetails(orderSuccess.productIds);
-  };
-
   useEffect(() => {
+    const fetchOrderDetails = () => {
+      fetchAddressDetails(orderSuccess.address.id);
+      fetchProductDetails(orderSuccess.products);
+    };
+
     fetchOrderDetails();
-  }, []);
+
+    console.log("order success > ", orderSuccess);
+  }, [orderSuccess]);
 
   const calculateEstimatedDeliveryDate = (orderDate) => {
     const estimatedDeliveryDateTime = new Date(orderDate);
@@ -54,8 +56,10 @@ const SuccessOrderPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-start my-16">
-      <h2 className="text-3xl font-semibold mb-4">Order Successful!</h2>
+    <div className="flex flex-col items-center justify-start mt-8 pt-8 bg-lightgrey">
+      <h2 className="text-3xl text-pricegreen font-semibold mb-4">
+        Order Successful!
+      </h2>
       <p className="text-lg mb-8">
         Thank you for your order. Your order has been successfully placed.
       </p>
@@ -72,10 +76,10 @@ const SuccessOrderPage = () => {
             </h6>
             <h6>
               <strong>Total price: </strong>
-              {orderSuccess.price.toFixed()} $
+              {orderSuccess.price.toFixed(2)} $
             </h6>
           </div>
-          <div className="flex flex-col gap-4 border p-4 m-4 rounded-lg w-max">
+          <div className="flex flex-col gap-4 shadow-lg border border-lightgrey2 bg-white p-4 m-4 rounded-lg w-max">
             {productDetails.map((product, index) => (
               <div key={index} className="flex gap-2">
                 <div>
