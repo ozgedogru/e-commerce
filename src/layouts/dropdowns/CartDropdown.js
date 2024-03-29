@@ -51,22 +51,18 @@ const CartDropdown = () => {
         <Popover.Panel
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className="absolute z-10 text-center right-0 w-72 bg-white border border-lightgrey2 rounded-md shadow-lg"
+          className="absolute z-10 text-center right-0 w-max bg-white border border-lightgrey2 rounded-md shadow-lg"
         >
-          <div className="flex flex-col gap-2 p-2 px-4">
+          <div className="flex flex-col gap-2 py-2 px-4">
             <div>
-              <p className="text-start text-black ml-2 mb-2">
-                Sepetim ({totalProductCount} urun)
+              <p className="text-start text-black tetx-sm ml-1 mb-2">
+                Your Cart ({totalProductCount} items)
               </p>
             </div>
             {cart.map((item) => (
               <div key={item.product.id} className="flex items-center mb-4">
                 <img
-                  src={
-                    // item.product.images &&
-                    // item.product.images[0] &&
-                    item.product.image
-                  }
+                  src={item.product.image}
                   alt={item.product.name}
                   className="object-cover h-16 rounded-md mr-2"
                 />
@@ -95,12 +91,12 @@ const CartDropdown = () => {
                 </div>
               </div>
             ))}
-            <div className="flex justify-evenly">
-              <button className="bg-black text-white text-sm rounded p-1 px-2">
-                <Link to="/cart">Sepete Git</Link>
+            <div className="flex justify-evenly gap-2">
+              <button className="bg-black text-white text-sm rounded p-1 px-2 hover:bg-shineblack">
+                <Link to="/cart">Go to Cart</Link>
               </button>
-              <button className="bg-black text-white text-sm rounded p-1 px-2">
-                Siparisi Tamamla
+              <button className="bg-black text-white text-sm rounded p-1 px-2 hover:bg-shineblack">
+                <Link to="/cart">Complete Order</Link>
               </button>
             </div>
           </div>
