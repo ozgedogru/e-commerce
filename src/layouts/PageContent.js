@@ -11,6 +11,8 @@ import CategoryPage from "../pages/CategoryPage";
 import ShoppingCartPage from "../pages/ShoppingCartPage";
 import ProtectedPage from "../pages/ProtectedPage";
 import CreateOrderPage from "../pages/create-order-page/CreateOrderPage";
+import SuccessOrderPage from "../pages/SuccessOrderPage";
+import PreviousOrdersPage from "../pages/PreviousOrderPage";
 
 const PageContent = () => {
   return (
@@ -29,14 +31,16 @@ const PageContent = () => {
           <CategoryPage />
         </Route>
         <Route path="/cart" exact>
-          <ProtectedPage>
-            <ShoppingCartPage />
-          </ProtectedPage>
+          <ShoppingCartPage />
         </Route>
         <Route path="/order" exact>
-          <ProtectedPage>
-            <CreateOrderPage />
-          </ProtectedPage>
+          <CreateOrderPage />
+        </Route>
+        <Route path="/success" exact>
+          <SuccessOrderPage />
+        </Route>
+        <Route path="/previous-orders" exact>
+          <PreviousOrdersPage />
         </Route>
         <Route path="/about" exact>
           <AboutPage />
