@@ -5,12 +5,17 @@ import AddAddressModal from "./AddAddressModal";
 import DeleteModal from "./DeleteModal";
 import AddPaymentModal from "./AddPaymentModal";
 import {
+  clearCart,
   setAddress,
+  setOrderSuccess,
+  setOrderSummary,
   setPayment,
 } from "../../store/actions/shoppingCartActions";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const CreateOrderPage = () => {
-  const { orderSum } = useSelector((state) => state.shoppingCartReducer);
+  const { orderSum, cart } = useSelector((state) => state.shoppingCartReducer);
 
   const [addressList, setAddressList] = useState([]);
   const [addressModalOpen, setAddressModalOpen] = useState(false);
@@ -150,25 +155,36 @@ const CreateOrderPage = () => {
     dispatch(setPayment(payment));
   };
 
-  useEffect(() => {
-    if (addressList.length > 0) {
-      setSelectedAddress(addressList[0]);
-    }
-  }, [addressList]);
+  // useEffect(() => {
+  //   if (addressList.length > 0) {
+  //     setSelectedAddress(addressList[0]);
+  //   }
+  // }, [addressList]);
 
-  useEffect(() => {
-    if (paymentList.length > 0) {
-      setSelectedPayment(paymentList[0]);
-    }
-  }, [paymentList]);
+  // useEffect(() => {
+  //   if (paymentList.length > 0) {
+  //     setSelectedPayment(paymentList[0]);
+  //   }
+  // }, [paymentList]);
 
   ///////////////////////////////////////////////////////////////////
+
+  const history = useHistory();
+  const [loading, setLoading] = useState(false);
+
+  const productIds = cart.map((ind) => {
+    return { id: ind.product.id };
+  });
 
   const createOrder = () => {
     if (!selectedAddress || !selectedPayment) {
       console.error("Address and payment information must be selected.");
+      toast.error("Address and payment information must be selected.");
+
       return;
     }
+
+    setLoading(true);
 
     const newOrder = {
       orderDate: new Date(),
@@ -177,22 +193,46 @@ const CreateOrderPage = () => {
       expirationDate: selectedPayment.expirationDate,
       price: orderSum.grandTotal,
       address: selectedAddress,
-      products: [],
-      user: 1,
+      products: productIds,
+      user: {
+        id: 1,
+      },
     };
 
-    axios
-      .post("http://localhost:8080/1/orders", newOrder)
-      .then((response) => {
-        console.log("Order created successfully:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error occurred while creating order:", error);
-      });
+    console.log("new order > ", newOrder);
+
+    setTimeout(() => {
+      axios
+        .post("http://localhost:8080/user/1/orders", newOrder)
+        .then((response) => {
+          console.log("Order created successfully:", response.data);
+
+          dispatch(setAddress(null));
+          dispatch(setPayment(null));
+          dispatch(clearCart(null));
+          dispatch(setOrderSummary(null));
+
+          dispatch(setOrderSuccess(response.data));
+
+          toast.success("Siparis olusturuldu!");
+          history.push("/success");
+
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error occurred while creating order:", error);
+          setLoading(false);
+        });
+    }, 1000);
   };
 
   return (
-    <div className="px-48 my-8">
+    <div className={`px-48 my-8 ${loading ? "dimmed" : ""}`}>
+      {loading && (
+        <div className="loading-overlay">
+          <p>Loading...</p>
+        </div>
+      )}
       <h2 className="text-2xl font-semibold mb-8">Review Your Order</h2>
       <div className="flex">
         <div className="w-2/3 pr-8">
@@ -240,6 +280,7 @@ const CreateOrderPage = () => {
                         id={`address-${index}`}
                         name="selectedAddress"
                         value={address.addressTitle}
+                        checked={selectedAddress === address}
                         onChange={() => handleSelectAddress(address)}
                         className="mr-2"
                       />
@@ -315,6 +356,7 @@ const CreateOrderPage = () => {
                         id={`payment-${index}`}
                         name="selectedPayment"
                         value={payment.cardNumber}
+                        checked={selectedPayment === payment}
                         onChange={() => handleSelectPayment(payment)}
                         className="mr-4"
                       />
@@ -411,7 +453,12 @@ const CreateOrderPage = () => {
               </div>
               <button
                 onClick={() => createOrder()}
-                className="w-full bg-primary text-white py-2 rounded-md"
+                className={`w-full bg-primary text-white py-2 rounded-md ${
+                  !selectedAddress || !selectedPayment
+                    ? "opacity-50 cursor-not-allowed"
+                    : ""
+                }`}
+                disabled={!selectedAddress || !selectedPayment}
               >
                 Checkout
               </button>
