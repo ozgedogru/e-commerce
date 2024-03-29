@@ -6,7 +6,7 @@ import {
   setOrderSummary,
   toggleProduct,
 } from "../store/actions/shoppingCartActions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -30,10 +30,14 @@ const ShoppingCartPage = () => {
   let shippingCost = 10;
   const [discountCode, setDiscountCode] = useState("");
   const [discountAmount, setdiscountAmount] = useState(0);
+  const [invalidDiscountMessage, setInvalidDiscountMessage] = useState("");
 
   const applyDiscountCode = () => {
     if (discountCode.toUpperCase() === "HELLO10") {
       setdiscountAmount(10);
+      setInvalidDiscountMessage("");
+    } else {
+      setInvalidDiscountMessage("Invalid discount code!");
     }
   };
 
@@ -76,6 +80,10 @@ const ShoppingCartPage = () => {
 
     history.push("/order");
   };
+
+  useEffect(() => {
+    console.log("cart > ", cart);
+  }, [cart]);
 
   return (
     <div className="mx-auto my-8 py-8 px-48">
@@ -131,7 +139,7 @@ const ShoppingCartPage = () => {
                 </svg>
               )}
               <img
-                src={item.product.images[0].url}
+                src={item.product.image}
                 alt={item.product.name}
                 className="w-16 h-20 object-cover rounded"
               />
@@ -230,23 +238,32 @@ const ShoppingCartPage = () => {
                 onClick={handleOrderDetail}
                 className="w-full bg-primary text-white py-2 rounded-md"
               >
-                Checkout
+                Proceed to Payment
               </button>
             </div>
-            <div className="flex mt-8 mx-2">
-              <input
-                type="text"
-                placeholder="Enter Discount Code"
-                value={discountCode}
-                onChange={(e) => setDiscountCode(e.target.value)}
-                className="border p-2 rounded-l-md w-3/4 "
-              />
-              <button
-                onClick={() => applyDiscountCode()}
-                className="bg-primary text-white p-2 rounded-r-md w-1/4"
-              >
-                Apply
-              </button>
+            <div className="flex flex-col">
+              <div className="flex mt-8 mx-2">
+                <input
+                  type="text"
+                  placeholder="Enter Discount Code"
+                  value={discountCode}
+                  onChange={(e) => setDiscountCode(e.target.value)}
+                  className="border p-2 rounded-l-md w-3/4 "
+                />
+                <button
+                  onClick={() => applyDiscountCode()}
+                  className="bg-primary text-white p-2 rounded-r-md w-1/4"
+                >
+                  Apply
+                </button>
+              </div>
+              <div className="mx-2 text-red">
+                {invalidDiscountMessage && (
+                  <span className="text-red-500 text-xs">
+                    {invalidDiscountMessage}
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         ) : (
