@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { AxiosInstance } from "../../api/axiosInstance";
+import { AxiosInstance, renewAxiosInstance } from "../../api/axiosInstance";
 
 export const SET_LOGGED_IN = "SET_LOGGED_IN";
 export const SET_LOGGED_OUT = "SET_LOGGED_OUT";
@@ -9,18 +9,28 @@ export const clearUser = () => ({ type: SET_LOGGED_OUT });
 
 export const userLogin = (formData, history) => {
   return (dispatch) => {
-    AxiosInstance.post("/login", formData)
+    AxiosInstance.post("/user/login", formData)
       .then((response) => {
-        console.log(response.data);
+        console.log(response);
 
-        dispatch(setUser(response.data));
-        localStorage.setItem("token", response.data.token);
-        toast.success("Welcome back!");
-        history.push("/");
+        if (response.data && response.data.token) {
+          dispatch(setUser(response.data));
+          localStorage.setItem("token", response.data.token);
+
+          renewAxiosInstance();
+
+          toast.success("Welcome back!");
+          history.push("/");
+        } else {
+          toast.error("An unexpected error occurred. Please try again.");
+        }
       })
       .catch((error) => {
         console.error("Error:", error);
-        toast.error("Error occurred: " + error.response.data.message);
+
+        const errorMessage =
+          error.response?.data?.message || "An unexpected error occurred";
+        toast.error(`Error occurred: ${errorMessage}`);
       });
   };
 };
@@ -29,6 +39,9 @@ export const userLogout = () => {
   return (dispatch) => {
     dispatch(clearUser());
     localStorage.removeItem("token");
+    renewAxiosInstance();
+    toast.success("Logged out successfully");
+
     console.log("token temizlendi");
   };
 };

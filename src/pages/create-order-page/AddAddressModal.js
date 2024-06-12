@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import axios from "axios";
+import { AxiosInstance } from "../../api/axiosInstance";
 
 const AddAddressModal = ({
   isOpen,
@@ -43,8 +44,7 @@ const AddAddressModal = ({
   };
 
   const addAddress = (newAddress) => {
-    axios
-      .post("http://localhost:8080/user/1/address", newAddress)
+    AxiosInstance.post("/user/address", newAddress)
       .then((response) => {
         console.log("Address added successfully:", response.data);
         fetchAddressList();
@@ -55,11 +55,7 @@ const AddAddressModal = ({
   };
 
   const editAddress = (updatedAddress) => {
-    axios
-      .put(
-        `http://localhost:8080/user/address/${addressToEdit.id}`,
-        updatedAddress
-      )
+    AxiosInstance.put(`/user/address/${updatedAddress.id}`, updatedAddress)
       .then((response) => {
         console.log("Address edited successfully:", response.data);
         fetchAddressList();

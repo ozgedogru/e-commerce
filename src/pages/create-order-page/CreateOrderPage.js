@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import AddAddressModal from "./AddAddressModal";
 import DeleteModal from "./DeleteModal";
 import AddPaymentModal from "./AddPaymentModal";
@@ -13,6 +12,7 @@ import {
 } from "../../store/actions/shoppingCartActions";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { AxiosInstance } from "../../api/axiosInstance";
 
 const CreateOrderPage = () => {
   const { orderSum, cart } = useSelector((state) => state.shoppingCartReducer);
@@ -32,8 +32,7 @@ const CreateOrderPage = () => {
 
   //address listesini getir
   const fetchAddressList = () => {
-    axios
-      .get("http://localhost:8080/user/1/addresses")
+    AxiosInstance.get("/user/addresses")
       .then((response) => {
         setAddressList(response.data);
         console.log(response);
@@ -44,8 +43,7 @@ const CreateOrderPage = () => {
   };
   //card bilgilerini getir
   const fetchPaymentList = () => {
-    axios
-      .get("http://localhost:8080/user/1/payments")
+    AxiosInstance.get("user/payments")
       .then((response) => {
         setPaymentList(response.data);
         console.log(response);
@@ -62,8 +60,7 @@ const CreateOrderPage = () => {
 
   const handleDeleteItem = (itemId, itemType) => {
     if (itemType === "address") {
-      axios
-        .delete(`http://localhost:8080/user/address/${itemId}`)
+      AxiosInstance.delete(`/user/address/${itemId}`)
         .then((response) => {
           console.log("Address deleted successfully:", response.data);
           fetchAddressList();
@@ -74,8 +71,7 @@ const CreateOrderPage = () => {
           setIsDeleteModalOpen(false);
         });
     } else if (itemType === "payment") {
-      axios
-        .delete(`http://localhost:8080/user/payments/${itemId}`)
+      AxiosInstance.delete(`/user/payments/${itemId}`)
         .then((response) => {
           console.log("Payment deleted successfully:", response.data);
           fetchPaymentList();
@@ -202,8 +198,7 @@ const CreateOrderPage = () => {
     console.log("new order > ", newOrder);
 
     setTimeout(() => {
-      axios
-        .post("http://localhost:8080/user/1/orders", newOrder)
+      AxiosInstance.post("/user/orders", newOrder)
         .then((response) => {
           console.log("Order created successfully:", response.data);
 
@@ -224,6 +219,23 @@ const CreateOrderPage = () => {
           setLoading(false);
         });
     }, 1000);
+  };
+
+  //////////////////////////////////////////////////////////////////////////////
+
+  const maskCreditCardNumber = (creditCardNumber) => {
+    // Kredi kartı numarasının uzunluğunu kontrol et
+    if (typeof creditCardNumber !== "string" || creditCardNumber.length < 4) {
+      console.error("Invalid credit card number.");
+      return null;
+    }
+
+    // Kredi kartı numarasının son dört hanesini al, geri kalanını * ile maskele
+    const maskedPart = creditCardNumber.slice(0, -4).replace(/./g, "*");
+    const lastFourDigits = creditCardNumber.slice(-4);
+
+    // Maskeleme yapılmış kısmı ve son dört hane birleştirerek döndür
+    return maskedPart + lastFourDigits;
   };
 
   return (
@@ -370,7 +382,9 @@ const CreateOrderPage = () => {
                             <p className="text-sm font-semibold">
                               Card Number:
                             </p>
-                            <p className="text-sm">{payment.cardNumber}</p>
+                            <p className="text-sm">
+                              {maskCreditCardNumber(payment.cardNumber)}
+                            </p>
                           </div>
                           <div>
                             <p className="text-sm font-semibold">

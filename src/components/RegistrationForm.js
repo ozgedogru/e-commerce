@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { AxiosInstance } from "../api/axiosInstance";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import axios from "axios";
 
 const RegistrationForm = () => {
   const {
@@ -21,8 +20,7 @@ const RegistrationForm = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/roles")
+    AxiosInstance.get("/roles")
       .then((response) => {
         setRoles(response.data);
         console.log(response.data);
@@ -56,20 +54,16 @@ const RegistrationForm = () => {
     //console.log("Form data", formData);
 
     setTimeout(() => {
-      axios
-        .post("http://localhost:8080/user/register", formData)
+      AxiosInstance.post("/user/register", formData)
         .then((response) => {
           console.log("submit succeeded:", response);
-          toast.success(`${response.data.message}`);
+          toast.success("Registration successful!");
           history.push("/");
         })
         .catch((error) => {
           console.log("Error:", error);
-          if (error.response.data.err.errno === 19) {
-            toast.error("This email address is already registered.");
-          } else {
-            toast.error(`${error.message}`);
-          }
+
+          toast.error(`${error.response.data.message}`);
         })
         .finally(() => {
           setLoading(false);

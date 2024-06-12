@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import AccordionCard from "../components/AccordionCard";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { AxiosInstance } from "../api/axiosInstance";
 
 const PreviousOrdersPage = () => {
   const [orders, setOrders] = useState([]);
@@ -10,7 +10,7 @@ const PreviousOrdersPage = () => {
   useEffect(() => {
     const fetchPreviousOrders = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/user/1/orders");
+        const response = await AxiosInstance.get("/user/orders");
         setIsLoading(false);
         setOrders(response.data.sort((a, b) => b.id - a.id));
       } catch (error) {

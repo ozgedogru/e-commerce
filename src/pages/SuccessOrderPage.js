@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { AxiosInstance } from "../api/axiosInstance";
 
 const SuccessOrderPage = () => {
   const { orderSuccess } = useSelector((state) => state.shoppingCartReducer);
@@ -9,11 +10,10 @@ const SuccessOrderPage = () => {
   const [addressDetails, setAddressDetails] = useState(null);
   const [productDetails, setProductDetails] = useState([]);
 
-  const fetchAddressDetails = (addressId) => {
-    axios
-      .get(`http://localhost:8080/user/address/${addressId}`)
+  const fetchAddressDetails = () => {
+    AxiosInstance.get("/user/addresses")
       .then((response) => {
-        console.log(response.data);
+        console.log("Addresses: ", response.data);
         setAddressDetails(response.data);
       })
       .catch((error) => {

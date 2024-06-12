@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import axios from "axios";
+import { AxiosInstance } from "../../api/axiosInstance";
 
 const AddPaymentModal = ({
   isOpen,
@@ -23,8 +24,7 @@ const AddPaymentModal = ({
   }, [paymentToEdit]);
 
   const addPayment = (newPayment) => {
-    axios
-      .post("http://localhost:8080/user/1/payments", newPayment)
+    AxiosInstance.post("/user/payments", newPayment)
       .then((response) => {
         console.log("Payment added successfully:", response.data);
         fetchPaymentList();
@@ -35,11 +35,7 @@ const AddPaymentModal = ({
   };
 
   const editPayment = (updatedPayment) => {
-    axios
-      .put(
-        `http://localhost:8080/user/payments/${paymentToEdit.id}`,
-        updatedPayment
-      )
+    AxiosInstance.put(`/user/payments/${paymentToEdit.id}`, updatedPayment)
       .then((response) => {
         console.log("Payment edited successfully:", response.data);
         fetchPaymentList();
