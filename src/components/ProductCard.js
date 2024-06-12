@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
-  const maxLength = 30;
+  const maxLength = 24;
 
   const handleAddToCart = () => {
     dispatch(addToCart(product, 1));
@@ -35,21 +35,22 @@ const ProductCard = ({ product }) => {
             alt={`card {${product.id}}`}
           />
         </div>
-        <h5 className="text-black text-center text-base font-bold">
-          {product.name}
-        </h5>
-        <p className="text-secondtext text-center text-sm font-bold px-1">
-          {truncatedDescription}
-        </p>
-        <div className="flex justify-center gap-2">
-          <h5 className="text-pricegrey font-bold text-base ">
-            ${product.price * 2}
-          </h5>
-          <h5 className="text-pricegreen font-bold text-base">
-            ${product.price}
-          </h5>
-        </div>
       </Link>
+      <h5 className="text-black text-center text-base font-bold">
+        {product.name}
+      </h5>
+      <p className="text-secondtext text-center text-sm font-bold px-1">
+        {truncatedDescription}
+      </p>
+      <div className="flex justify-center gap-2">
+        <h5 className="text-pricegrey font-bold text-base ">
+          ${product.price * 2}
+        </h5>
+        <h5 className="text-pricegreen font-bold text-base">
+          ${product.price}
+        </h5>
+      </div>
+
       <div className="flex justify-center w-full">
         <button
           onClick={handleAddToCart}
