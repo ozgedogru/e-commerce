@@ -10,6 +10,10 @@ import { useEffect } from "react";
 const Header = () => {
   const { user, isLoggedIn } = useSelector((state) => state.userReducer);
 
+  useEffect(() => {
+    console.log("user > ", user);
+  });
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -83,7 +87,6 @@ const Header = () => {
               </ul>
             </nav>
             <div className="flex items-center text-primary py-4 font-bold">
-              <p>{user.fullName}</p>
               <div>
                 <UserDropdown />
               </div>
