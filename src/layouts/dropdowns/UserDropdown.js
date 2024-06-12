@@ -20,7 +20,7 @@ const UserDropdown = () => {
         {isLoggedIn ? (
           <div className="flex flex-wrap items-center px-2 gap-1">
             <Gravatar email={user.email} className="w-5 h-5 rounded-full" />
-            <p>{user.name}</p>
+            <p>{user.fullName}</p>
           </div>
         ) : (
           <div className="flex flex-wrap items-center px-2 gap-1">
