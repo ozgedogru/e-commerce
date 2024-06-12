@@ -5,6 +5,7 @@ import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import ShopNavbarDropdown from "./dropdowns/ShopNavbarDropdown";
 import CartDropdown from "./dropdowns/CartDropdown";
 import UserDropdown from "./dropdowns/UserDropdown";
+import { useEffect } from "react";
 
 const Header = () => {
   const { user, isLoggedIn } = useSelector((state) => state.userReducer);
@@ -82,6 +83,7 @@ const Header = () => {
               </ul>
             </nav>
             <div className="flex items-center text-primary py-4 font-bold">
+              <p>{user.fullName}</p>
               <div>
                 <UserDropdown />
               </div>
@@ -97,7 +99,7 @@ const Header = () => {
                 <p></p>
               </div>
               <div>
-                {user.name ? (
+                {isLoggedIn ? (
                   <div className="flex items-center px-2 gap-1">
                     <p>
                       <button onClick={() => handleLogout()}>Logout</button>
