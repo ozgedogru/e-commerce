@@ -3,14 +3,14 @@ import slugify from "slugify";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/actions/shoppingCartActions";
 import { toast } from "react-toastify";
-import { useEffect } from "react";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
+  const maxLength = 30;
 
   const handleAddToCart = () => {
     dispatch(addToCart(product, 1));
-    toast.info("Urun sepete eklendi.", {
+    toast.info("The product has been added to the cart.", {
       position: "bottom-right",
       autoClose: 2000,
     });
@@ -19,6 +19,11 @@ const ProductCard = ({ product }) => {
   const categoryName = product.category.title;
   const productNameSlug = slugify(product.name, { lower: true });
   const url = `/${categoryName}/${product.id}/${productNameSlug}`;
+
+  const truncatedDescription =
+    product.description.length > maxLength
+      ? product.description.substring(0, maxLength) + "..."
+      : product.description;
 
   return (
     <div className="flex flex-col items-center justify-between sm:w-[16rem] sm:min-h-[32rem] w-72 pb-4 gap-2 shadow-md hover:scale-105 transition duration-300 ">
@@ -34,7 +39,7 @@ const ProductCard = ({ product }) => {
           {product.name}
         </h5>
         <p className="text-secondtext text-center text-sm font-bold px-1">
-          {product.description}
+          {truncatedDescription}
         </p>
         <div className="flex justify-center gap-2">
           <h5 className="text-pricegrey font-bold text-base ">
