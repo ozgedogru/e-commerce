@@ -209,7 +209,7 @@ const CreateOrderPage = () => {
 
           dispatch(setOrderSuccess(response.data));
 
-          toast.success("Siparis olusturuldu!");
+          toast.success("Order created!");
           history.push("/success");
 
           setLoading(false);

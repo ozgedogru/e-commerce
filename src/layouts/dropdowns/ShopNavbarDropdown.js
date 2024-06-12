@@ -51,11 +51,11 @@ const ShopNavbarDropdown = () => {
         <div className="absolute left-0 pt-2 space-y-2 z-10 rounded-xl">
           <div className="flex bg-white rounded-md shadow-lg">
             <div className="py-1">
-              <div className="font-bold px-4 py-2">Kadın</div>
+              <div className="font-bold px-4 py-2">Women</div>
               {femaleCategories.map((category) => (
                 <Link
                   to={`/shop/${category.id}/${
-                    category.gender === "K" ? "Kadın" : "Erkek"
+                    category.gender === "K" ? "Women" : "Men"
                   }/${category.title}`}
                   key={category.id}
                   className=" font-normal block px-4 py-2 m-1 text-sm rounded-lg hover:bg-lightgrey2"
@@ -65,11 +65,11 @@ const ShopNavbarDropdown = () => {
               ))}
             </div>
             <div className="py-1">
-              <div className="font-bold px-4 py-2">Erkek</div>
+              <div className="font-bold px-4 py-2">Men</div>
               {maleCategories.map((category) => (
                 <Link
                   to={`/shop/${category.id}/${
-                    category.gender === "K" ? "Kadın" : "Erkek"
+                    category.gender === "K" ? "Women" : "Men"
                   }/${category.title}`}
                   key={category.id}
                   className=" font-normal block px-4 py-2 m-1 text-sm rounded-lg hover:bg-lightgrey2"

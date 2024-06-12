@@ -15,7 +15,7 @@ const ProductDetailCard = ({ productDetails }) => {
   const handleAddToCart = () => {
     console.log("handle add to card function has been trigered");
     dispatch(addToCart(productDetails, 1));
-    toast.info("Urun sepete eklendi.", {
+    toast.info("The product has been added to the cart.", {
       position: "bottom-right",
       autoClose: 2000,
     });

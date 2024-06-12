@@ -97,7 +97,7 @@ const CategoryPage = () => {
         <div className="flex flex-wrap sm:flex-nowrap sm:w-full h-auto justify-center gap-8">
           {firstFiveCategories.map((cat) => (
             <Link
-              to={`/shop/${cat.id}/${cat.gender === "K" ? "Kadın" : "Erkek"}/${
+              to={`/shop/${cat.id}/${cat.gender === "K" ? "Women" : "Men"}/${
                 cat.title
               }`}
               key={cat.id}
@@ -112,7 +112,7 @@ const CategoryPage = () => {
                   alt={cat.title}
                 />
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-white font-bold text-base leading-6">
-                  <h6>{cat.gender === "K" ? "Kadın" : "Erkek"}</h6>
+                  <h6>{cat.gender === "K" ? "Women" : "Men"}</h6>
                   <h6>{cat.title}</h6>
                 </div>
               </div>
