@@ -17,14 +17,14 @@ const ProductSlider = ({ productDetails }) => {
         <div className="flex w-72 h-72 sm:w-96 sm:h-96">
           <img
             className="object-cover w-full h-full"
-            src={productDetails?.images[0].url}
+            src={productDetails?.image}
             alt="pic1"
           ></img>
         </div>
         <div className="flex w-72 h-72 sm:w-96 sm:h-96">
           <img
             className="object-cover w-full h-full"
-            src={productDetails?.images[0].url}
+            src={productDetails?.image}
             alt="pic1"
           ></img>
         </div>

@@ -94,7 +94,7 @@ const ProductListPage = () => {
           {firstFiveCategories.map((category) => (
             <Link
               to={`/shop/${category.id}/${
-                category.gender === "k" ? "Kadin" : "Erkek"
+                category.gender === "K" ? "Kadın" : "Erkek"
               }/${category.title}`}
               key={category.id}
               className="w-full brightness-90 hover:opacity-90 transition duration-200 cursor-pointer"
@@ -102,11 +102,11 @@ const ProductListPage = () => {
               <div className="relative text-center w-full h-full">
                 <img
                   className="w-full h-full object-cover sm:w-80"
-                  src={category.img}
+                  src={category.image}
                   alt={category.title}
                 />
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-white font-bold text-base leading-6">
-                  <h6>{category.gender === "k" ? "Kadin" : "Erkek"}</h6>
+                  <h6>{category.gender === "K" ? "Kadın" : "Erkek"}</h6>
                   <h6>{category.title}</h6>
                 </div>
               </div>

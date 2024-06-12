@@ -3,6 +3,7 @@ import slugify from "slugify";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/actions/shoppingCartActions";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
@@ -15,13 +16,7 @@ const ProductCard = ({ product }) => {
     });
   };
 
-  const categoryMap = {
-    1: "tisort",
-    2: "ayakkabi",
-    3: "ceket",
-    4: "elbise",
-  };
-  const categoryName = categoryMap[product.category_id];
+  const categoryName = product.category.title;
   const productNameSlug = slugify(product.name, { lower: true });
   const url = `/${categoryName}/${product.id}/${productNameSlug}`;
 

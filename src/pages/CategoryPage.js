@@ -97,7 +97,7 @@ const CategoryPage = () => {
         <div className="flex flex-wrap sm:flex-nowrap sm:w-full h-auto justify-center gap-8">
           {firstFiveCategories.map((cat) => (
             <Link
-              to={`/shop/${cat.id}/${cat.gender === "k" ? "Kadin" : "Erkek"}/${
+              to={`/shop/${cat.id}/${cat.gender === "K" ? "Kadın" : "Erkek"}/${
                 cat.title
               }`}
               key={cat.id}
@@ -108,11 +108,11 @@ const CategoryPage = () => {
               <div className="relative text-center w-full h-full">
                 <img
                   className="w-full h-full object-cover sm:w-80"
-                  src={cat.img}
+                  src={cat.image}
                   alt={cat.title}
                 />
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-white font-bold text-base leading-6">
-                  <h6>{cat.gender === "k" ? "Kadin" : "Erkek"}</h6>
+                  <h6>{cat.gender === "K" ? "Kadın" : "Erkek"}</h6>
                   <h6>{cat.title}</h6>
                 </div>
               </div>

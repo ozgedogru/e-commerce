@@ -28,8 +28,8 @@ const ShopNavbarDropdown = () => {
     dispatch(fetchProducts());
   };
 
-  const femaleCategories = categories.filter((c) => c.gender === "k");
-  const maleCategories = categories.filter((c) => c.gender === "e");
+  const femaleCategories = categories.filter((c) => c.gender === "K");
+  const maleCategories = categories.filter((c) => c.gender === "E");
 
   return (
     <div
@@ -55,7 +55,7 @@ const ShopNavbarDropdown = () => {
               {femaleCategories.map((category) => (
                 <Link
                   to={`/shop/${category.id}/${
-                    category.gender === "k" ? "Kadin" : "Erkek"
+                    category.gender === "K" ? "Kadın" : "Erkek"
                   }/${category.title}`}
                   key={category.id}
                   className=" font-normal block px-4 py-2 m-1 text-sm rounded-lg hover:bg-lightgrey2"
@@ -69,7 +69,7 @@ const ShopNavbarDropdown = () => {
               {maleCategories.map((category) => (
                 <Link
                   to={`/shop/${category.id}/${
-                    category.gender === "k" ? "Kadin" : "Erkek"
+                    category.gender === "K" ? "Kadın" : "Erkek"
                   }/${category.title}`}
                   key={category.id}
                   className=" font-normal block px-4 py-2 m-1 text-sm rounded-lg hover:bg-lightgrey2"
