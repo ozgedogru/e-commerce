@@ -6,7 +6,6 @@ import AddPaymentModal from "./AddPaymentModal";
 import {
   clearCart,
   setAddress,
-  setOrderSuccess,
   setOrderSummary,
   setPayment,
 } from "../../store/actions/shoppingCartActions";
@@ -151,17 +150,17 @@ const CreateOrderPage = () => {
     dispatch(setPayment(payment));
   };
 
-  // useEffect(() => {
-  //   if (addressList.length > 0) {
-  //     setSelectedAddress(addressList[0]);
-  //   }
-  // }, [addressList]);
+  useEffect(() => {
+    if (addressList.length > 0) {
+      setSelectedAddress(addressList[0]);
+    }
+  }, [addressList]);
 
-  // useEffect(() => {
-  //   if (paymentList.length > 0) {
-  //     setSelectedPayment(paymentList[0]);
-  //   }
-  // }, [paymentList]);
+  useEffect(() => {
+    if (paymentList.length > 0) {
+      setSelectedPayment(paymentList[0]);
+    }
+  }, [paymentList]);
 
   ///////////////////////////////////////////////////////////////////
 
@@ -207,10 +206,8 @@ const CreateOrderPage = () => {
           dispatch(clearCart(null));
           dispatch(setOrderSummary(null));
 
-          dispatch(setOrderSuccess(response.data));
-
           toast.success("Order created!");
-          history.push("/success");
+          history.push(`/success?orderId=${response.data.id}`);
 
           setLoading(false);
         })

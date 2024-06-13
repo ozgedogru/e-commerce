@@ -70,8 +70,3 @@ export const setOrderSummary = (orderSummary) => ({
   type: SET_ORDER_SUMMARY,
   payload: orderSummary,
 });
-
-export const setOrderSuccess = (orderSuccess) => ({
-  type: SET_ORDER_SUCCESS,
-  payload: orderSuccess,
-});

@@ -1,51 +1,28 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { AxiosInstance } from "../api/axiosInstance";
 
 const SuccessOrderPage = () => {
-  const { orderSuccess } = useSelector((state) => state.shoppingCartReducer);
+  const [orderDetails, setOrderDetails] = useState(null);
 
-  const [addressDetails, setAddressDetails] = useState(null);
-  const [productDetails, setProductDetails] = useState([]);
-
-  const fetchAddressDetails = () => {
-    AxiosInstance.get("/user/addresses")
-      .then((response) => {
-        console.log("Addresses: ", response.data);
-        setAddressDetails(response.data);
-      })
-      .catch((error) => {
-        console.error("Error occured!", error);
-      });
-  };
-
-  const fetchProductDetails = (products) => {
-    Promise.all(
-      products.map((product) =>
-        axios.get(`http://localhost:8080/products/${product.id}`)
-      )
-    )
-      .then((responses) => {
-        const productDetails = responses.map((response) => response.data);
-        setProductDetails(productDetails);
-      })
-      .catch((error) => {
-        console.error("Error occurred!", error);
-      });
-  };
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const orderId = searchParams.get("orderId");
 
   useEffect(() => {
     const fetchOrderDetails = () => {
-      fetchAddressDetails(orderSuccess.address.id);
-      fetchProductDetails(orderSuccess.products);
+      AxiosInstance.get(`/user/orders/${orderId}`)
+        .then((response) => {
+          console.log("order: ", response.data);
+          setOrderDetails(response.data);
+        })
+        .catch((error) => {
+          console.error("Error occured!", error);
+        });
     };
 
     fetchOrderDetails();
-
-    console.log("order success > ", orderSuccess);
-  }, [orderSuccess]);
+  }, [orderId]);
 
   const calculateEstimatedDeliveryDate = (orderDate) => {
     const estimatedDeliveryDateTime = new Date(orderDate);
@@ -63,24 +40,25 @@ const SuccessOrderPage = () => {
       <p className="text-lg mb-8">
         Thank you for your order. Your order has been successfully placed.
       </p>
-      {addressDetails && productDetails && (
+      {orderDetails && (
         <div className="flex flex-col items-center">
           <div className="flex flex-col items-center gap-2 m-4 w-max">
             <h6>
               <strong>Estimated delivery date: </strong>
-              {calculateEstimatedDeliveryDate(orderSuccess.orderDate)}
+              {calculateEstimatedDeliveryDate(orderDetails.orderDate)}
             </h6>
             <h6>
-              <strong>Shipping address: </strong> {addressDetails.addressTitle}{" "}
-              - {addressDetails.district} / {addressDetails.city}
+              <strong>Shipping address: </strong>{" "}
+              {orderDetails.address.addressTitle} -{" "}
+              {orderDetails.address.district} / {orderDetails.address.city}
             </h6>
             <h6>
               <strong>Total price: </strong>
-              {orderSuccess.price.toFixed(2)} $
+              {orderDetails.price.toFixed(2)} $
             </h6>
           </div>
           <div className="flex flex-col gap-4 shadow-lg border border-lightgrey2 bg-white p-4 m-4 rounded-lg w-max">
-            {productDetails.map((product, index) => (
+            {orderDetails.products.map((product, index) => (
               <div key={index} className="flex gap-2">
                 <div>
                   <img

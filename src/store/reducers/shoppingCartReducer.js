@@ -3,7 +3,6 @@ import {
   SET_PAYMENT,
   SET_ADDRESS,
   SET_ORDER_SUMMARY,
-  SET_ORDER_SUCCESS,
 } from "../actions/shoppingCartActions";
 
 const initialState = {
@@ -16,7 +15,6 @@ const initialState = {
     shippingCost: 10,
     grandTotal: 0,
   },
-  orderSuccess: {},
 };
 
 export const shoppingCartReducer = (state = initialState, action) => {
@@ -33,9 +31,6 @@ export const shoppingCartReducer = (state = initialState, action) => {
 
     case SET_ORDER_SUMMARY:
       return { ...state, orderSum: action.payload };
-
-    case SET_ORDER_SUCCESS:
-      return { ...state, orderSuccess: action.payload };
 
     default:
       return state;
