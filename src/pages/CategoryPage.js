@@ -18,12 +18,18 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import { Link, useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom/";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 const CategoryPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
 
-  const { category } = useParams();
+  const { categoryId } = useParams();
+
+  useEffect(() => {
+    console.log("categoryId > ", categoryId);
+  }, [categoryId]);
   const queryParams = new URLSearchParams(window.location.search);
   const filterFromUrl = queryParams.get("filter") || "";
   const sortFromUrl = queryParams.get("sort") || "";
@@ -34,13 +40,13 @@ const CategoryPage = () => {
   const { productList, totalProductCount, fetchState, offset } = useSelector(
     (state) => state.productReducer
   );
-  const limit = 10;
+  const limit = 5;
 
   const handleFilterButtonClick = (e) => {
     e.preventDefault();
     dispatch(setOffset(0));
     dispatch(clearProductList([]));
-    dispatch(fetchProducts(category, filter, sort, limit, 0));
+    dispatch(fetchProducts(categoryId, filter, sort, limit, 0));
 
     const queryParams = new URLSearchParams();
     if (filter) queryParams.set("filter", filter);
@@ -60,14 +66,21 @@ const CategoryPage = () => {
   const loadMore = () => {
     const newOffset = offset + limit;
     dispatch(setOffset(newOffset));
-    dispatch(fetchProducts(category, filter, sort, limit, newOffset));
+    dispatch(fetchProducts(categoryId, filter, sort, limit, newOffset));
   };
 
   useEffect(() => {
+    const currentQueryParams = new URLSearchParams(location.search);
+    const currentFilter = currentQueryParams.get("filter") || "";
+    const currentSort = currentQueryParams.get("sort") || "";
+
+    setFilter(currentFilter);
+    setSort(currentSort);
+
     dispatch(setOffset(0));
-    dispatch(clearProductList([]));
-    dispatch(fetchProducts(category, filterFromUrl, sortFromUrl));
-  }, [dispatch, category]);
+    dispatch(clearProductList());
+    dispatch(fetchProducts(categoryId, currentFilter, currentSort, limit, 0));
+  }, [dispatch, categoryId, location.search]);
 
   const categories = useSelector((state) => state.globalReducer.categories);
   const firstFiveCategories = categories
@@ -102,7 +115,9 @@ const CategoryPage = () => {
               }`}
               key={cat.id}
               className={`w-full transition duration-200 cursor-pointer ${
-                Number(category) === cat.id ? "brightness-90" : "brightness-50"
+                Number(categoryId) === cat.id
+                  ? "brightness-90"
+                  : "brightness-50"
               }`}
             >
               <div className="relative text-center w-full h-full">

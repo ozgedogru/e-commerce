@@ -24,7 +24,7 @@ const ShopNavbarDropdown = () => {
   const dispatch = useDispatch();
   const handleShopClick = () => {
     dispatch(setOffset(0));
-    dispatch(clearProductList([]));
+    dispatch(clearProductList());
     dispatch(fetchProducts());
   };
 

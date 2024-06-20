@@ -23,7 +23,7 @@ export const productReducer = (
     case SET_PRODUCT_LIST:
       return {
         ...state,
-        productList: [...state.productList, ...action.payload],
+        productList: action.payload,
       };
     case CLEAR_PRODUCT_LIST:
       return {

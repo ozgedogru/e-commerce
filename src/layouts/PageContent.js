@@ -9,7 +9,7 @@ import LoginPage from "../pages/LoginPage";
 import ProductDetailPage from "../pages/ProductDetailPage";
 import CategoryPage from "../pages/CategoryPage";
 import ShoppingCartPage from "../pages/ShoppingCartPage";
-import ProtectedPage from "../pages/ProtectedPage";
+//import ProtectedPage from "../pages/ProtectedPage";
 import CreateOrderPage from "../pages/create-order-page/CreateOrderPage";
 import SuccessOrderPage from "../pages/SuccessOrderPage";
 import PreviousOrdersPage from "../pages/PreviousOrderPage";
@@ -27,7 +27,7 @@ const PageContent = () => {
         <Route path="/:category/:productId/:productNameSlug" exact>
           <ProductDetailPage />
         </Route>
-        <Route path="/shop/:category/:gender/:title" exact>
+        <Route path="/shop/:categoryId/:gender/:title" exact>
           <CategoryPage />
         </Route>
         <Route path="/cart" exact>

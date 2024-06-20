@@ -17,12 +17,17 @@ import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import { Link } from "react-router-dom/";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  useLocation,
+  useParams,
+} from "react-router-dom/cjs/react-router-dom.min";
 
 const ProductListPage = () => {
   const dispatch = useDispatch();
 
   const { category } = useParams();
+  const location = useLocation();
+
   const queryParams = new URLSearchParams(window.location.search);
   const filterFromUrl = queryParams.get("filter") || "";
   const sortFromUrl = queryParams.get("sort") || "";
@@ -33,13 +38,13 @@ const ProductListPage = () => {
   const { productList, totalProductCount, fetchState, offset } = useSelector(
     (state) => state.productReducer
   );
-  const limit = 10;
+  const limit = 5;
 
   const handleFilterButtonClick = (e) => {
     e.preventDefault();
     dispatch(setOffset(0));
-    dispatch(clearProductList([]));
-    dispatch(fetchProducts(null, filter, sort, limit, 0));
+    dispatch(clearProductList());
+    dispatch(fetchProducts(category, filter, sort, limit, 0));
 
     const queryParams = new URLSearchParams();
     if (filter) queryParams.set("filter", filter);
@@ -56,14 +61,21 @@ const ProductListPage = () => {
   const loadMore = () => {
     const newOffset = offset + limit;
     dispatch(setOffset(newOffset));
-    dispatch(fetchProducts(null, filter, sort, limit, newOffset));
+    dispatch(fetchProducts(category, filter, sort, limit, newOffset));
   };
 
   useEffect(() => {
+    const currentQueryParams = new URLSearchParams(location.search);
+    const currentFilter = currentQueryParams.get("filter") || "";
+    const currentSort = currentQueryParams.get("sort") || "";
+
+    setFilter(currentFilter);
+    setSort(currentSort);
+
     dispatch(setOffset(0));
-    dispatch(clearProductList([]));
-    dispatch(fetchProducts(category, filterFromUrl, sortFromUrl));
-  }, [dispatch, category]);
+    dispatch(clearProductList());
+    dispatch(fetchProducts(category, currentFilter, currentSort, limit, 0));
+  }, [dispatch, category, location.search]);
 
   const categories = useSelector((state) => state.globalReducer.categories);
   const firstFiveCategories = categories
@@ -250,18 +262,20 @@ const ProductListPage = () => {
               dataLength={productList.length}
               next={loadMore}
               hasMore={productList.length < totalProductCount}
+              loader={<h4> Loading...</h4>}
+              endMessage={
+                noProductsFound ? (
+                  <p className="flex justify-center text-secondtext text-lg py-16">
+                    No products found based on the specified criteria.
+                  </p>
+                ) : null
+              }
             >
-              {fetchState === "FETCHING" && (
-                <div className="flex items-center justify-center w-full h-72">
-                  <svg className="animate-spin h-12 w-12 border-t-2 border-black rounded-full"></svg>
+              {productList.map((p) => (
+                <div key={p.id} className="flex flex-col py-4 gap-4">
+                  <ProductCard product={p} img={p.image} />
                 </div>
-              )}
-              {fetchState === "FETCHED" &&
-                productList.map((p) => (
-                  <div key={p.id} className="flex flex-col py-4 gap-4">
-                    <ProductCard product={p} img={p.image} />
-                  </div>
-                ))}
+              ))}
             </InfiniteScroll>
             <div>
               <ScrollToTopButton />
