@@ -60,7 +60,7 @@ export const fetchProducts = (category, filter, sort, limit, offset = 0) => {
 export const fetchBestSellers = (
   categoryId,
   sort = "rating:desc",
-  limit,
+  limit = 8,
   offset = 0
 ) => {
   return (dispatch) => {

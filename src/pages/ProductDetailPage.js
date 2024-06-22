@@ -176,7 +176,7 @@ const ProductDetailPage = () => {
       <div className="flex justify-center w-full sm:px-48 px-8">
         <div className="flex justify-center w-full flex-col gap-4">
           <div className="flex flex-col items-start font-bold gap-4 mt-8">
-            <h3 className="text-2xl leading-8">BESTSELLER PRODUCTS</h3>
+            <h3 className="text-2xl leading-8">TOP PICKS IN THIS CATEGORY</h3>
           </div>
           <hr className="text-lightgrey2" />
           <div className="flex justify-start flex-wrap gap-8 py-8 w-full">

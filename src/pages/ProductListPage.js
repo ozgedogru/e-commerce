@@ -38,7 +38,7 @@ const ProductListPage = () => {
   const { productList, totalProductCount, fetchState, offset } = useSelector(
     (state) => state.productReducer
   );
-  const limit = 5;
+  const limit = 10;
 
   const handleFilterButtonClick = (e) => {
     e.preventDefault();
@@ -262,20 +262,18 @@ const ProductListPage = () => {
               dataLength={productList.length}
               next={loadMore}
               hasMore={productList.length < totalProductCount}
-              loader={<h4> Loading...</h4>}
-              endMessage={
-                noProductsFound ? (
-                  <p className="flex justify-center text-secondtext text-lg py-16">
-                    No products found based on the specified criteria.
-                  </p>
-                ) : null
-              }
             >
-              {productList.map((p) => (
-                <div key={p.id} className="flex flex-col py-4 gap-4">
-                  <ProductCard product={p} img={p.image} />
+              {fetchState === "FETCHING" && (
+                <div className="flex items-center justify-center w-full h-72">
+                  <svg className="animate-spin h-12 w-12 border-t-2 border-black rounded-full"></svg>
                 </div>
-              ))}
+              )}
+              {fetchState === "FETCHED" &&
+                productList.map((p) => (
+                  <div key={p.id} className="flex flex-col py-4 gap-4">
+                    <ProductCard product={p} img={p.image} />
+                  </div>
+                ))}
             </InfiniteScroll>
             <div>
               <ScrollToTopButton />

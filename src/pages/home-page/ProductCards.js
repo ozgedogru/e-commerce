@@ -18,7 +18,7 @@ const ProductCards = () => {
           <h2 className="text-secondtext font-bold text-xl leading-6 tracking-wider">
             Featured Products
           </h2>
-          <h3 className="text-2xl leading-8">BESTSELLER PRODUCTS</h3>
+          <h3 className="text-2xl leading-8">TOP RATED PRODUCTS</h3>
           <p className="text-secondtext font-normal leading-5 tracking-widest">
             Problems trying to resolve the conflict between{" "}
           </p>
