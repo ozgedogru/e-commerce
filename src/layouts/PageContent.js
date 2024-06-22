@@ -9,7 +9,7 @@ import LoginPage from "../pages/LoginPage";
 import ProductDetailPage from "../pages/ProductDetailPage";
 import CategoryPage from "../pages/CategoryPage";
 import ShoppingCartPage from "../pages/ShoppingCartPage";
-//import ProtectedPage from "../pages/ProtectedPage";
+import ProtectedPage from "../pages/ProtectedPage";
 import CreateOrderPage from "../pages/create-order-page/CreateOrderPage";
 import SuccessOrderPage from "../pages/SuccessOrderPage";
 import PreviousOrdersPage from "../pages/PreviousOrderPage";
@@ -34,13 +34,19 @@ const PageContent = () => {
           <ShoppingCartPage />
         </Route>
         <Route path="/order" exact>
-          <CreateOrderPage />
+          <ProtectedPage>
+            <CreateOrderPage />
+          </ProtectedPage>
         </Route>
         <Route path="/success" exact>
-          <SuccessOrderPage />
+          <ProtectedPage>
+            <SuccessOrderPage />
+          </ProtectedPage>
         </Route>
         <Route path="/previous-orders" exact>
-          <PreviousOrdersPage />
+          <ProtectedPage>
+            <PreviousOrdersPage />
+          </ProtectedPage>
         </Route>
         <Route path="/about" exact>
           <AboutPage />
