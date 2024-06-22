@@ -1,18 +1,15 @@
-import { useEffect } from "react";
-import ProductCard from "../../components/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
+import ProductCard from "../../components/ProductCard";
+import { useEffect } from "react";
 import { fetchBestSellers } from "../../store/actions/productActions";
 
 const ProductCards = () => {
+  const bestSellers = useSelector((state) => state.productReducer.bestSellers);
+
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(fetchBestSellers(null, "rating:desc"));
+    dispatch(fetchBestSellers());
   }, [dispatch]);
-
-  const topProducts = useSelector((state) => state.productReducer.bestSellers);
-  const topTen = topProducts.slice(0, 10);
-  console.log("top Products", topProducts);
 
   return (
     <div className="flex justify-center w-full">
@@ -27,7 +24,7 @@ const ProductCards = () => {
           </p>
         </div>
         <div className="flex justify-start flex-wrap gap-8 max-w-64">
-          {topTen.map((product) => (
+          {bestSellers.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

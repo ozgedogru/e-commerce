@@ -32,16 +32,10 @@ export const setFetchState = (fetchState) => ({
   payload: fetchState,
 });
 
-export const fetchProducts = (
-  category,
-  filter,
-  sort,
-  limit = 10,
-  offset = 0
-) => {
+export const fetchProducts = (category, filter, sort, limit, offset = 0) => {
   return (dispatch) => {
     const queryParams = { limit, offset };
-    if (category) queryParams.category = category;
+    if (category !== undefined) queryParams.categoryId = category;
     if (filter) queryParams.filter = filter;
     if (sort) queryParams.sort = sort;
 
@@ -63,15 +57,24 @@ export const fetchProducts = (
   };
 };
 
-export const fetchBestSellers = (category, sort = "rating:desc") => {
+export const fetchBestSellers = (
+  categoryId,
+  sort = "rating:desc",
+  limit,
+  offset = 0
+) => {
   return (dispatch) => {
-    const params = {};
-    if (category) params.category = category;
-    if (sort) params.sort = sort;
+    const queryParams = { limit, offset };
+    if (categoryId !== undefined) queryParams.categoryId = categoryId;
+    if (sort) queryParams.sort = sort;
 
-    AxiosInstance.get("/products", { params: { category, sort } })
+    AxiosInstance.get("/products", { params: queryParams })
       .then((res) => {
-        dispatch(setBestSellers(res.data.products));
+        if (res.data && Array.isArray(res.data.products)) {
+          dispatch(setBestSellers(res.data.products));
+        } else {
+          console.error("Unexpected API response format:", res.data);
+        }
       })
       .catch((error) => {
         console.error("Error:", error);

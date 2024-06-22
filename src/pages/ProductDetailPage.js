@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
 import ProductDetailCard from "../components/ProductDetailCard";
 import Clients from "../components/Clients";
 import arrowright from "../assets/shop/arrowright.png";
@@ -8,53 +7,34 @@ import shopCard from "../assets/productcard/productCard2.jpg";
 import { Link, useHistory } from "react-router-dom";
 import { AxiosInstance } from "../api/axiosInstance";
 import ProductCard from "../components/ProductCard";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchBestSellers } from "../store/actions/productActions";
 
 const ProductDetailPage = () => {
   const [productDetails, setProductDetails] = useState(null);
-  const [bestSellers, setBestSellers] = useState([]);
 
   const { productId } = useParams();
   const history = useHistory();
+  const dispatch = useDispatch();
 
-  const { cart } = useSelector((state) => state.shoppingCartReducer);
-  console.log("shopping cart > ", cart);
+  const bestSellers = useSelector((state) => state.productReducer.bestSellers);
 
-  const fetchProductDetails = (id) => {
-    AxiosInstance.get(`products/${id}`)
-      .then((res) => {
+  useEffect(() => {
+    const fetchProductDetails = async (id) => {
+      try {
+        const res = await AxiosInstance.get(`products/${id}`);
+        console.log("product details > ", res.data);
         setProductDetails(res.data);
-      })
-      .catch((error) => {
+        if (res.data.category.id) {
+          dispatch(fetchBestSellers(res.data.category.id, "rating:desc", 4));
+        }
+      } catch (error) {
         console.error("Error:", error);
-      });
-  };
+      }
+    };
 
-  const fetchBestSellers = (category, sort = "rating:desc") => {
-    const params = {};
-    if (category) params.category = category;
-    if (sort) params.sort = sort;
-
-    AxiosInstance.get("/products", { params: { category, sort } })
-      .then((res) => {
-        setBestSellers(res.data.products);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  };
-
-  useEffect(() => {
     fetchProductDetails(productId);
-  }, [productId]);
-
-  useEffect(() => {
-    if (productDetails) {
-      fetchBestSellers(productDetails.category_id);
-    }
-  }, [productDetails, cart]);
-
-  useEffect(() => {}, [cart]);
+  }, [productId, dispatch]);
 
   /// sayfayi en uste tasi
   const scrollToTop = () => {
@@ -200,7 +180,7 @@ const ProductDetailPage = () => {
           </div>
           <hr className="text-lightgrey2" />
           <div className="flex justify-start flex-wrap gap-8 py-8 w-full">
-            {bestSellers.slice(0, 8).map((best) => (
+            {bestSellers.map((best) => (
               <ProductCard key={best.id} product={best} />
             ))}
           </div>
