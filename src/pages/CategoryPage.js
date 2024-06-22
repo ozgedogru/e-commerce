@@ -45,7 +45,7 @@ const CategoryPage = () => {
   const handleFilterButtonClick = (e) => {
     e.preventDefault();
     dispatch(setOffset(0));
-    dispatch(clearProductList([]));
+    dispatch(clearProductList());
     dispatch(fetchProducts(categoryId, filter, sort, limit, 0));
 
     const queryParams = new URLSearchParams();

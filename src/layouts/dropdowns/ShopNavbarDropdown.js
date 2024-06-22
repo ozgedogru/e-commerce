@@ -1,12 +1,7 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
-import {
-  clearProductList,
-  fetchProducts,
-  setOffset,
-} from "../../store/actions/productActions";
 
 const ShopNavbarDropdown = () => {
   const categories = useSelector((state) => state.globalReducer.categories);
@@ -21,13 +16,6 @@ const ShopNavbarDropdown = () => {
     setIsDropdownOpen(false);
   };
 
-  const dispatch = useDispatch();
-  const handleShopClick = () => {
-    dispatch(setOffset(0));
-    dispatch(clearProductList());
-    dispatch(fetchProducts());
-  };
-
   const femaleCategories = categories.filter((c) => c.gender === "K");
   const maleCategories = categories.filter((c) => c.gender === "E");
 
@@ -38,12 +26,7 @@ const ShopNavbarDropdown = () => {
       onMouseLeave={handleMouseLeave}
     >
       <div className={`${isDropdownOpen ? "text-primary" : "text-secondtext"}`}>
-        <NavLink
-          to="/shop"
-          exact
-          onClick={handleShopClick}
-          activeClassName="text-primary"
-        >
+        <NavLink to="/shop" exact activeClassName="text-primary">
           Shop
         </NavLink>
       </div>
