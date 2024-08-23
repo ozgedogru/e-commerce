@@ -35,7 +35,7 @@ export const setFetchState = (fetchState) => ({
 export const fetchProducts = (category, filter, sort, limit, offset = 0) => {
   return (dispatch) => {
     const queryParams = { limit, offset };
-    if (category !== undefined) queryParams.categoryId = category;
+    if (category) queryParams.categoryId = category;
     if (filter) queryParams.filter = filter;
     if (sort) queryParams.sort = sort;
 
